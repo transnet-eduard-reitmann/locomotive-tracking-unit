@@ -56,7 +56,7 @@
 | **Mounting** | DIN Rail + Brackets | R50 | 1 | R50 | Secure installation |
 | **Protection** | Surge/EMI Protection | R200 | 1 | R200 | Electrical safety |
 | **Cables/Misc** | Connectors, wiring | R50 | 1 | R50 | Assembly |
-| **TOTAL** | | | | **R2,840** | **Per unit cost** |
+| **TOTAL** | | | | **R2,870** | **Per unit cost** |
 
 ### 2.2 Why Cellular-Only is Optimal for Simplicity
 
@@ -264,10 +264,10 @@ CREATE TABLE NetworkEvents (
 
 | Category | Cost | Percentage |
 |----------|------|------------|
-| **Hardware** | R284,000 | 76% |
-| **Development** | R270,000 | 22% |
-| **Testing & Integration** | R80,000 | 2% |
-| **TOTAL CAPEX** | **R374,000** | **100%** |
+| **Hardware** | R287,000 | 45% |
+| **Development** | R270,000 | 43% |
+| **Testing & Integration** | R80,000 | 13% |
+| **TOTAL CAPEX** | **R637,000** | **100%** |
 
 ### 6.2 Operational Costs (Monthly)
 
@@ -421,8 +421,9 @@ The cellular-only locomotive tracking system provides the most **straightforward
 - Direct integration with existing IT infrastructure
 
 **Investment Summary:**
-- **Initial:** R675,000 for complete 100-unit deployment
+- **Initial:** R637,000 for complete 100-unit deployment
 - **Operational:** R60,000/year ongoing costs
+- **5-Year Total:** R937,000
 
 This solution provides immediate operational capability with real-time fleet visibility, making it ideal for organizations prioritizing quick deployment and proven reliability over long-term cost optimization.
 

@@ -9,7 +9,7 @@
 
 **Solution Approach:** ESP32-based tracking devices with LoRa communication, local SD card storage, and data upload only when in range of LoRa gateways positioned at strategic railway locations.
 
-**Total Investment:** R1,850 per unit hardware + R15/month operational costs
+**Total Investment:** R1,550 per unit hardware + R0/month operational costs
 
 **Deployment Timeline:** 24 months for 100-unit rollout with gateway infrastructure
 

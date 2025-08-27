@@ -301,11 +301,11 @@ gantt
 
 | Category | Cost | Percentage |
 |----------|------|------------|
-| **Hardware** | R322,000 | 78% |
-| **Development** | R50,000 | 12% |
-| **Testing & Certification** | R25,000 | 6% |
-| **Installation & Training** | R15,000 | 4% |
-| **TOTAL CAPEX** | **R412,000** | **100%** |
+| **Hardware** | R322,000 | 32% |
+| **Development** | R480,000 | 47% |
+| **Testing & Certification** | R120,000 | 12% |
+| **Installation & Training** | R91,000 | 9% |
+| **TOTAL CAPEX** | **R1,013,000** | **100%** |
 
 ### 6.2 Operational Costs (Monthly) - Updated for Extended Timeline
 
@@ -321,8 +321,8 @@ gantt
 |-------|----------|------------|---------|
 | **Phase 1: R&D** | Months 1-6 | R210,000 | Development & prototyping |
 | **Phase 2: Testing** | Months 7-12 | R280,000 | Field trials & certification |
-| **Phase 3: Deployment** | Months 13-18 | R422,000 | Production rollout |
-| **TOTAL PROJECT COST** | **18 months** | **R912,000** | **Complete implementation** |
+| **Phase 3: Deployment** | Months 13-18 | R523,000 | Production rollout |
+| **TOTAL PROJECT COST** | **18 months** | **R1,013,000** | **Complete implementation** |
 
 **Annual Operating Cost (Year 2+):** R60,000
 
@@ -443,7 +443,8 @@ The corrected recommendation of **LILYGO T-SIM7600G-H** provides the optimal bal
 - Comprehensive risk mitigation
 
 **Investment Summary:**
-- **Initial:** R412,000 for 100-unit deployment
-- **Operational:** R60,000/year ongoing costs
+- **Initial:** R1,013,000 for 100-unit deployment
+- **Operational:** R66,000/year ongoing costs
+- **5-Year Total:** R1,343,000
 
 This solution provides a foundation for modern fleet management, enabling data-driven decisions, operational optimization, and enhanced safety across the South African rail network.
