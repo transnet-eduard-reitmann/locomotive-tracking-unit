@@ -97,11 +97,11 @@ All variants are built on proven, industrial-grade hardware:
 ```
 ┌─────────────────────────────────────────┐
 │         MODULAR MOTHERBOARD             │
-│  ┌────────┐  ┌────────┐  ┌──────────┐ │
-│  │  GPS   │  │ ESP32  │  │ STORAGE  │ │
-│  └────────┘  └────────┘  └──────────┘ │
+│  ┌────────┐  ┌────────┐  ┌──────────┐   │
+│  │  GPS   │  │ ESP32  │  │ STORAGE  │   │
+│  └────────┘  └────────┘  └──────────┘   │
 │                                         │
-│  MODULE SLOTS: [1] [2] [3] [4]        │
+│  MODULE SLOTS: [1] [2] [3] [4]          │
 └─────────────────────────────────────────┘
            ↓        ↓        ↓
       [Cellular] [LoRa] [Satellite]

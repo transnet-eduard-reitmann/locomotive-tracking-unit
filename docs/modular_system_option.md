@@ -28,17 +28,17 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                   MOTHERBOARD (ESP32)                    │
-│                                                          │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐ │
-│  │   GPS    │  │  POWER   │  │  STORAGE │  │  MCU   │ │
-│  │  MODULE  │  │  MGMT    │  │   32GB   │  │ ESP32  │ │
-│  └──────────┘  └──────────┘  └──────────┘  └────────┘ │
-│                                                          │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │          MODULE EXPANSION SLOTS (4x)             │  │
-│  │  [SLOT 1]  [SLOT 2]  [SLOT 3]  [SLOT 4]        │  │
-│  └──────────────────────────────────────────────────┘  │
+│                   MOTHERBOARD (ESP32)                   │
+│                                                         │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐   │
+│  │   GPS    │  │  POWER   │  │  STORAGE │  │  MCU   │   │
+│  │  MODULE  │  │  MGMT    │  │   32GB   │  │ ESP32  │   │
+│  └──────────┘  └──────────┘  └──────────┘  └────────┘   │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │          MODULE EXPANSION SLOTS (4x)             │   │
+│  │  [SLOT 1]  [SLOT 2]  [SLOT 3]  [SLOT 4]          │   │
+│  └──────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
                             ↓
          ┌──────────┬──────────┬──────────┬──────────┐
@@ -74,6 +74,41 @@
 | **Display** | OLED Status Display | R80 | 1 | R80 | Local diagnostics |
 | **Mounting** | DIN Rail Kit | R50 | 1 | R50 | Installation hardware |
 | **TOTAL BASE** | | | | **R2,100** | **Base system cost** |
+
+#### 2.1.1 Recommended Microcontroller and Pinout
+
+For the motherboard's core, the **ESP32-S3-DevKitC-1** is an excellent choice. It has a powerful dual-core processor, ample memory, and sufficient GPIO pins to handle all modules simultaneously.
+
+**Proposed Pin Assignment:**
+
+| Pin | Function | Peripheral | Interface | Notes |
+|:--- |:--- |:--- |:--- |:--- |
+| **GPIO8** | SDA | GPS, OLED, IMU | I2C (Bus 0) | Default I2C pins. |
+| **GPIO9** | SCL | GPS, OLED, IMU | I2C (Bus 0) | Default I2C pins. |
+| **GPIO12**| SCLK | LoRa Module | SPI (Bus 2) | Hardware SPI for high speed. |
+| **GPIO11**| MISO | LoRa Module | SPI (Bus 2) | Hardware SPI for high speed. |
+| **GPIO13**| MOSI | LoRa Module | SPI (Bus 2) | Hardware SPI for high speed. |
+| **GPIO10**| CS | LoRa Module | SPI (Bus 2) | Chip Select for LoRa. |
+| **GPIO17**| TX1 | Cellular Module | UART1 | Hardware UART for reliability. |
+| **GPIO18**| RX1 | Cellular Module | UART1 | Hardware UART for reliability. |
+| **GPIO38**| TX2 | Satellite Module | UART2 | A second hardware UART. |
+| **GPIO39**| RX2 | Satellite Module | UART2 | A second hardware UART. |
+| **GPIO1** | Control | Cellular Power | Digital Out | General purpose IO. |
+| **GPIO2** | Control | Cellular Reset | Digital Out | General purpose IO. |
+| **GPIO3** | Status | Cellular Status | Digital In | General purpose IO. |
+| **GPIO4** | Control | LoRa Reset | Digital Out | General purpose IO. |
+| **GPIO5** | Status | LoRa Busy | Digital In | General purpose IO. |
+| **GPIO6** | Interrupt | LoRa DIO1 | Digital In | Can be used for interrupts. |
+| **GPIO7** | Control | Satellite Enable | Digital Out | General purpose IO. |
+| **GPIO14**| Status | Satellite Status | Digital In | General purpose IO. |
+| **GPIO15**| Interrupt | GPS PPS | Digital In | Good for precise timing interrupts. |
+| **GPIO16**| Interrupt | IMU Interrupt | Digital In | General purpose IO. |
+| **GPIO40**| Input | Button 1 | Digital In | General purpose IO. |
+| **GPIO41**| Input | Button 2 | Digital In | General purpose IO. |
+| **GPIO42**| Input | Button 3 | Digital In | General purpose IO. |
+
+**Note on Production Design:**
+While the ESP32-S3 has enough pins for this configuration, the recommended best practice for a production-quality design is to use an **I2C I/O Expander (e.g., MCP23017)**. This simplifies PCB routing and frees up the ESP32's native pins for more critical or high-speed tasks, leading to a more robust and scalable hardware design.
 
 ### 2.2 Communication Module Options
 
