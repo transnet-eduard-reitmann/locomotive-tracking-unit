@@ -433,20 +433,20 @@ gantt
     title LoRa-Only Railway Tracking - 24 Month Implementation
     dateFormat  YYYY-MM-DD
     section Phase 1: Development
-    Hardware Prototyping     :2024-02-01, 4M
-    T-Beam Integration      :2024-03-01, 3M
-    Gateway Development     :2024-03-01, 4M
-    Backend Development      :2024-04-01, 5M
-    Field Testing           :2024-06-01, 3M
+    Hardware Prototyping     :2025-09-01, 4M
+    T-Beam Integration      :2025-10-01, 3M
+    Gateway Development     :2025-10-01, 4M
+    Backend Development      :2025-11-01, 5M
+    Field Testing           :2026-01-01, 3M
     section Phase 2: Infrastructure
-    Commercial Gateways     :2024-09-01, 4M
-    DIY Gateway Deployment  :2024-10-01, 5M
-    Production Hardware      :2024-10-01, 4M
-    System Integration       :2024-11-01, 4M
+    Commercial Gateways     :2026-04-01, 4M
+    DIY Gateway Deployment  :2026-05-01, 5M
+    Production Hardware      :2026-05-01, 4M
+    System Integration       :2026-06-01, 4M
     section Phase 3: Deployment
-    Fleet Rollout           :2025-04-01, 4M
-    Final Optimization      :2025-06-01, 3M
-    Operations Handover      :2025-08-01, 2M
+    Fleet Rollout           :2026-11-01, 4M
+    Final Optimization      :2027-01-01, 3M
+    Operations Handover      :2027-03-01, 2M
 ```
 
 **Total Project Investment: R551,000**

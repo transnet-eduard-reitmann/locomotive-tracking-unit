@@ -276,21 +276,21 @@ gantt
     title Locomotive Tracking System - 18 Month Implementation
     dateFormat  YYYY-MM-DD
     section Phase 1: R&D
-    Hardware Prototyping    :2024-02-01, 3M
-    Firmware Development    :2024-02-15, 4M
-    Backend Development     :2024-03-01, 5M
-    MS SQL Integration      :2024-04-01, 3M
-    Initial Testing        :2024-05-01, 2M
+    Hardware Prototyping    :2025-09-01, 3M
+    Firmware Development    :2025-09-15, 4M
+    Backend Development     :2025-10-01, 5M
+    MS SQL Integration      :2025-11-01, 3M
+    Initial Testing        :2025-12-01, 2M
     section Phase 2: Validation  
-    Field Trial Hardware   :2024-07-01, 2M
-    Extended Field Testing :2024-07-15, 4M
-    ICASA Certification    :2024-08-01, 4M
-    System Integration     :2024-09-01, 3M
-    Performance Optimization:2024-10-01, 2M
+    Field Trial Hardware   :2026-02-01, 2M
+    Extended Field Testing :2026-02-15, 4M
+    ICASA Certification    :2026-03-01, 4M
+    System Integration     :2026-04-01, 3M
+    Performance Optimization:2026-05-01, 2M
     section Phase 3: Deployment
-    Production Hardware    :2025-01-01, 3M
-    Fleet Installation    :2025-02-01, 4M
-    Training & Handover    :2025-05-01, 2M
+    Production Hardware    :2026-08-01, 3M
+    Fleet Installation    :2026-09-01, 4M
+    Training & Handover    :2027-01-01, 2M
 ```
 
 ---
