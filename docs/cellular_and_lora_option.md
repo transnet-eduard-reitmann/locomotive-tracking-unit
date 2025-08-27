@@ -1,5 +1,5 @@
 # South African Railway Locomotive GPS Tracking System
-## Complete Project Implementation Guide
+## Cellular + LoRa Hybrid Implementation Guide (Variant 3)
 
 ---
 
@@ -7,7 +7,7 @@
 
 **Project Goal:** Develop a scalable GPS tracking system for locomotive fleet management across the South African rail network, providing real-time location data, route optimization, and comprehensive fleet visibility.
 
-**Recommended Solution:** LILYGO T-SIM7600G-H with hybrid communication strategy (4G LTE primary, LoRa backup) and cloud-based data management.
+**Solution Approach:** LILYGO T-SIM7600G-H with hybrid communication strategy (4G LTE primary, LoRa backup) providing maximum reliability and coverage through redundant communication paths.
 
 **Total Investment:** R3,220 per unit hardware + R50/month operational costs
 

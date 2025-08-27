@@ -1,1 +1,13 @@
-I have read the content of the Node.gitignore file. What would you like me to do with it? For example, I can save it as a `.gitignore` file in your project.
+# Build artifacts
+firmware/.pio/
+backend/*/bin/
+backend/*/obj/
+frontend/*/node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
