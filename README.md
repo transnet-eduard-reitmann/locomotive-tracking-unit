@@ -202,8 +202,8 @@ Despite not being the cheapest, the modular system provides the best overall val
 3. **Development Setup**
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/locomotive-tracker.git
-cd locomotive-tracker
+git clone https://github.com/transnet-eduard-reitmann/locomotive-tracking-unit.git
+cd locomotive-tracking-unit
 
 # Setup development environment
 pip install platformio
@@ -230,7 +230,7 @@ dotnet build
 ## Project Structure
 
 ```
-locomotive-tracker/
+locomotive-tracking-unit/
 ├── docs/                              # Comprehensive documentation
 │   ├── cellular_only_option.md       # Variant 1 specifications
 │   ├── lora_only_option.md           # Variant 2 specifications
@@ -301,9 +301,9 @@ locomotive-tracker/
 - 🔧 **[Modular System Guide](docs/modular_system_option.md)** - Variant 5 complete guide ⭐
 
 ### Community & Support
-- **GitHub Issues:** [Report bugs or request features](https://github.com/yourusername/locomotive-tracker/issues)
-- **Discussions:** [Community forum](https://github.com/yourusername/locomotive-tracker/discussions)
-- **Wiki:** [Extended documentation](https://github.com/yourusername/locomotive-tracker/wiki)
+- **GitHub Issues:** [Report bugs or request features](https://github.com/transnet-eduard-reitmann/locomotive-tracking-unit/issues)
+- **Discussions:** [Community forum](https://github.com/transnet-eduard-reitmann/locomotive-tracking-unit/discussions)
+- **Wiki:** [Extended documentation](https://github.com/transnet-eduard-reitmann/locomotive-tracking-unit/wiki)
 
 ---
 
