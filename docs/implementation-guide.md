@@ -24,31 +24,31 @@ This document provides comprehensive technical documentation for implementing a 
 
 ```
                 FIELD DEVICES                           PRIVATE NETWORK
-┌─────────────────────────────────────────┐    ┌──────────────────────────┐
-│                                         │    │                          │
-│  Locomotive Unit #1 (Urban)            │    │   Company Data Center    │
-│  └─ T-SIM7600G-H (Cellular only)       │───►│                          │
-│                                         │    │   ┌──────────────────┐  │
+┌────────────────────────────────────────┐    ┌─────────────────────────┐
+│                                        │    │                         │
+│  Locomotive Unit #1 (Urban)            │    │   Company Data Center   │
+│  └─ T-SIM7600G-H (Cellular only)       │───►│                         │
+│                                        │    │   ┌──────────────────┐  │
 │  Locomotive Unit #2 (Depot)            │    │   │  MS SQL Server   │  │
 │  └─ T-SIM7600G-H + LoRa Module         │───►│   │  Spatial DB      │  │
-│                                         │    │   └──────────────────┘  │
-│  Locomotive Unit #3 (Remote)           │    │                          │
+│                                        │    │   └──────────────────┘  │
+│  Locomotive Unit #3 (Remote)           │    │                         │
 │  └─ T-SIM7600G-H + Satellite Module    │───►│   ┌──────────────────┐  │
-│                                         │    │   │  MQTT Broker     │  │
+│                                        │    │   │  MQTT Broker     │  │
 │  Locomotive Unit #4 (Cross-border)     │    │   │  (Mosquitto)     │  │
-│  └─ T-SIM7600G-H + Sat + LoRa         │───►│   └──────────────────┘  │
-│                                         │    │                          │
-└─────────────────────────────────────────┘    │   ┌──────────────────┐  │
-                    │                           │   │  Web Dashboard   │  │
-                    │                           │   │  (.NET Core)     │  │
-            [Private APN Tunnel]                │   └──────────────────┘  │
-                    │                           │                          │
-                    ▼                           │   ┌──────────────────┐  │
-         ┌──────────────────┐                  │   │  Active Directory│  │
-         │  Cellular Network │                  │   │  Authentication  │  │
-         │  MTN/Vodacom APN  │─────────────────│   └──────────────────┘  │
-         └──────────────────┘                  │                          │
-                                               └──────────────────────────┘
+│  └─ T-SIM7600G-H + Sat + LoRa          │───►│   └──────────────────┘  │
+│                                        │    │                         │
+└────────────────────────────────────────┘    │   ┌──────────────────┐  │
+                    │                         │   │  Web Dashboard   │  │
+                    │                         │   │  (.NET Core)     │  │
+            [Private APN Tunnel]              │   └──────────────────┘  │
+                    │                         │                         │
+                    ▼                         │   ┌──────────────────┐  │
+         ┌──────────────────┐                 │   │  Active Directory│  │
+         │ Cellular Network │                 │   │  Authentication  │  │
+         │ MTN/Vodacom APN  │─────────────────│   └──────────────────┘  │
+         └──────────────────┘                 │                         │
+                                              └─────────────────────────┘
 ```
 
 ### 1.3 Communication Priority Logic
