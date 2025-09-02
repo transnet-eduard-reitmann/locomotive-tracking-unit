@@ -750,17 +750,6 @@ mqttClient.setClient(secureClient);
 | Satellite (selective) | 5 | R75 | R375 |
 | **Total OPEX** | | | **R5,375/month** |
 
-### 10.2 ROI Analysis
-
-**Cost Savings:**
-- Improved asset utilization: R100,000/year
-- Reduced fuel through optimization: R150,000/year
-- Prevention of unauthorized use: R50,000/year
-- Maintenance optimization: R75,000/year
-- **Total savings: R375,000/year**
-
-**Payback Period:** 1.4 years
-
 ---
 
 ## 11. Future Enhancements

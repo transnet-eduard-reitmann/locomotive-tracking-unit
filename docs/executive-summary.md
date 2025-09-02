@@ -281,14 +281,7 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 - Flexibility for future optimization
 - Clear path to fleet-wide visibility
 
-**Project Sponsor Approval:**
-
-_____________________  
-Name:  
-Title:  
-Date:  
-
 ---
 
 *For detailed technical documentation, refer to the Implementation Guide.*  
-*For questions, contact: railway-it@transnet.co.za*
+*For questions, contact: Eduard.Reitmann@Transnet.net*

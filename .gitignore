@@ -1,13 +1,210 @@
-# Build artifacts
-firmware/.pio/
-backend/*/bin/
-backend/*/obj/
-frontend/*/node_modules/
+# Locomotive Tracking System - Git Ignore File
 
-# IDE files
+## Development Tools
 .vscode/
-.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# OS files
+## Build Outputs
+bin/
+obj/
+out/
+build/
+dist/
+target/
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
+## Entity Framework
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+## Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## React
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+## PlatformIO (ESP32 Development)
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+*.elf
+*.bin
+*.hex
+
+## KiCad (PCB Design)
+*.kicad_pcb-bak
+*.sch-bak
+*-cache.lib
+*-cache.dcm
+*.net
+*.dsn
+*.ses
+fp-info-cache
+*.xml
+*.csv#
+*.tsv#
+
+## Fusion 360 (3D Design)
+*.f3d
+*.f3z
+**/Fusion 360 Export/
+
+## Configuration Files (Security Sensitive)
+**/config/secrets/
+**/config/production/
+**/*appsettings.Production.json
+**/*appsettings.Staging.json
+
+## Certificates and Keys
+*.pfx
+*.p12
+*.key
+*.pem
+*.crt
+*.cert
+**/certificates/private/
+
+## Database
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite3
+
+## Logs
+logs/
+*.log
+*.log.*
+
+## Temporary Files
+*.tmp
+*.temp
+*~
 .DS_Store
 Thumbs.db
+
+## Hardware Development
+**/hardware/**/production/
+**/hardware/**/gerber/
+**/hardware/**/assembly/output/
+
+## Test Results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+## Deployment
+publish/
+**/bin/Release/
+**/obj/Release/
+
+## IDE and Editor Files
+*.swp
+*.swo
+*~
+.idea/
+*.iml
+*.iws
+*.ipr
+
+## Package Files
+*.nupkg
+*.snupkg
+*.tgz
+*.tar.gz
+
+## System Files
+.env
+.env.backup
+.env.production
+.env.staging
+
+## Firmware Binary Files
+firmware/**/*.elf
+firmware/**/*.bin
+firmware/**/*.hex
+firmware/**/*.map
+
+## Hardware Manufacturing Files
+hardware/**/gerber/
+hardware/**/drill/
+hardware/**/pick-place/
+hardware/**/assembly/
+
+## Backup Files
+*.bak
+*.backup
+*~
+
+## Archive Files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.xz
+
+## Local Development
+local/
+scratch/
+temp/
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+## Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+## Keep these files
+!.gitkeep
+!README.md
+!LICENSE
+!docs/**/*.md
+!**/examples/
+!**/templates/
+
+# Allow certain configuration templates
+!**/config/templates/
+!**/config/examples/
+!**/.example.*
+
+## Hardware Documentation (Keep)
+!hardware/**/README.md
+!hardware/**/specifications/
+!hardware/**/datasheets/
+
+## Firmware Configuration Templates (Keep)
+!firmware/**/config/templates/
+!firmware/**/config/examples/
+!firmware/**/config/*.example.h
