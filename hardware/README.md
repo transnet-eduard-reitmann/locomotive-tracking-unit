@@ -140,6 +140,71 @@ hardware/
 - **Conditions**: Various weather and operational scenarios
 - **Metrics**: Reliability, performance, durability
 
+## Over-the-Air (OTA) Updates
+
+The hardware platform provides comprehensive OTA update capabilities enabling remote firmware deployment across the entire locomotive fleet without physical access to devices.
+
+### OTA Hardware Architecture
+
+#### Memory Layout for OTA
+The ESP32 flash memory is partitioned to support dual-boot OTA updates:
+
+```
+┌─────────────────────────────────────────┐
+│           ESP32 Flash Memory (4MB)       │
+├─────────────────────────────────────────┤
+│  Bootloader (0x1000) - 32KB             │
+├─────────────────────────────────────────┤
+│  Partition Table (0x8000) - 3KB         │
+├─────────────────────────────────────────┤
+│  OTA Data (0xD000) - 8KB                │
+├─────────────────────────────────────────┤
+│  App Partition 0 (0x10000) - 1.5MB      │
+│  Current Firmware (Active)              │
+├─────────────────────────────────────────┤
+│  App Partition 1 (0x190000) - 1.5MB     │
+│  OTA Target (Update Downloads Here)     │
+├─────────────────────────────────────────┤
+│  SPIFFS (0x310000) - 1MB                │
+│  Configuration & Data Storage           │
+└─────────────────────────────────────────┘
+```
+
+### Hardware Requirements for OTA
+
+| Component | Requirement | T-SIM7600G-H Specification |
+|-----------|-------------|----------------------------|
+| **Flash Memory** | 4MB minimum | 4MB ✓ |
+| **RAM** | 8MB PSRAM | 8MB PSRAM ✓ |
+| **Cellular Modem** | 4G/3G/2G support | SIM7600G ✓ |
+| **Power Supply** | Stable during updates | Railway + battery backup ✓ |
+| **Watchdog Timer** | Hardware recovery | ESP32 built-in ✓ |
+
+### OTA Network Infrastructure
+- **Update Server**: Private network server (10.50.100.30)
+- **MQTT Broker**: Fleet command distribution (10.50.100.10)
+- **Private APN**: Secure cellular tunnel ("transnet.m2m")
+- **HTTPS/TLS**: Encrypted firmware downloads
+- **Certificate Auth**: Device identity verification
+
+### Fleet Management Hardware
+- **Status LED**: Visual update progress indication
+- **OLED Display**: Local update status display
+- **Reset Button**: Manual recovery if needed
+- **Expansion Slots**: Future OTA-capable modules
+
+### Power Considerations for OTA
+- **Update Power Budget**: 2.5W during download phase
+- **Battery Backup**: Maintains power during 45-60 second updates  
+- **Power Monitoring**: Prevents updates on low battery (<50%)
+- **UPS Integration**: Railway power with seamless backup switching
+
+### Security Hardware Features
+- **Secure Element**: Optional crypto accelerator
+- **Hardware RNG**: True random number generation
+- **Tamper Detection**: Physical security monitoring
+- **Debug Interface**: JTAG disabled in production
+
 ## Certification Requirements
 
 ### South African Compliance
@@ -188,4 +253,4 @@ hardware/
 
 ---
 
-*For installation procedures, see the [Deployment Guide](../docs/deployment/). For technical specifications, see the [Implementation Guide](../docs/implementation-guide.md).*
+*For technical specifications, see the [Implementation Guide](../docs/implementation-guide.md).*

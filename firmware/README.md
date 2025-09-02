@@ -141,9 +141,401 @@ Each device must be assigned a unique ID during deployment for tracking and iden
 ### Debug Output
 Enable serial debugging by setting `DEBUG_LEVEL` in `config/device_config.h`.
 
-## Over-the-Air Updates
+## Over-the-Air (OTA) Updates
 
-The firmware supports OTA updates via cellular connection for remote maintenance and feature updates.
+The firmware provides comprehensive OTA update capabilities enabling secure, automated firmware deployment across the entire locomotive fleet via cellular connectivity.
+
+### OTA Implementation Architecture
+
+#### Core OTA Components
+- **OTA Manager**: Handles update checking, downloading, and installation
+- **Security Layer**: Firmware verification and cryptographic validation
+- **Fleet Manager**: MQTT-based fleet-wide update coordination
+- **Rollback System**: Automatic recovery from failed updates
+- **Progress Reporting**: Real-time update status communication
+
+#### Update Process Flow
+1. **Discovery Phase**: Periodic version checking via HTTPS
+2. **Validation Phase**: Server authentication and update verification
+3. **Download Phase**: Secure firmware download to inactive partition
+4. **Installation Phase**: Cryptographic verification and partition switch
+5. **Verification Phase**: Self-test validation after reboot
+6. **Commit Phase**: Update confirmation or automatic rollback
+
+### PlatformIO Configuration for OTA
+
+```ini
+; platformio.ini - OTA-enabled configuration
+[env:t-sim7600g-h-ota]
+platform = espressif32
+board = esp32dev
+framework = arduino
+monitor_speed = 115200
+
+; OTA partition scheme
+board_build.partitions = partitions_ota.csv
+
+; OTA libraries
+lib_deps = 
+    TinyGSM@^0.11.7
+    ArduinoJson@^6.21.3
+    PubSubClient@^2.8.0
+    ESP32httpUpdate@^2.1.145
+    ArduinoHTTPSClient@^2.1.2
+
+; OTA upload configuration
+upload_protocol = espota
+upload_port = 10.50.100.30
+upload_flags = 
+    --port=3232
+    --auth=railway_ota_2024
+```
+
+### Partition Table for OTA
+
+```csv
+# partitions_ota.csv
+# Name,   Type, SubType,  Offset,   Size,     Flags
+nvs,      data, nvs,      0x9000,   0x5000,
+otadata,  data, ota,      0xe000,   0x2000,
+app0,     app,  ota_0,    0x10000,  0x180000,
+app1,     app,  ota_1,    0x190000, 0x180000,
+spiffs,   data, spiffs,   0x310000, 0x100000,
+```
+
+### Core OTA Implementation
+
+#### Basic OTA Manager Class
+```cpp
+// ota_manager.h
+#include <HTTPUpdate.h>
+#include <TinyGsmClient.h>
+#include <PubSubClient.h>
+#include <ArduinoJson.h>
+
+class RailwayOTAManager {
+private:
+    const char* update_server = "https://10.50.100.30";
+    const char* current_version = FIRMWARE_VERSION;
+    const char* device_id = DEVICE_ID;
+    
+    TinyGsmClient* gsm_client;
+    PubSubClient* mqtt_client;
+    
+    bool update_available = false;
+    String update_url;
+    String update_version;
+    
+public:
+    void begin(TinyGsmClient* client, PubSubClient* mqtt);
+    bool checkForUpdates();
+    void performUpdate();
+    void handleFleetUpdate(char* topic, byte* payload, unsigned int length);
+    bool validateFirmware(uint8_t* firmware, size_t size);
+    void reportUpdateStatus(const char* status);
+};
+```
+
+### Security Implementation
+
+#### Secure Update Validation
+```cpp
+// security.cpp - Firmware verification
+#include "mbedtls/pk.h"
+#include "mbedtls/sha256.h"
+
+class SecureOTA {
+private:
+    // RSA public key for firmware verification
+    const char* public_key_pem = R"(
+-----BEGIN PUBLIC KEY-----
+[Your RSA Public Key for Firmware Signing]
+-----END PUBLIC KEY-----
+)";
+    
+public:
+    bool verifyFirmwareSignature(const uint8_t* firmware, size_t size, 
+                                const uint8_t* signature, size_t sig_len) {
+        mbedtls_pk_context pk;
+        mbedtls_pk_init(&pk);
+        
+        // Parse public key
+        int ret = mbedtls_pk_parse_public_key(&pk, 
+            (const unsigned char*)public_key_pem, 
+            strlen(public_key_pem) + 1);
+        if (ret != 0) return false;
+        
+        // Calculate firmware hash
+        uint8_t hash[32];
+        mbedtls_sha256(firmware, size, hash, 0);
+        
+        // Verify signature
+        ret = mbedtls_pk_verify(&pk, MBEDTLS_MD_SHA256, 
+                               hash, 32, signature, sig_len);
+        
+        mbedtls_pk_free(&pk);
+        return (ret == 0);
+    }
+    
+    bool validateFirmwareVersion(const char* new_version) {
+        // Prevent downgrade attacks
+        return (strcmp(new_version, current_version) > 0);
+    }
+};
+```
+
+### Fleet Management System
+
+#### MQTT-Based Fleet Updates
+```cpp
+// fleet_manager.cpp
+void FleetOTAManager::handleMqttMessage(char* topic, byte* payload, unsigned int length) {
+    StaticJsonDocument<512> doc;
+    deserializeJson(doc, payload, length);
+    
+    if (strstr(topic, "/update")) {
+        const char* version = doc["version"];
+        const char* url = doc["url"];
+        const char* checksum = doc["md5"];
+        int delay_seconds = doc["delay"] | 0;
+        
+        // Validate update command
+        if (version && url && validateUpdateCommand(doc)) {
+            scheduleUpdate(version, url, checksum, delay_seconds);
+        }
+    }
+}
+
+void FleetOTAManager::scheduleUpdate(const char* version, const char* url, 
+                                   const char* checksum, int delay_seconds) {
+    // Add random jitter to prevent thundering herd
+    int jitter = random(0, 300); // 0-5 minutes
+    unsigned long update_time = millis() + (delay_seconds + jitter) * 1000;
+    
+    // Store update parameters
+    update_scheduled = true;
+    update_scheduled_time = update_time;
+    update_target_version = String(version);
+    update_target_url = String(url);
+    update_target_checksum = String(checksum);
+    
+    // Report scheduling
+    reportUpdateStatus("scheduled");
+}
+```
+
+### Rollback and Recovery
+
+#### Automatic Rollback System
+```cpp
+// rollback.cpp
+#include "esp_ota_ops.h"
+
+class RollbackManager {
+public:
+    void markUpdateValid() {
+        // Mark current partition as valid
+        esp_ota_mark_app_valid_cancel_rollback();
+        Serial.println("OTA: Update marked as valid");
+    }
+    
+    void triggerRollback() {
+        // Force rollback to previous partition
+        esp_ota_mark_app_invalid_rollback_and_reboot();
+    }
+    
+    bool validateNewFirmware() {
+        // Perform comprehensive self-tests
+        bool gps_ok = testGPS();
+        bool cellular_ok = testCellular();
+        bool mqtt_ok = testMQTT();
+        bool sensors_ok = testSensors();
+        
+        return gps_ok && cellular_ok && mqtt_ok && sensors_ok;
+    }
+    
+private:
+    bool testGPS() {
+        // Test GPS functionality
+        return true; // Implementation specific
+    }
+    
+    bool testCellular() {
+        // Test cellular connectivity
+        return modem.isNetworkConnected();
+    }
+    
+    bool testMQTT() {
+        // Test MQTT connection
+        return mqtt_client->connected();
+    }
+    
+    bool testSensors() {
+        // Test hardware sensors
+        return true; // Implementation specific
+    }
+};
+```
+
+### Update Deployment Strategies
+
+#### Staged Rollout Implementation
+```cpp
+// deployment.cpp
+enum class DeploymentStrategy {
+    IMMEDIATE,    // All devices immediately
+    CANARY,      // 5% first, then remainder
+    STAGED,      // Deploy in time-based groups
+    GEOGRAPHIC   // Deploy by geographic regions
+};
+
+class DeploymentManager {
+public:
+    void deployUpdate(DeploymentStrategy strategy, const char* version) {
+        switch (strategy) {
+            case DeploymentStrategy::CANARY:
+                deployCanary(version);
+                break;
+            case DeploymentStrategy::STAGED:
+                deployStaged(version);
+                break;
+            case DeploymentStrategy::GEOGRAPHIC:
+                deployGeographic(version);
+                break;
+            default:
+                deployImmediate(version);
+        }
+    }
+    
+private:
+    void deployCanary(const char* version) {
+        // Deploy to 5% test group first
+        publishUpdate("fleet/canary/update", version);
+        
+        // Wait 24 hours, then deploy to remainder if successful
+        scheduleFollowUp("fleet/main/update", version, 86400000);
+    }
+};
+```
+
+### Monitoring and Diagnostics
+
+#### Update Progress Reporting
+```cpp
+// monitoring.cpp
+class UpdateMonitor {
+private:
+    unsigned long update_start_time;
+    size_t total_size;
+    size_t downloaded_bytes;
+    
+public:
+    void onUpdateStart() {
+        update_start_time = millis();
+        reportProgress("started", 0);
+    }
+    
+    void onUpdateProgress(size_t current, size_t total) {
+        downloaded_bytes = current;
+        total_size = total;
+        
+        int percent = (current * 100) / total;
+        if (percent % 10 == 0) { // Report every 10%
+            reportProgress("downloading", percent);
+        }
+    }
+    
+    void onUpdateComplete(bool success) {
+        unsigned long duration = millis() - update_start_time;
+        
+        StaticJsonDocument<256> report;
+        report["device_id"] = device_id;
+        report["success"] = success;
+        report["duration_ms"] = duration;
+        report["size_bytes"] = total_size;
+        
+        String json;
+        serializeJson(report, json);
+        mqtt_client->publish("fleet/update/report", json.c_str());
+    }
+    
+private:
+    void reportProgress(const char* phase, int percent) {
+        StaticJsonDocument<128> status;
+        status["device_id"] = device_id;
+        status["phase"] = phase;
+        status["percent"] = percent;
+        
+        String json;
+        serializeJson(status, json);
+        mqtt_client->publish("fleet/update/status", json.c_str());
+    }
+};
+```
+
+### Testing Framework
+
+#### OTA Testing Suite
+```cpp
+// test_ota.cpp
+void testOTAFunctionality() {
+    Serial.println("=== OTA Test Suite ===");
+    
+    // Test 1: Partition validation
+    const esp_partition_t* running = esp_ota_get_running_partition();
+    const esp_partition_t* update = esp_ota_get_next_update_partition(NULL);
+    assert(running != update);
+    Serial.println("✓ OTA partitions configured correctly");
+    
+    // Test 2: Network connectivity
+    assert(modem.isGprsConnected());
+    Serial.println("✓ Cellular connection active");
+    
+    // Test 3: Server reachability
+    HTTPClient http;
+    http.begin(*gsm_client, "https://10.50.100.30/health");
+    assert(http.GET() == 200);
+    Serial.println("✓ Update server reachable");
+    
+    // Test 4: MQTT connectivity
+    assert(mqtt_client.connected());
+    Serial.println("✓ MQTT fleet management active");
+    
+    // Test 5: Security validation
+    SecureOTA security;
+    assert(security.validateFirmwareVersion("999.999.999"));
+    Serial.println("✓ Security validation functional");
+    
+    Serial.println("=== All OTA tests passed ===");
+}
+```
+
+### Production Configuration
+
+#### Build Flags for Production OTA
+```cpp
+// config/ota_config.h
+#ifdef PRODUCTION_BUILD
+    #define OTA_SERVER_URL "https://10.50.100.30"
+    #define MQTT_BROKER "10.50.100.10"
+    #define OTA_CHECK_INTERVAL 3600000  // 1 hour
+    #define ENABLE_SECURE_OTA true
+    #define ENABLE_SIGNATURE_VERIFICATION true
+#else
+    #define OTA_SERVER_URL "http://192.168.1.100"
+    #define MQTT_BROKER "192.168.1.100"
+    #define OTA_CHECK_INTERVAL 300000   // 5 minutes
+    #define ENABLE_SECURE_OTA false
+    #define ENABLE_SIGNATURE_VERIFICATION false
+#endif
+
+// Fleet management topics
+#define TOPIC_FLEET_ALL_UPDATE "fleet/all/update"
+#define TOPIC_FLEET_DEVICE_UPDATE "fleet/" DEVICE_ID "/update"
+#define TOPIC_FLEET_GROUP_UPDATE "fleet/group1/update"
+#define TOPIC_FLEET_STATUS "fleet/status/" DEVICE_ID
+#define TOPIC_FLEET_UPDATE_REPORT "fleet/update/report"
+```
 
 ---
 

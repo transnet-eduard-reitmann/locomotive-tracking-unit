@@ -449,9 +449,243 @@ namespace RailwayTracking.API
 
 ---
 
-## 5. Database Schema
+## 5. Over-the-Air (OTA) Update System
 
-### 5.1 MS SQL Server Tables
+The system implements comprehensive OTA capabilities for remote firmware management across the entire locomotive fleet, addressing one of the key operational requirements identified during extended research.
+
+### 5.1 OTA Architecture Overview
+
+```mermaid
+graph TB
+    subgraph "Control Center"
+        A[Firmware Repository] --> B[Update Server<br/>10.50.100.30]
+        B --> C[MQTT Broker<br/>10.50.100.10]
+        D[Fleet Dashboard] --> C
+        E[Certificate Authority] --> B
+    end
+    
+    subgraph "Private APN Network"
+        C --> F[Cellular Network<br/>transnet.m2m]
+    end
+    
+    subgraph "Field Devices"
+        F --> G[Locomotive 1<br/>T-SIM7600G-H]
+        F --> H[Locomotive 2<br/>T-SIM7600G-H]
+        F --> I[Locomotive N<br/>T-SIM7600G-H]
+    end
+    
+    subgraph "ESP32 Memory Layout"
+        J[Bootloader<br/>0x1000]
+        K[App Partition 0<br/>Active Firmware]
+        L[App Partition 1<br/>OTA Target]
+        M[SPIFFS<br/>Config Data]
+    end
+```
+
+### 5.2 Fleet Deployment Strategies
+
+#### Canary Deployment (Recommended)
+```mermaid
+graph TD
+    A[New Firmware v1.2.0] --> B[5% Fleet Test Group<br/>Canary Locomotives]
+    B -->|24 hours monitoring| C{Success Rate >95%?}
+    C -->|Yes| D[25% Fleet<br/>Early Adopters]
+    C -->|No| E[Halt Deployment<br/>Investigate Issues]
+    D -->|24 hours monitoring| F{Success Rate >95%?}
+    F -->|Yes| G[100% Fleet<br/>Full Deployment]
+    F -->|No| H[Partial Rollback<br/>Fix Issues]
+```
+
+#### Geographic Rollout
+- **Gauteng Routes**: High-traffic main lines (30% of fleet)
+- **Western Cape**: Secondary routes (25% of fleet) 
+- **KwaZulu-Natal**: Mixed traffic (25% of fleet)
+- **Remote Routes**: Low-traffic areas (20% of fleet)
+
+### 5.3 OTA Security Framework
+
+#### Multi-Layer Security Model
+1. **Transport Security**: HTTPS/TLS 1.3 with certificate pinning
+2. **Authentication**: Device certificates and private key authentication  
+3. **Firmware Signing**: RSA-4096 signed firmware binaries
+4. **Version Control**: Anti-rollback protection with secure versioning
+5. **Integrity Validation**: SHA-256 checksums with signature verification
+
+#### Certificate Management
+```mermaid
+graph LR
+    A[Root CA<br/>Railway Authority] --> B[Intermediate CA<br/>Operations]
+    B --> C[Server Certificate<br/>Update Server]
+    B --> D[Device Certificates<br/>Individual Locomotives]
+    
+    E[Code Signing CA] --> F[Firmware Signing<br/>Certificate]
+    F --> G[Signed Firmware<br/>Binaries]
+```
+
+### 5.4 Update Process Flow
+
+#### Phase 1: Update Discovery
+```cpp
+// Periodic version check via cellular
+void checkForUpdates() {
+    HTTPClient https;
+    https.begin(gsm_client, "https://10.50.100.30/api/version");
+    https.addHeader("X-Device-ID", DEVICE_ID);
+    https.addHeader("X-Current-Version", FIRMWARE_VERSION);
+    
+    if (https.GET() == 200) {
+        StaticJsonDocument<256> response;
+        deserializeJson(response, https.getString());
+        
+        const char* latest = response["version"];
+        if (isNewerVersion(latest)) {
+            scheduleUpdate(response["url"], response["checksum"]);
+        }
+    }
+}
+```
+
+#### Phase 2: Secure Download
+- **Bandwidth Management**: Throttled downloads to prevent network congestion
+- **Resume Capability**: Partial download recovery on connection loss
+- **Verification**: Real-time hash calculation during download
+- **Progress Reporting**: MQTT status updates to fleet dashboard
+
+#### Phase 3: Installation & Validation
+```cpp
+void performOTAUpdate() {
+    // Pre-update validation
+    if (!validateUpdateConditions()) return;
+    
+    // Download to inactive partition
+    esp_ota_handle_t ota_handle;
+    const esp_partition_t* update_partition = esp_ota_get_next_update_partition(NULL);
+    
+    // Secure download with verification
+    if (downloadAndVerifyFirmware(update_partition, &ota_handle)) {
+        esp_ota_end(ota_handle);
+        esp_ota_set_boot_partition(update_partition);
+        
+        // Schedule self-test after reboot
+        schedulePostUpdateValidation();
+        ESP.restart();
+    }
+}
+```
+
+### 5.5 Rollback and Recovery
+
+#### Automatic Rollback Triggers
+- **Boot Failure**: No successful boot within 3 attempts
+- **Self-Test Failure**: GPS, cellular, or MQTT connectivity failure
+- **Watchdog Timeout**: System hang or infinite loop detection
+- **Critical Error**: Memory corruption or stack overflow
+
+#### Recovery Process
+```cpp
+void validateNewFirmware() {
+    bool system_healthy = true;
+    
+    // Test critical subsystems
+    system_healthy &= testGPSFunctionality();
+    system_healthy &= testCellularConnectivity();
+    system_healthy &= testMQTTConnection();
+    system_healthy &= testMemoryIntegrity();
+    
+    if (system_healthy) {
+        esp_ota_mark_app_valid_cancel_rollback();
+        reportUpdateSuccess();
+    } else {
+        // Automatic rollback
+        esp_ota_mark_app_invalid_rollback_and_reboot();
+    }
+}
+```
+
+### 5.6 Fleet Management Interface
+
+#### Dashboard Capabilities
+- **Fleet Overview**: Real-time firmware version distribution
+- **Update Progress**: Live deployment status and progress tracking  
+- **Health Monitoring**: System status of each locomotive post-update
+- **Rollback Control**: Emergency rollback capability for individual or groups
+- **Audit Trail**: Complete history of all update activities
+
+#### MQTT Command Structure
+```json
+{
+  "fleet_update_command": {
+    "target": "fleet/group/gauteng",
+    "version": "2.1.0", 
+    "url": "https://10.50.100.30/firmware/v2.1.0/locomotive-fw.bin",
+    "checksum": "sha256:a1b2c3d4...",
+    "strategy": "staged",
+    "delay_seconds": 300,
+    "conditions": {
+      "min_battery": 50,
+      "max_speed": 5,
+      "signal_strength": -90
+    }
+  }
+}
+```
+
+### 5.7 Performance Metrics
+
+#### Update Success Criteria
+- **Download Success Rate**: >98% first attempt
+- **Installation Success Rate**: >99.5% without rollback
+- **Network Impact**: <10% bandwidth utilization during updates
+- **Update Duration**: 45-90 seconds complete cycle
+- **Fleet Availability**: >95% operational during staged rollouts
+
+#### Monitoring and Alerting  
+```cpp
+struct OTAMetrics {
+    uint32_t downloads_attempted;
+    uint32_t downloads_successful; 
+    uint32_t installations_successful;
+    uint32_t rollbacks_triggered;
+    uint32_t average_download_time_ms;
+    uint32_t average_install_time_ms;
+    float success_rate_percent;
+};
+```
+
+### 5.8 Integration with Existing Systems
+
+#### Database Integration
+The OTA system integrates with the existing MS SQL Server database to track:
+- Firmware version history per locomotive
+- Update deployment schedules and results
+- Performance metrics and failure analysis
+- Audit trails for compliance reporting
+
+#### MQTT Integration
+OTA commands and status reporting utilize the existing MQTT infrastructure:
+- **Command Topics**: `fleet/{group}/update`, `fleet/{device}/update`
+- **Status Topics**: `fleet/status/{device}`, `fleet/update/progress`
+- **Priority Handling**: Emergency updates bypass normal scheduling
+
+### 5.9 Testing Framework
+
+#### Pre-Deployment Validation
+1. **Firmware Validation**: Signature verification and compatibility checking
+2. **Network Testing**: Cellular connectivity and download speed validation
+3. **Partition Testing**: Flash memory integrity and partition alignment
+4. **Recovery Testing**: Rollback mechanism and watchdog functionality
+
+#### Field Testing Protocol  
+- **Test Group**: 5 locomotives across different routes
+- **Duration**: 4 weeks comprehensive testing
+- **Scenarios**: Normal operation, power cycling, network interruption
+- **Success Criteria**: 100% successful updates with zero rollbacks
+
+---
+
+## 6. Database Schema
+
+### 6.1 MS SQL Server Tables
 
 ```sql
 -- Core tracking tables for private network deployment
@@ -528,7 +762,7 @@ END
 
 ---
 
-## 6. Implementation Timeline
+## 7. Implementation Timeline
 
 ### 6.1 Phase 1: Cellular Deployment (Months 1-6)
 
@@ -592,7 +826,7 @@ END
 
 ---
 
-## 7. Testing & Validation
+## 8. Testing & Validation
 
 ### 7.1 Hardware Testing
 
@@ -655,7 +889,7 @@ bool performSelfTest() {
 
 ---
 
-## 8. Security Considerations
+## 9. Security Considerations
 
 ### 8.1 Network Security
 
@@ -690,7 +924,7 @@ mqttClient.setClient(secureClient);
 
 ---
 
-## 9. Operational Procedures
+## 10. Operational Procedures
 
 ### 9.1 Installation Process
 
@@ -730,7 +964,7 @@ mqttClient.setClient(secureClient);
 
 ---
 
-## 10. Cost Analysis
+## 11. Cost Analysis
 
 ### 10.1 Total Cost Breakdown (100 Units)
 
@@ -741,18 +975,19 @@ mqttClient.setClient(secureClient);
 | Development & integration | R150,000 |
 | Private APN setup | R20,000 |
 | Installation | R50,000 |
-| **Total CAPEX** | **R532,000** |
+| **Total CAPEX** | **R512,000** |
 
 **Monthly Operating Costs:**
 | Service | Units | Cost/Unit | Total |
 |---------|-------|-----------|-------|
-| Private APN data | 100 | R50 | R5,000 |
-| Satellite (selective) | 5 | R75 | R375 |
-| **Total OPEX** | | | **R5,375/month** |
+| Cellular Connectivity | 85 | R50 | R4,250 |
+| Satellite Data | 5 | R175 | R875 |
+| System Maintenance | 1 | R500 | R500 |
+| **Total OPEX** | | | **R5,625/month** |
 
 ---
 
-## 11. Future Enhancements
+## 12. Future Enhancements
 
 ### 11.1 Planned Upgrades
 

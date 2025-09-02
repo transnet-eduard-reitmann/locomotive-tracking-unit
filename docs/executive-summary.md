@@ -64,37 +64,34 @@ pie title "Fleet Communication Mix (100 Units)"
 ### Capital Expenditure (CAPEX)
 ```mermaid
 graph TD
-    A[Total CAPEX: R532,000] --> B[Hardware: R312,000<br/>58.6%]
-    A --> C[Development: R150,000<br/>28.2%]
-    A --> D[Infrastructure: R70,000<br/>13.2%]
+    A[Total CAPEX: R512,000] --> B[Hardware: R312,000<br/>60.9%]
+    A --> C[Development: R150,000<br/>29.3%]
+    A --> D[Installation: R50,000<br/>9.8%]
 ```
 
 ### Detailed Cost Breakdown
 | Category | Component | Cost |
 |----------|-----------|------|
 | **Hardware** | 100x Base Units @ R3,120 | R312,000 |
-| **Development** | Firmware & Backend | R100,000 |
-| **Integration** | Database & Dashboard | R50,000 |
-| **Infrastructure** | Private APN Setup | R20,000 |
+| **Development** | Firmware & Backend | R150,000 |
 | **Installation** | Labor & Testing | R50,000 |
-| **Total CAPEX** | | **R532,000** |
+| **Total CAPEX** | | **R512,000** |
 
 ### Operating Expenditure (OPEX)
 | Service | Monthly Cost | Annual Cost |
 |---------|--------------|-------------|
-| **Cellular Data (85 units)** | R4,250 | R51,000 |
-| **Private APN Service** | R500 | R6,000 |
-| **Satellite Data (5 units)** | R375 | R4,500 |
-| **System Maintenance** | R250 | R3,000 |
-| **Total OPEX** | **R5,375** | **R64,500** |
+| **Cellular Connectivity (85 units)** | R4,250 | R51,000 |
+| **Satellite Data (5 units)** | R875 | R10,500 |
+| **System Maintenance** | R500 | R6,000 |
+| **Total OPEX** | **R5,625** | **R67,500** |
 
 ### 5-Year Total Cost of Ownership
 ```mermaid
 graph LR
-    A[Year 1<br/>R596,500] --> B[Year 2<br/>R64,500]
-    B --> C[Year 3<br/>R64,500]
-    C --> D[Year 4<br/>R64,500]
-    D --> E[Year 5<br/>R64,500]
+    A[Year 1<br/>R579,500] --> B[Year 2<br/>R67,500]
+    B --> C[Year 3<br/>R67,500]
+    C --> D[Year 4<br/>R67,500]
+    D --> E[Year 5<br/>R67,500]
     
     style A fill:#FFE4B5
     style B fill:#E6F3FF
@@ -103,7 +100,7 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure: R854,500**
+**Total 5-Year Expenditure: R849,500**
 
 ---
 
@@ -190,8 +187,8 @@ graph TD
 | Criteria | Selected Solution | Alternative 1 | Alternative 2 |
 |----------|------------------|---------------|---------------|
 | **Approach** | Cellular + Modular | Fixed Hybrid | Full Modular |
-| **Initial Cost** | R532K | R1,013K | R542K |
-| **5-Year Total Cost** | R854K | R1,343K | R880K |
+| **Initial Cost** | R512K | R1,013K | R542K |
+| **5-Year Total Cost** | R849K | R1,343K | R880K |
 | **Deployment Time** | 6 months | 18 months | 12 months |
 | **Flexibility** | High | Low | Very High |
 | **Complexity** | Low | Medium | High |
@@ -200,7 +197,7 @@ graph TD
 ### Cost Efficiency Analysis
 ```mermaid
 graph TD
-    A[Solution Options] --> B[Selected: R854K<br/>Cellular + Modular]
+    A[Solution Options] --> B[Selected: R849K<br/>Cellular + Modular]
     A --> C[Alternative 1: R1,343K<br/>Fixed Hybrid]
     A --> D[Alternative 2: R880K<br/>Full Modular]
     
@@ -214,7 +211,7 @@ graph TD
 ## 8. Recommendations
 
 ### Immediate Actions (Month 1)
-1. **Approve budget** allocation of R532,000 CAPEX
+1. **Approve budget** allocation of R512,000 CAPEX
 2. **Engage network provider** for private APN setup
 3. **Order pilot hardware** (10 units) for testing
 4. **Assign project team** with IT and operations representatives
@@ -245,11 +242,11 @@ graph LR
 ### Total Project Expenditure
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R532,000 | R64,500 | R596,500 |
-| **Year 2** | - | R64,500 | R661,000 |
-| **Year 3** | - | R64,500 | R725,500 |
-| **Year 4** | - | R64,500 | R790,000 |
-| **Year 5** | - | R64,500 | R854,500 |
+| **Year 1** | R512,000 | R67,500 | R579,500 |
+| **Year 2** | - | R67,500 | R647,000 |
+| **Year 3** | - | R67,500 | R714,500 |
+| **Year 4** | - | R67,500 | R782,000 |
+| **Year 5** | - | R67,500 | R849,500 |
 
 ### Budget Allocation by Category
 ```mermaid
@@ -269,7 +266,7 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 | Factor | Assessment |
 |--------|------------|
 | **Strategic Alignment** | ✅ Supports fleet modernization objectives |
-| **Budget Requirements** | ✅ R532K initial + R64.5K annual |
+| **Budget Requirements** | ✅ R512K initial + R64.5K annual |
 | **Technical Risk** | ✅ Low - proven hardware platform |
 | **Operational Impact** | ✅ Immediate visibility improvement |
 | **Scalability** | ✅ Easily expanded to 1000+ units |

@@ -10,9 +10,11 @@ A comprehensive GPS tracking system for locomotive fleet management across the S
 ## Key Features
 
 - **Immediate Deployment** - Works out-of-box with cellular networks
+- **Over-the-Air Updates** - Remote firmware deployment to entire fleet via cellular
 - **Modular Expansion** - Add LoRa or satellite modules for dead zones  
 - **Real-time Tracking** - 1-minute update intervals on main routes
 - **Private Network Access** - APN configuration for secure company network
+- **Fleet Management** - Centralized monitoring and control of all tracking units
 - **Cost-Optimized** - R3,120 base unit with optional modules as needed
 - **Future-Proof** - Expandable design accommodates new technologies
 
@@ -79,11 +81,12 @@ locomotive-tracking-unit/
 - **Environment**: IP67 rated, -20°C to +70°C operation
 
 ### Software  
-- **Embedded**: C++ on ESP32 using PlatformIO
+- **Embedded**: C++ on ESP32 using PlatformIO with OTA support
 - **Backend**: .NET Core Web API with Entity Framework
 - **Database**: MS SQL Server with spatial data extensions
-- **Frontend**: React.js dashboard with real-time mapping
+- **Frontend**: React.js dashboard with real-time mapping and fleet management
 - **Communication**: MQTT over TLS for secure data transmission
+- **OTA System**: Secure firmware updates with rollback protection
 
 ### Network
 - **Primary**: Cellular (4G/3G/2G) via private APN
@@ -107,10 +110,11 @@ locomotive-tracking-unit/
 git clone https://github.com/your-org/locomotive-tracking-unit.git
 cd locomotive-tracking-unit
 
-# Setup ESP32 development environment
+# Setup ESP32 development environment with OTA support
 pip install platformio
 cd firmware/core
 pio init --board esp32dev
+# Configure OTA partitions in platformio.ini
 
 # Setup backend development
 cd ../../backend/api
@@ -122,6 +126,16 @@ cd ../../frontend/dashboard
 npm install
 npm start
 ```
+
+### OTA Update System
+
+The system includes comprehensive Over-the-Air update capabilities:
+
+- **Fleet-Wide Updates**: Deploy firmware to entire locomotive fleet remotely
+- **Staged Rollouts**: Canary deployments with automatic rollback protection
+- **Security**: Signed firmware with certificate-based authentication
+- **Monitoring**: Real-time update progress and success tracking
+- **Zero Downtime**: Updates happen during scheduled maintenance windows
 
 ### Hardware Setup
 
@@ -163,10 +177,10 @@ npm start
 ## Documentation
 
 - **[Implementation Guide](docs/implementation-guide.md)** - Complete technical documentation
-- **[Hardware Specifications](docs/hardware/)** - Detailed component information  
-- **[API Documentation](docs/api/)** - Backend integration reference
-- **[Deployment Guide](docs/deployment/)** - Installation procedures
-- **[User Manual](docs/user-guide/)** - Operational documentation
+- **[Hardware Specifications](hardware/README.md)** - Detailed component information  
+- **[Executive Summary](docs/executive-summary.md)** - Project overview and business case
+- **[Firmware Documentation](firmware/README.md)** - ESP32 firmware implementation
+- **[Backend Documentation](backend/README.md)** - Server-side implementation
 
 ## Research & Concepts
 

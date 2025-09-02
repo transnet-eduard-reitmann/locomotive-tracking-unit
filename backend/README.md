@@ -360,4 +360,4 @@ ENTRYPOINT ["dotnet", "LocomotiveTracking.Api.dll"]
 
 ---
 
-*For API documentation, see [OpenAPI/Swagger](http://localhost:5000/swagger). For deployment guides, see the [Deployment Documentation](../docs/deployment/).*
+*For API documentation, see [OpenAPI/Swagger](http://localhost:5000/swagger). For technical specifications, see the [Implementation Guide](../docs/implementation-guide.md).*

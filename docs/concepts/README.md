@@ -15,6 +15,11 @@ This folder contains historical research and analysis of different implementatio
 - **[Satellite-Only Option](research/satellite_only_option.md)** - Global coverage satellite solution
 - **[Modular System Option](research/modular_system_option.md)** - Hot-swappable modular approach
 
+### Extended Research (Post-Decision Analysis)
+- **[OTA Comparison Guide](research/ota-comparison-guide.md)** - ESP32 vs Raspberry Pi Zero 2W for OTA capabilities
+- **[Raspberry Pi Alternative](research/raspberry-pi-alternative.md)** - Detailed Linux-based implementation approach
+- **[OTA Implementation Details](research/ota-implementation-detailed.md)** - Comprehensive OTA system design and implementation
+
 ## Final Solution
 
 After extensive analysis, the chosen implementation is a **Cellular-Base with Modular Extensions** approach that:
@@ -36,6 +41,9 @@ This solution combines the reliability of cellular networks with the flexibility
 2. **Cellular Provides Immediate Value**: Proven infrastructure enables rapid deployment
 3. **Modularity Enables Optimization**: Adapt communication method to operational requirements
 4. **Cost Management is Critical**: Operational costs compound over time and must be optimized
+5. **ESP32 OTA is Production-Ready**: Comprehensive OTA capabilities eliminate concerns about remote firmware management
+6. **Power Efficiency Matters**: ESP32's lower power consumption is critical for battery backup requirements
+7. **Simplicity Improves Reliability**: Less complex systems have fewer failure points in harsh railway environments
 
 ## Reference Usage
 
@@ -47,4 +55,4 @@ These concept documents serve as:
 
 ---
 
-*These research documents represent the comprehensive analysis phase that led to the current cellular-base modular implementation.*
+*These research documents represent the comprehensive analysis phase that led to the current cellular-base modular implementation. The extended research validates the ESP32 choice and provides detailed OTA implementation guidance for production deployment.*
