@@ -97,8 +97,9 @@ Different railway route types benefit from different communication approaches:
 - **Mixed operations** → Modular approach enables optimization
 
 ### Power Consumption Critical
-ESP32's significantly lower power consumption (80mA vs 150mA idle) enables:
-- 48-hour battery backup with compact 10Ah battery
+ESP32's efficient power consumption (130mA @ 5V with enhanced UI vs 150mA Pi idle) enables:
+- 38-hour battery backup with enhanced UI active, 60+ hours with auto-off
+- Compact 10Ah battery system sufficient for requirements
 - Reduced charging system complexity
 - Reliable operation during locomotive power outages
 

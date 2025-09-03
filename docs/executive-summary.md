@@ -73,10 +73,10 @@ graph TD
 ### Detailed Cost Breakdown
 | Category | Component | Cost |
 |----------|-----------|------|
-| **Hardware** | 100x Base Units @ R3,650 (includes enhanced UI) | R365,000 |
+| **Hardware** | 100x Base Units @ R3,675 (includes enhanced UI + GPIO expander) | R367,500 |
 | **Development** | Firmware, Backend & Train Management Integration | R180,000 |
 | **Installation** | Labor & Testing | R50,000 |
-| **Total CAPEX** | | **R595,000** |
+| **Total CAPEX** | | **R597,500** |
 
 ### Operating Expenditure (OPEX)
 | Service | Monthly Cost | Annual Cost |
@@ -89,7 +89,7 @@ graph TD
 ### 5-Year Total Cost of Ownership
 ```mermaid
 graph LR
-    A[Year 1<br/>R662,500] --> B[Year 2<br/>R67,500]
+    A[Year 1<br/>R665,000] --> B[Year 2<br/>R67,500]
     B --> C[Year 3<br/>R67,500]
     C --> D[Year 4<br/>R67,500]
     D --> E[Year 5<br/>R67,500]
@@ -101,7 +101,7 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure: R932,500**
+**Total 5-Year Expenditure: R935,000**
 
 ---
 
@@ -128,7 +128,7 @@ gantt
 ### Deployment Milestones
 | Phase | Timeline | Units | Capability | Budget |
 |-------|----------|-------|------------|--------|
-| **Phase 1** | Months 1-6 | 100 | Cellular tracking + train management operational | R595,000 |
+| **Phase 1** | Months 1-6 | 100 | Cellular tracking + train management operational | R597,500 |
 | **Phase 2** | Months 7-12 | +30 modules | Depot cost optimization | R150,000 |
 | **Phase 3** | Months 13-18 | +5 modules | Complete coverage | R75,000 |
 
@@ -212,7 +212,7 @@ graph TD
 ## 8. Recommendations
 
 ### Immediate Actions (Month 1)
-1. **Approve budget** allocation of R595,000 CAPEX
+1. **Approve budget** allocation of R597,500 CAPEX
 2. **Engage network provider** for private APN setup
 3. **Order pilot hardware** (10 units) for testing
 4. **Assign project team** with IT and operations representatives
@@ -243,16 +243,16 @@ graph LR
 ### Total Project Expenditure
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R595,000 | R67,500 | R662,500 |
-| **Year 2** | - | R67,500 | R730,000 |
-| **Year 3** | - | R67,500 | R797,500 |
-| **Year 4** | - | R67,500 | R865,000 |
-| **Year 5** | - | R67,500 | R932,500 |
+| **Year 1** | R597,500 | R67,500 | R665,000 |
+| **Year 2** | - | R67,500 | R732,500 |
+| **Year 3** | - | R67,500 | R800,000 |
+| **Year 4** | - | R67,500 | R867,500 |
+| **Year 5** | - | R67,500 | R935,000 |
 
 ### Budget Allocation by Category
 ```mermaid
 pie title "5-Year Cost Distribution"
-    "Initial Hardware" : 365
+    "Initial Hardware" : 367.5
     "Development & Integration" : 230
     "Operating Costs (5 years)" : 337.5
 ```
@@ -267,7 +267,7 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 | Factor | Assessment |
 |--------|------------|
 | **Strategic Alignment** | ✅ Supports fleet modernization objectives |
-| **Budget Requirements** | ✅ R595K initial + R67.5K annual |
+| **Budget Requirements** | ✅ R597.5K initial + R67.5K annual |
 | **Technical Risk** | ✅ Low - proven hardware platform |
 | **Operational Impact** | ✅ Immediate visibility improvement |
 | **Scalability** | ✅ Easily expanded to 1000+ units |

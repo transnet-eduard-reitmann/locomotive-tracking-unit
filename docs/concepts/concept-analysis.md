@@ -13,7 +13,7 @@ Straightforward implementation using LILYGO T-SIM7600G-H with 4G LTE communicati
 - **Hardware**: LILYGO T-SIM7600G-H integrated board
 - **Communication**: 4G LTE primary, 3G/2G fallback
 - **Coverage**: 99%+ across SA rail network using multi-carrier approach
-- **Cost Structure**: R2,870/unit + R50/month operational
+- **Cost Structure**: R3,675/unit (includes enhanced UI + GPIO expander) + R50/month operational
 - **Deployment**: 15 months for 100-unit rollout
 - **Update Frequency**: 1-minute real-time intervals
 

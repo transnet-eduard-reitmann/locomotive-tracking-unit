@@ -10,7 +10,7 @@ This is a South African Railway Locomotive GPS Tracking System - a comprehensive
 
 The system uses a **cellular-base with modular extensions** approach:
 
-- **Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS) as base unit with enhanced UI (2.8" TFT display, 4-button navigation) and optional expansion modules
+- **Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS) as base unit with enhanced UI (2.8" TFT display, 4-button navigation, MCP23017 GPIO expander) and optional expansion modules
 - **Firmware**: C++ on ESP32 using PlatformIO with comprehensive OTA support and train management workflows
 - **Backend**: .NET Core Web API with Entity Framework, MQTT services, SignalR, and **Train Management Integration Services**
 - **Database**: MS SQL Server with spatial data extensions and train management tables
@@ -48,6 +48,8 @@ pio lib install "SIM7600"
 pio lib install "TinyGPSPlus"  
 pio lib install "ArduinoJson"
 pio lib install "PubSubClient"
+pio lib install "TFT_eSPI"
+pio lib install "Adafruit MCP23017 Arduino Library"
 
 # Build firmware
 pio run
@@ -109,10 +111,11 @@ sqlcmd -Q "ALTER DATABASE LocomotiveTracking SET COMPATIBILITY_LEVEL = 150"
 ### Firmware Architecture
 - **LILYGO T-SIM7600G-H Base**: Integrated ESP32 + 4G LTE + GPS foundation
 - **Enhanced User Interface**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
+- **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI implementation)
 - **Train Management Workflow**: On-device train number assignment, confirmation, and status display
 - **Cellular communication**: 4G/3G/2G with automatic fallback - always available
 - **Modular expansion**: Hot-swappable LoRa and satellite communication modules
-- **Power management**: Railway power integration with 48-hour battery backup (updated for enhanced UI: 0.6W idle, 7.7W peak)
+- **Power management**: Railway power integration with 38-hour battery backup (updated for enhanced UI + GPIO expander: 0.65W idle, 7.7W peak)
 - **Route-based profiles**: Adaptive reporting intervals and module activation based on location
 - **Comprehensive OTA system**: Secure fleet-wide firmware updates via cellular
 
@@ -147,6 +150,7 @@ Key configuration files in `firmware/config/`:
 - `routes.h`: Geographic boundaries and communication preferences
 - `device_config.h`: Device-specific settings and debug levels
 - `ui_config.h`: Display settings, button mappings, and user interface preferences
+- `gpio_config.h`: GPIO pin assignments and expander configuration
 
 ### Backend Configuration
 ```json
@@ -229,4 +233,8 @@ This is a **safety-critical railway system** that must comply with:
 - Train management workflow enables TCO-initiated train assignments with device confirmation
 - OTA updates can be deployed to entire fleet or specific device groups
 - All communications use MQTT over TLS for security and reliability
-- Base unit cost updated to R3,650 (includes enhanced UI components)
+- Base unit cost updated to R3,675 (includes enhanced UI components + mandatory GPIO expander)
+- GPIO expander provides 16 additional GPIO pins via I2C for enhanced UI functionality
+- Power consumption includes enhanced UI: 0.65W idle, 38-hour battery life with UI active
+- Complete GPIO pin analysis available in `hardware/gpio-analysis.md`
+- Enhanced UI specifications detailed in `firmware/ui-specifications.md`

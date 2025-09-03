@@ -23,6 +23,7 @@ firmware/
 │   ├── gps_manager.cpp    # GPS positioning and tracking
 │   ├── cellular_manager.cpp  # SIM7600G cellular modem control
 │   ├── ui_manager.cpp     # Enhanced UI management (TFT display, buttons)
+│   ├── gpio_expander.cpp  # MCP23017 GPIO expander driver
 │   ├── train_manager.cpp  # Train assignment workflow and management
 │   ├── power_manager.cpp     # Power optimization and management (updated for UI)
 │   └── storage_manager.cpp   # SD card data logging
@@ -30,14 +31,21 @@ firmware/
 │   ├── lora_module.cpp      # LoRa communication (optional)
 │   ├── satellite_module.cpp # Satellite interface (optional)
 │   └── module_interface.h   # Common module interface
+├── drivers/           # Hardware drivers
+│   ├── tft_display.cpp      # 2.8" TFT display driver
+│   ├── button_matrix.cpp    # 4-button navigation driver
+│   └── led_controller.cpp   # Multi-color LED control
 ├── config/            # Configuration management
 │   ├── apn_settings.h       # Private APN configuration
 │   ├── routes.h             # Route profiles and boundaries
 │   ├── device_config.h      # Device-specific settings
-│   └── ui_config.h          # UI settings, display configuration, button mappings
+│   ├── ui_config.h          # UI settings, display configuration, button mappings
+│   └── gpio_config.h        # GPIO pin assignments and expander configuration
 └── tests/             # Unit tests and hardware tests
     ├── test_gps.cpp         # GPS functionality tests
     ├── test_cellular.cpp    # Cellular communication tests
+    ├── test_ui.cpp          # Enhanced UI functionality tests
+    ├── test_gpio_expander.cpp # GPIO expander tests
     └── test_integration.cpp # Full system integration tests
 ```
 
@@ -48,8 +56,9 @@ firmware/
 - **Cellular**: SIM7600G (4G LTE Cat-4, 3G, 2G)
 - **GPS**: Integrated GNSS (GPS, GLONASS, BeiDou, Galileo)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
+- **GPIO Expander**: MCP23017 I2C 16-port expander for UI components
 - **Storage**: 32GB MicroSD card
-- **Power**: 110V railway power with battery backup (0.6W idle, 7.7W peak including UI)
+- **Power**: 110V railway power with battery backup (0.65W idle, 7.7W peak including UI + expander)
 
 ## Key Features
 
@@ -106,6 +115,8 @@ pio lib install "ArduinoJson"
 pio lib install "PubSubClient"
 pio lib install "TFT_eSPI"
 pio lib install "XPT2046_Touchscreen"
+pio lib install "Adafruit MCP23017 Arduino Library"
+pio lib install "Wire"
 pio run
 ```
 
@@ -127,6 +138,33 @@ const char* APN_PASS = "your_password";
 ### Route Profiles
 Edit `config/routes.h` to define geographical boundaries and communication preferences for different route types.
 
+### GPIO Configuration
+Edit `config/gpio_config.h`:
+```cpp
+// ESP32 Direct GPIO Pin Assignments
+#define TFT_CS_PIN       GPIO32   // TFT display chip select
+#define TFT_DC_PIN       GPIO33   // TFT display data/command  
+#define TFT_RST_PIN      GPIO25   // TFT display reset
+#define TFT_BACKLIGHT    GPIO26   // TFT backlight control
+// TFT uses shared SPI: GPIO14 (CLK), GPIO13 (MOSI), GPIO12 (MISO)
+
+#define I2C_SDA_PIN      GPIO27   // I2C data line
+#define I2C_SCL_PIN      GPIO14   // I2C clock line (shared with SPI CLK)
+
+// GPIO Expander Configuration
+#define I2C_GPIO_ADDR    0x20     // MCP23017 I2C address
+
+// GPIO Expander Pin Assignments
+#define EXP_BTN_UP       0        // Navigation button up
+#define EXP_BTN_DOWN     1        // Navigation button down  
+#define EXP_BTN_OK       2        // Confirmation button
+#define EXP_BTN_CANCEL   3        // Cancel/back button
+#define EXP_LED_GPS      4        // GPS status LED
+#define EXP_LED_CELLULAR 5        // Cellular connectivity LED
+#define EXP_LED_TRAIN    6        // Train assignment status LED
+#define EXP_TRAIN_BUZZER 8        // Train assignment notification buzzer
+```
+
 ### UI Configuration
 Edit `config/ui_config.h`:
 ```cpp
@@ -137,19 +175,13 @@ Edit `config/ui_config.h`:
 #define TEXT_COLOR TFT_WHITE
 #define HIGHLIGHT_COLOR TFT_CYAN
 
-// Button mappings
-#define BTN_UP_PIN 25
-#define BTN_DOWN_PIN 26
-#define BTN_LEFT_PIN 27
-#define BTN_RIGHT_PIN 14
-#define BTN_OK_PIN 12
-#define BTN_CANCEL_PIN 13
+// Button debounce settings
+#define BUTTON_DEBOUNCE_MS 50
+#define BUTTON_LONG_PRESS_MS 1000
 
-// Status LED pins
-#define LED_GPS_PIN 2
-#define LED_CELLULAR_PIN 4
-#define LED_TRAIN_PIN 16
-#define LED_STATUS_PIN 17
+// Display timeout settings
+#define DISPLAY_TIMEOUT_MS 300000  // 5 minutes auto-off
+#define BACKLIGHT_DIM_LEVEL 50     // 0-255
 ```
 
 ### Device ID
@@ -185,11 +217,13 @@ Each device must be assigned a unique ID during deployment for tracking and iden
 ### Common Issues
 - **No GPS Fix**: Check antenna connection and sky view
 - **Cellular Connection Failed**: Verify APN settings and SIM activation
-- **Display Not Working**: Check TFT display connections and power supply
-- **Buttons Not Responsive**: Verify button pin assignments and debouncing settings
+- **Display Not Working**: Check TFT display connections, SPI configuration, and power supply
+- **Buttons Not Responsive**: Verify GPIO expander I2C connection and pin assignments
+- **GPIO Expander Not Detected**: Check I2C wiring (SDA/SCL), pull-up resistors, and address conflicts
 - **Train Assignments Not Working**: Check MQTT subscription topics and backend connectivity
 - **Data Not Transmitting**: Check MQTT broker connectivity
-- **High Power Consumption**: Review sleep mode configuration (UI increases base consumption)
+- **High Power Consumption**: Review sleep mode configuration and display timeout settings
+- **LED Status Not Working**: Verify GPIO expander initialization and pin configuration
 
 ### Debug Output
 Enable serial debugging by setting `DEBUG_LEVEL` in `config/device_config.h`.

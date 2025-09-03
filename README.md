@@ -17,7 +17,7 @@ A comprehensive GPS tracking system for locomotive fleet management across the S
 - **Real-time Tracking** - 1-minute update intervals on main routes
 - **Private Network Access** - APN configuration for secure company network
 - **Fleet Management** - Centralized monitoring and control of all tracking units
-- **Cost-Optimized** - R3,650 base unit with enhanced UI, optional modules as needed
+- **Cost-Optimized** - R3,675 base unit with enhanced UI + GPIO expander, optional modules as needed
 - **TCO Workflow Integration** - Seamless train number assignment and confirmation process
 - **Future-Proof** - Expandable design accommodates new technologies
 
@@ -80,8 +80,9 @@ locomotive-tracking-unit/
 ### Hardware
 - **Core Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
+- **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI)
 - **Expansion**: Optional LoRa and satellite communication modules
-- **Power**: 110V railway power with 48-hour battery backup (0.6W idle, 7.7W peak including UI)
+- **Power**: 110V railway power with 38-hour battery backup (0.65W idle, 7.7W peak including UI + expander)
 - **Environment**: IP67 rated, -20°C to +70°C operation
 
 ### Software  
@@ -162,10 +163,10 @@ The system includes comprehensive Over-the-Air update capabilities:
 ## Cost Summary
 
 ### Initial Investment (100 Units)
-- Base Hardware: R365,000 (100 × R3,650, includes enhanced UI)
+- Base Hardware: R367,500 (100 × R3,675, includes enhanced UI + GPIO expander)
 - Development & Integration: R180,000 (includes train management integration)
 - Installation: R50,000
-- **Total CAPEX: R595,000**
+- **Total CAPEX: R597,500**
 
 ### Monthly Operating Costs (100 Units)
 - Cellular Connectivity: R4,250 (85 units)

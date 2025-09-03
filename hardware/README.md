@@ -34,15 +34,16 @@ hardware/
 ### Core Components
 - **Main Board**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
-- **Unit Price**: R3,650 (includes enhanced UI components)
+- **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI)
+- **Unit Price**: R3,675 (includes enhanced UI components + GPIO expander)
 - **Dimensions**: 120mm × 90mm × 25mm (increased for UI integration)
 
 ### Power System
 - **Input**: 110V DC railway power
 - **Power Supply**: Mean Well DDR-30G-5 (5V/6A output) - upgraded for UI power requirements
 - **Backup Battery**: 2× 18650 Li-ion (7.4V, 6800mAh)
-- **Battery Life**: 48 hours continuous operation (with enhanced UI)
-- **Power Consumption**: 0.6W idle (including UI), 7.7W peak transmission
+- **Battery Life**: 38 hours continuous operation (with enhanced UI active)
+- **Power Consumption**: 0.65W idle (including UI + GPIO expander), 7.7W peak transmission
 
 ### Environmental Protection
 - **Enclosure Rating**: IP67 (dust/water resistant)
@@ -67,6 +68,7 @@ hardware/
 | TFT Display | 2.8" Color TFT 320x240 | 1 | R350 | R350 |
 | Button Assembly | 4-button navigation pad | 1 | R80 | R80 |
 | Status LEDs | Multi-color LEDs x4 | 1 | R50 | R50 |
+| GPIO Expander | MCP23017 I2C 16-port | 1 | R25 | R25 |
 | Wiring Harness | UI connection cables | 1 | R50 | R50 |
 | External Antenna | 4G/GPS Combo Antenna | 1 | R200 | R200 |
 | Power Supply | Mean Well DDR-30G-5 | 1 | R350 | R350 |
@@ -77,7 +79,7 @@ hardware/
 | Connectors | M12, terminal blocks | 1 | R100 | R100 |
 | Protection | TVS diodes, filters | 1 | R100 | R100 |
 | Assembly | Labor and testing | 1 | R100 | R100 |
-| **TOTAL** | | | | **R3,650** |
+| **TOTAL** | | | | **R3,675** |
 
 ## Expansion Modules
 
@@ -249,7 +251,7 @@ The ESP32 flash memory is partitioned to support dual-boot OTA updates:
 ## Cost Analysis
 
 ### Unit Economics (100+ units)
-- **Base Unit**: R3,650 per unit (includes enhanced UI)
+- **Base Unit**: R3,675 per unit (includes enhanced UI + GPIO expander)
 - **LoRa Module**: +R250 per unit (optional)
 - **Satellite Module**: +R3,200-4,850 per unit (optional)
 - **Installation**: R500 per unit

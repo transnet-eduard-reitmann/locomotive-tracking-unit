@@ -75,6 +75,7 @@ Priority 4: Store & Forward (buffer until connection available)
 | **TFT Display** | 2.8" Color TFT 320x240 | R350 | 1 | R350 | Enhanced UI display |
 | **Button Assembly** | 4-button navigation pad | R80 | 1 | R80 | User interface control |
 | **Status LEDs** | Multi-color LEDs x4 | R50 | 1 | R50 | Status indicators |
+| **GPIO Expander** | MCP23017 I2C 16-port | R25 | 1 | R25 | Additional GPIO capacity |
 | **UI Wiring Harness** | Connection cables | R50 | 1 | R50 | UI integration |
 | **External Antenna** | 4G/GPS Combo Antenna | R200 | 1 | R200 | Enhanced reception |
 | **Power Supply** | Mean Well DDR-30G-5 | R350 | 1 | R350 | 9-36V to 5V DC-DC |
@@ -85,7 +86,7 @@ Priority 4: Store & Forward (buffer until connection available)
 | **Expansion Board** | Custom PCB with UI | R250 | 1 | R250 | Module interface + UI controller |
 | **Connectors** | M12, terminal blocks | R100 | 1 | R100 | Robust connections |
 | **Surge Protection** | TVS diodes, filters | R100 | 1 | R100 | Railway EMC |
-| **TOTAL BASE** | | | | **R3,650** | **Complete base unit (includes enhanced UI)** |
+| **TOTAL BASE** | | | | **R3,675** | **Complete base unit (includes enhanced UI + GPIO expander)** |
 
 ### 2.2 Expansion Modules
 
@@ -108,34 +109,63 @@ Priority 4: Store & Forward (buffer until connection available)
 ### 2.3 Pin Assignments
 
 ```cpp
-// T-SIM7600G-H Pin Assignments with Expansion Support
+// T-SIM7600G-H Pin Assignments with GPIO Expander Integration
 
 // Built-in peripherals (already connected internally)
 // GPS: Connected via UART to SIM7600G
 // Cellular: Integrated in SIM7600G
 // SD Card: GPIO5 (CS), GPIO18 (CLK), GPIO19 (MISO), GPIO23 (MOSI)
 
-// Available expansion pins on ESP32
+// Enhanced UI - Direct ESP32 GPIO (high-speed requirements)
+#define TFT_CS_PIN       GPIO32   // TFT display chip select
+#define TFT_DC_PIN       GPIO33   // TFT display data/command
+#define TFT_RST_PIN      GPIO25   // TFT display reset
+#define TFT_BACKLIGHT    GPIO26   // TFT backlight control
+// TFT uses shared SPI: GPIO14 (CLK), GPIO13 (MOSI), GPIO12 (MISO)
+
+// Expansion modules
 #define LORA_CS_PIN      GPIO15   // LoRa chip select
 #define LORA_RST_PIN     GPIO4    // LoRa reset
 #define LORA_IRQ_PIN     GPIO2    // LoRa interrupt
-#define LORA_SCK_PIN     GPIO14   // SPI clock (shared)
-#define LORA_MISO_PIN    GPIO12   // SPI MISO (shared)
-#define LORA_MOSI_PIN    GPIO13   // SPI MOSI (shared)
+// LoRa uses shared SPI: GPIO14 (CLK), GPIO13 (MOSI), GPIO12 (MISO)
 
 #define SAT_TX_PIN       GPIO16   // Satellite UART TX
 #define SAT_RX_PIN       GPIO17   // Satellite UART RX
 #define SAT_EN_PIN       GPIO21   // Satellite enable
 #define SAT_STATUS_PIN   GPIO22   // Satellite status
 
-#define I2C_SDA_PIN      GPIO26   // I2C for sensors
-#define I2C_SCL_PIN      GPIO27   // I2C for sensors
+// I2C Bus (shared by GPIO expander and sensors)
+#define I2C_SDA_PIN      GPIO27   // I2C data line
+#define I2C_SCL_PIN      GPIO14   // I2C clock line (shared with SPI CLK)
 
-#define STATUS_LED       GPIO25   // Status indicator
-#define USER_BUTTON      GPIO0    // Configuration button
-
+// System monitoring
 #define BATTERY_ADC      GPIO35   // Battery voltage monitor
 #define EXTERNAL_INT     GPIO34   // External interrupt
+#define SYSTEM_LED       GPIO0    // Primary system status LED
+
+// GPIO Expander Configuration
+#define I2C_GPIO_ADDR    0x20     // MCP23017 I2C address
+
+// GPIO Expander Pin Assignments (via I2C)
+// Port A (Expander pins 0-7)
+#define EXP_BTN_UP       0        // Navigation button up
+#define EXP_BTN_DOWN     1        // Navigation button down  
+#define EXP_BTN_OK       2        // Confirmation button
+#define EXP_BTN_CANCEL   3        // Cancel/back button
+#define EXP_LED_GPS      4        // GPS status LED
+#define EXP_LED_CELLULAR 5        // Cellular connectivity LED
+#define EXP_LED_TRAIN    6        // Train assignment status LED
+#define EXP_SPARE_A7     7        // Spare expander pin
+
+// Port B (Expander pins 8-15)
+#define EXP_TRAIN_BUZZER 8        // Train assignment notification buzzer
+#define EXP_DEBUG_LED    9        // Debug/maintenance LED
+#define EXP_SPARE_B2     10       // Spare expander pin
+#define EXP_SPARE_B3     11       // Spare expander pin
+#define EXP_SPARE_B4     12       // Spare expander pin
+#define EXP_SPARE_B5     13       // Spare expander pin
+#define EXP_SPARE_B6     14       // Spare expander pin
+#define EXP_SPARE_B7     15       // Spare expander pin
 ```
 
 ### 2.4 Power Management
@@ -160,16 +190,21 @@ graph TD
 ```
 
 **Power Consumption:**
-- **Idle:** 80mA @ 5V (0.4W)
-- **GPS Active:** 150mA @ 5V (0.75W)
+- **Idle:** 130mA @ 5V (0.65W) - includes enhanced UI and GPIO expander
+- **GPS Active:** 180mA @ 5V (0.9W) - includes display backlight
 - **Cellular TX:** 1.5A @ 5V peak (7.5W)
 - **LoRa TX:** 120mA @ 3.3V (0.4W)
 - **Satellite TX:** 1A @ 5V (5W)
+- **Enhanced UI Components:**
+  - TFT Display: 40mA @ 3.3V (0.13W)
+  - GPIO Expander: 1mA @ 3.3V (0.003W)
+  - Status LEDs: 10mA @ 3.3V total (0.033W)
 
 **Battery Life (6800mAh @ 7.4V = 50Wh):**
-- **Cellular only:** 48 hours continuous operation
-- **With LoRa:** 45 hours
-- **With Satellite:** 36 hours
+- **Cellular only:** 38 hours continuous operation (with enhanced UI active)
+- **With LoRa:** 36 hours
+- **With Satellite:** 30 hours
+- **Sleep mode with UI off:** 60+ hours (display auto-off after inactivity)
 
 ---
 

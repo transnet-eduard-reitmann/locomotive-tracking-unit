@@ -23,7 +23,7 @@ Both platforms **support comprehensive OTA updates**, contrary to common assumpt
 | **OTA Updates** | ✅ Native support | ✅ Full support |
 | **Remote Management** | OTA only | SSH, VPN, full remote access |
 | **Development Time** | 6 months | 8-9 months |
-| **Cost per Unit** | R3,650 total (includes enhanced UI) | R4,250 total |
+| **Cost per Unit** | R3,675 total (includes enhanced UI + GPIO expander) | R4,250 total |
 | **Battery Life (48hr)** | ✅ Achievable | ⚠️ Challenging |
 | **Reliability** | Very High | High |
 | **Environmental Rating** | Industrial grade | Consumer/Light industrial |
@@ -225,11 +225,11 @@ class RailwayPiUpdater:
 ## Power Consumption Analysis
 
 ### ESP32 Power Profile
-- **Idle State**: 80mA @ 3.3V = 264mW
-- **Active Tracking**: 200mA @ 3.3V = 660mW
-- **Sleep Mode**: 5mA @ 3.3V = 16.5mW
-- **Deep Sleep**: 0.01mA @ 3.3V = 0.033mW
-- **48-hour Battery Backup**: Achievable with 10Ah battery
+- **Idle State**: 130mA @ 5V = 650mW (includes enhanced UI + GPIO expander)
+- **Active Tracking**: 180mA @ 5V = 900mW (includes display backlight)
+- **Sleep Mode**: 50mA @ 5V = 250mW (display off, expander standby)
+- **Deep Sleep**: 5mA @ 5V = 25mW (display sleep mode)
+- **38-hour Battery Backup**: Achievable with 10Ah battery (with enhanced UI)
 
 ### Raspberry Pi Power Profile
 - **Idle State**: 150mA @ 5V = 750mW
@@ -241,9 +241,10 @@ class RailwayPiUpdater:
 ### Battery Backup Implications
 
 **ESP32 Solution**:
-- 10Ah battery provides 48+ hours backup
+- 10Ah battery provides 38+ hours backup (with enhanced UI active)
 - Compact battery housing fits locomotive installation requirements
 - Lower charging system complexity
+- 60+ hours backup with display auto-off after inactivity
 
 **Raspberry Pi Solution**:
 - 20Ah+ battery system required for 48-hour backup

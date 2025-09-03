@@ -15,8 +15,8 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 - **Route-Based Optimization**: Automatic expansion module selection based on GPS location and operational requirements
 
 ### Total Cost of Ownership (100 units, 5 years)
-- **Initial Investment**: R595,000 (enhanced base units + train management integration + initial module set)
-- **Operational Costs**: R340,000 (optimized per route)
+- **Initial Investment**: R597,500 (enhanced base units + GPIO expander + train management integration + initial module set)
+- **Operational Costs**: R337,500 (optimized per route)
 - **Total 5-Year Cost**: R935,000
 - **Ranking**: 2nd most cost-effective after LoRa-Only, with complete train management integration
 
