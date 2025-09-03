@@ -1,5 +1,5 @@
 # Prompt to run:
-do this final check for me. read the draft user requirements specifications in the docs/user-specifications again using python -c "". ignore the satellite-first (because cellular-first has been adopted), but check if the current state of the project will be a comprehensive solution to the fundamental problem. ask me before making any changes.
+do this final check for me. read the draft user requirements specifications in the docs/user-specifications again using python -c "". ignore the satellite-first (because cellular-first has been adopted), but check if the current state of the project will be a comprehensive solution to the fundamental problem. finally, check the hardware pin assignments, do they include buttons and screen? will there be enough spare GPIO pins to manage screen/buttons? ask me before making any changes.
 
 
 # TODO - Locomotive Tracking System
