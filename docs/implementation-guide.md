@@ -134,17 +134,23 @@ Priority 4: Store & Forward (buffer until connection available)
 
 ### 2.4 Power Management
 
-```
-Railway Power (24-110V DC) ──┬──> DC-DC Converter (5V/3A)
-                             │         │
-                             │         ├──> T-SIM7600G-H (5V)
-                             │         ├──> Expansion Modules
-                             │         └──> Battery Charger
-                             │                    │
-                             └──> Monitoring <────┤
-                                                  │
-                                           18650 Battery Pack
-                                           (7.4V, 6800mAh)
+```mermaid
+graph TD
+    A[Railway Power<br/>24-110V DC] --> B[DC-DC Converter<br/>5V/3A]
+    A --> C[Power Monitoring<br/>Voltage/Current]
+    
+    B --> D[T-SIM7600G-H<br/>5V Main Unit]
+    B --> E[Expansion Modules<br/>5V/3.3V]
+    B --> F[Battery Charger<br/>Li-Ion Management]
+    
+    F --> G[18650 Battery Pack<br/>7.4V, 6800mAh]
+    G --> C
+    G -.->|Backup Power| B
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style D fill:#e8f5e8
+    style G fill:#fff3e0
 ```
 
 **Power Consumption:**

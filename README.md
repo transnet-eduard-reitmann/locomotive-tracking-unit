@@ -184,11 +184,12 @@ The system includes comprehensive Over-the-Air update capabilities:
 
 ## Research & Concepts
 
-This project evolved from extensive research into multiple implementation approaches. Historical research documents and alternative implementations can be found in:
+This project evolved from comprehensive analysis of five communication concepts and hardware platform options. The complete research documentation provides insight into the decision-making process:
 
-- **[Concept Research](docs/concepts/research/)** - Original 5-variant analysis
-- **[Implementation Comparison](docs/concepts/research/implementation_comparison.md)** - Detailed variant comparison
-- **[Original Overview](docs/concepts/research/original-overview.md)** - Historical project overview
+- **[Research & Design Concepts](docs/concepts/)** - Complete research documentation and analysis
+- **[Concept Analysis](docs/concepts/concept-analysis.md)** - Five communication approaches evaluated
+- **[Decision Rationale](docs/concepts/decision-rationale.md)** - Why cellular-base modular system was chosen
+- **[Hardware Analysis](docs/concepts/hardware-analysis.md)** - ESP32 vs Raspberry Pi platform comparison
 
 ## Support
 
