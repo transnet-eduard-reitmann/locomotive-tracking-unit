@@ -6,11 +6,13 @@
 
 The backend is built using microservices architecture with:
 
-- **Web API** - RESTful API for data access and device management
-- **MQTT Services** - Real-time data ingestion from tracking devices  
-- **Database Layer** - MS SQL Server with spatial data extensions
-- **Background Services** - Data processing and maintenance tasks
-- **SignalR Hub** - Real-time dashboard updates
+- **Web API** - RESTful API for data access, device management, and train management
+- **Train Management Service** - Complete integration with Transnet ITP, TMS, and VDU systems
+- **Integration Gateway** - API connectors for existing Transnet systems with data validation
+- **MQTT Services** - Real-time data ingestion from tracking devices and train assignment commands
+- **Database Layer** - MS SQL Server with spatial data extensions and train management tables
+- **Background Services** - Data processing, maintenance tasks, and train synchronization
+- **SignalR Hub** - Real-time dashboard updates and train assignment notifications
 
 ## Directory Structure
 
@@ -24,6 +26,8 @@ backend/
 ├── services/          # Background services
 │   ├── DataProcessor/ # Telemetry data processing
 │   ├── MqttService/   # MQTT broker integration
+│   ├── TrainManagement/ # Train management integration services
+│   ├── Integration/   # Transnet system connectors (ITP, TMS, VDU)
 │   ├── Maintenance/   # System maintenance tasks
 │   └── Notifications/ # Alert and notification service
 ├── database/          # Data access layer
@@ -78,6 +82,25 @@ GET    /api/fleet/routes           # Defined route information
 POST   /api/fleet/geofence         # Create geofence boundaries
 ```
 
+### Train Management
+```
+GET    /api/trains                      # List all trains and assignments
+GET    /api/trains/{trainNumber}        # Get specific train details
+POST   /api/trains/assign               # Assign train number to locomotive
+DELETE /api/trains/{trainNumber}        # Clear train assignment
+PUT    /api/trains/{trainNumber}/status # Update train status
+GET    /api/trains/assignments          # Get active train assignments
+```
+
+### Integration
+```
+GET    /api/integration/itp/plans       # Get train plans from ITP
+GET    /api/integration/tms/vehicles    # Get vehicle lists from TMS
+POST   /api/integration/vdu/notify      # Send notification to VDU
+GET    /api/integration/sync/status     # Get synchronization status
+POST   /api/integration/validate        # Validate cross-system data
+```
+
 ### Reporting
 ```
 GET    /api/reports/utilization    # Asset utilization reports
@@ -100,13 +123,38 @@ CREATE TABLE Devices (
     IsActive BIT DEFAULT 1,
     LastSeen DATETIME2,
     CurrentRoute NVARCHAR(100),
+    CurrentTrainNumber NVARCHAR(50), -- Current assigned train
     Configuration NVARCHAR(MAX) -- JSON configuration
+);
+
+-- Train management and assignments
+CREATE TABLE TrainAssignments (
+    AssignmentID INT IDENTITY PRIMARY KEY,
+    TrainNumber NVARCHAR(50) NOT NULL,
+    DeviceID INT FOREIGN KEY REFERENCES Devices(DeviceID),
+    AssignedBy NVARCHAR(100) NOT NULL,
+    AssignedAt DATETIME2 NOT NULL,
+    ConfirmedAt DATETIME2,
+    ClearedAt DATETIME2,
+    Status NVARCHAR(20) DEFAULT 'PENDING', -- PENDING, CONFIRMED, ACTIVE, CLEARED
+    INDEX IX_Train_Active (TrainNumber, Status) WHERE Status IN ('CONFIRMED', 'ACTIVE')
+);
+
+-- Integration with Transnet systems
+CREATE TABLE SystemIntegration (
+    SyncID INT IDENTITY PRIMARY KEY,
+    SystemName NVARCHAR(50) NOT NULL, -- ITP, TMS, VDU
+    LastSync DATETIME2,
+    SyncStatus NVARCHAR(20) DEFAULT 'OK', -- OK, ERROR, WARNING
+    ErrorMessage NVARCHAR(MAX),
+    RecordsProcessed INT DEFAULT 0
 );
 
 -- Location tracking history
 CREATE TABLE LocationHistory (
     ID BIGINT IDENTITY PRIMARY KEY,
     DeviceID INT FOREIGN KEY REFERENCES Devices(DeviceID),
+    TrainNumber NVARCHAR(50), -- Train number at time of position
     Timestamp DATETIME2 NOT NULL,
     Position GEOGRAPHY NOT NULL,
     Speed FLOAT,
@@ -118,7 +166,8 @@ CREATE TABLE LocationHistory (
     SignalStrength INT,
     Battery INT,
     Temperature FLOAT,
-    INDEX IX_Location_Device_Time (DeviceID, Timestamp) INCLUDE (Position)
+    INDEX IX_Location_Device_Time (DeviceID, Timestamp) INCLUDE (Position),
+    INDEX IX_Location_Train_Time (TrainNumber, Timestamp) INCLUDE (Position)
 );
 
 -- Route definitions and boundaries
@@ -154,11 +203,16 @@ CREATE TABLE SystemEvents (
 railway/telemetry/{deviceId}/position    # Position updates
 railway/telemetry/{deviceId}/status      # Device status
 railway/commands/{deviceId}/config       # Configuration commands
+railway/commands/{deviceId}/train_assign # Train number assignment
+railway/commands/{deviceId}/train_clear  # Train number clear
 railway/events/{deviceId}/alerts         # Emergency alerts
+railway/events/{deviceId}/train_confirmed # Train assignment confirmed
 railway/system/heartbeat                 # System health monitoring
 ```
 
 ### Message Format
+
+#### Position Update Message
 ```json
 {
   "deviceId": "LOCO-001",
@@ -185,7 +239,38 @@ railway/system/heartbeat                 # System health monitoring
       "cellular": "active",
       "lora": "standby", 
       "satellite": "not_installed"
-    }
+    },
+    "trainNumber": "T12345", // Current assigned train
+    "trainStatus": "confirmed"
+  }
+}
+```
+
+#### Train Assignment Command
+```json
+{
+  "deviceId": "LOCO-001",
+  "timestamp": "2025-09-01T10:30:45Z",
+  "messageType": "train_assign",
+  "data": {
+    "trainNumber": "T12345",
+    "assignedBy": "TCO-JHB-001",
+    "requiresConfirmation": true,
+    "timeout": 300
+  }
+}
+```
+
+#### Train Confirmation Response
+```json
+{
+  "deviceId": "LOCO-001",
+  "timestamp": "2025-09-01T10:32:15Z",
+  "messageType": "train_confirmed",
+  "data": {
+    "trainNumber": "T12345",
+    "status": "confirmed", // confirmed, rejected
+    "confirmedBy": "DRIVER-001"
   }
 }
 ```
@@ -247,6 +332,14 @@ dotnet test
     "Password": "secure-password",
     "KeepAlive": 60,
     "QosLevel": 1
+  },
+  "IntegrationSettings": {
+    "ITPApiUrl": "https://itp.transnet.net/api/v1",
+    "TMSApiUrl": "https://tms.transnet.net/api/v2",
+    "VDUApiUrl": "https://vdu.transnet.net/api/v1",
+    "SyncInterval": 300,
+    "MaxRetryAttempts": 3,
+    "TimeoutSeconds": 30
   }
 }
 ```
@@ -262,19 +355,29 @@ export MqttSettings__Password="production-mqtt-password"
 ## Background Services
 
 ### Data Processing Service
-- **Function**: Process incoming telemetry data
+- **Function**: Process incoming telemetry data and train assignments
 - **Frequency**: Real-time (message-driven)
-- **Tasks**: Data validation, transformation, storage, alerting
+- **Tasks**: Data validation, transformation, storage, alerting, train status updates
+
+### Train Management Service
+- **Function**: Synchronize with Transnet systems and manage train assignments
+- **Frequency**: Every 5 minutes (configurable)
+- **Tasks**: ITP train plan sync, TMS vehicle list sync, VDU notification handling
+
+### Integration Service
+- **Function**: Maintain connectivity with external Transnet systems
+- **Frequency**: Continuous with heartbeat monitoring
+- **Tasks**: API health monitoring, data validation, error recovery
 
 ### Maintenance Service  
 - **Function**: System maintenance and cleanup
 - **Frequency**: Daily at 02:00
-- **Tasks**: Archive old data, optimize database, health checks
+- **Tasks**: Archive old data, optimize database, health checks, integration logs cleanup
 
 ### Notification Service
 - **Function**: Send alerts and notifications
 - **Frequency**: Event-driven
-- **Tasks**: Geofence violations, device offline alerts, system notifications
+- **Tasks**: Geofence violations, device offline alerts, train assignment notifications, system notifications
 
 ## Real-time Features
 
@@ -297,10 +400,11 @@ public class TrackingHub : Hub
 ```
 
 ### Dashboard Integration
-- **Real-time Map Updates**: Live locomotive positions
-- **Alert Notifications**: Immediate system alerts
-- **Status Monitoring**: Device connectivity and health
-- **Performance Metrics**: System performance dashboards
+- **Real-time Map Updates**: Live locomotive positions with train identification
+- **Train Assignment Monitoring**: Live train assignment status and confirmations
+- **Alert Notifications**: Immediate system alerts and train assignment notifications
+- **Status Monitoring**: Device connectivity, health, and train assignment status
+- **Performance Metrics**: System performance dashboards and integration health
 
 ## Security
 

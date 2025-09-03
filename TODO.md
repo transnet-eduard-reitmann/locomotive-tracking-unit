@@ -1,3 +1,7 @@
+# Prompt to run:
+do this final check for me. read the draft user requirements specifications in the docs/user-specifications again using python -c "". ignore the satellite-first (because cellular-first has been adopted), but check if the current state of the project will be a comprehensive solution to the fundamental problem. ask me before making any changes.
+
+
 # TODO - Locomotive Tracking System
 
 ## Development Tasks
@@ -5,40 +9,46 @@
 ### Phase 1: Core Development (Months 1-6)
 - [ ] **Hardware Development**
   - [ ] Order LILYGO T-SIM7600G-H development boards
-  - [ ] Design PCB layout for production version
-  - [ ] Create enclosure design for railway environment
-  - [ ] Test power supply integration with 110V railway power
+  - [ ] Design enhanced UI hardware (2.8" TFT display, 4-button navigation, status LEDs)
+  - [ ] Design PCB layout for production version with UI integration
+  - [ ] Create enclosure design for railway environment with front-accessible UI panel
+  - [ ] Test power supply integration with 110V railway power (updated for UI: 0.6W idle, 7.7W peak)
   - [ ] Validate GPS performance and antenna placement
   - [ ] Environmental testing (-20°C to +70°C, vibration)
 
 - [ ] **Firmware Development**
   - [ ] Setup PlatformIO development environment
+  - [ ] Implement enhanced UI management (TFT display, button navigation, menu system)
+  - [ ] Develop train management workflow (assignment confirmation, display)
   - [ ] Implement GPS positioning and tracking logic
   - [ ] Develop cellular communication with SIM7600G
-  - [ ] Implement MQTT client with TLS security
-  - [ ] Create power management and sleep modes
+  - [ ] Implement MQTT client with TLS security for train assignment commands
+  - [ ] Create power management and sleep modes (updated for enhanced UI)
   - [ ] Add data logging to SD card
   - [ ] Implement configuration management
   - [ ] Add OTA update capability
 
 - [ ] **Backend Development**
   - [ ] Setup .NET Core Web API project
-  - [ ] Design database schema with spatial extensions
-  - [ ] Implement MQTT broker integration
-  - [ ] Create device management APIs
-  - [ ] Develop real-time SignalR hubs
+  - [ ] Design database schema with spatial extensions and train management tables
+  - [ ] Develop train management integration services (ITP, TMS, VDU connectors)
+  - [ ] Create integration gateway for Transnet system APIs
+  - [ ] Implement MQTT broker integration with train assignment commands
+  - [ ] Create device management APIs and train management APIs
+  - [ ] Develop real-time SignalR hubs for train assignments
   - [ ] Add authentication and authorization
-  - [ ] Implement background data processing
+  - [ ] Implement background data processing and train synchronization services
   - [ ] Create reporting and analytics features
 
 - [ ] **Frontend Development**
   - [ ] Setup React.js dashboard project
   - [ ] Integrate mapping library (Leaflet/OpenLayers)
-  - [ ] Create real-time locomotive position display
-  - [ ] Build device management interface
-  - [ ] Add fleet status monitoring
+  - [ ] Create real-time locomotive position display with train identification
+  - [ ] Build device management interface with train assignment controls
+  - [ ] Add fleet status monitoring with train number displays
+  - [ ] Develop train management interface for TCO workflow
   - [ ] Implement alert and notification system
-  - [ ] Create reporting dashboards
+  - [ ] Create reporting dashboards with train analytics
 
 ### Phase 2: Testing & Validation (Months 6-12)
 - [ ] **Laboratory Testing**
@@ -56,8 +66,10 @@
   - [ ] Validate battery backup performance
 
 - [ ] **Integration Testing**
-  - [ ] End-to-end data flow validation
-  - [ ] Dashboard real-time update testing
+  - [ ] End-to-end data flow validation including train management
+  - [ ] Transnet system integration testing (ITP, TMS, VDU connectivity)
+  - [ ] Train assignment workflow testing (TCO to device confirmation)
+  - [ ] Dashboard real-time update testing with train identification
   - [ ] Multi-device performance testing
   - [ ] Security penetration testing
   - [ ] Load testing with 100+ simulated devices

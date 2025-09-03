@@ -33,15 +33,16 @@ hardware/
 
 ### Core Components
 - **Main Board**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
-- **Unit Price**: R1,500
-- **Dimensions**: 90mm × 70mm × 15mm
+- **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
+- **Unit Price**: R3,650 (includes enhanced UI components)
+- **Dimensions**: 120mm × 90mm × 25mm (increased for UI integration)
 
 ### Power System
 - **Input**: 110V DC railway power
-- **Power Supply**: Mean Well DDR-30G-5 (5V/6A output)
+- **Power Supply**: Mean Well DDR-30G-5 (5V/6A output) - upgraded for UI power requirements
 - **Backup Battery**: 2× 18650 Li-ion (7.4V, 6800mAh)
-- **Battery Life**: 48 hours continuous operation
-- **Power Consumption**: 0.4W idle, 7.5W peak transmission
+- **Battery Life**: 48 hours continuous operation (with enhanced UI)
+- **Power Consumption**: 0.6W idle (including UI), 7.7W peak transmission
 
 ### Environmental Protection
 - **Enclosure Rating**: IP67 (dust/water resistant)
@@ -54,23 +55,29 @@ hardware/
 - **Cellular Antenna**: 4G/GPS combo antenna (external)
 - **Expansion**: 4× M.2 Key-E slots for optional modules
 - **Data Storage**: 32GB industrial MicroSD card
-- **Status Display**: OLED display for local diagnostics
+- **Enhanced UI Display**: 2.8" color TFT touch display (320x240 resolution)
+- **User Interface**: 4-button navigation pad (Up/Down/Left/Right + OK/Cancel)
+- **Status Indicators**: 4× multi-color LEDs (GPS, Cellular, Train Assignment, System Status)
 
 ## Bill of Materials (Base Unit)
 
 | Component | Model | Quantity | Unit Price (ZAR) | Total |
 |-----------|--------|----------|------------------|-------|
 | Main Board | LILYGO T-SIM7600G-H | 1 | R1,500 | R1,500 |
+| TFT Display | 2.8" Color TFT 320x240 | 1 | R350 | R350 |
+| Button Assembly | 4-button navigation pad | 1 | R80 | R80 |
+| Status LEDs | Multi-color LEDs x4 | 1 | R50 | R50 |
+| Wiring Harness | UI connection cables | 1 | R50 | R50 |
 | External Antenna | 4G/GPS Combo Antenna | 1 | R200 | R200 |
 | Power Supply | Mean Well DDR-30G-5 | 1 | R350 | R350 |
 | Backup Battery | 18650 Li-ion x2 + BMS | 1 | R120 | R120 |
 | Storage | 32GB Industrial SD | 1 | R150 | R150 |
-| Enclosure | IP67 Railway Box | 1 | R350 | R350 |
-| Expansion Board | Custom PCB | 1 | R200 | R200 |
+| Enclosure | IP67 Railway Box (larger) | 1 | R450 | R450 |
+| Expansion Board | Custom PCB with UI | 1 | R250 | R250 |
 | Connectors | M12, terminal blocks | 1 | R100 | R100 |
 | Protection | TVS diodes, filters | 1 | R100 | R100 |
-| Assembly | Labor and testing | 1 | R50 | R50 |
-| **TOTAL** | | | | **R3,120** |
+| Assembly | Labor and testing | 1 | R100 | R100 |
+| **TOTAL** | | | | **R3,650** |
 
 ## Expansion Modules
 
@@ -97,7 +104,8 @@ hardware/
 ### Mechanical Mounting
 - **Location**: Locomotive electrical cabinet
 - **Mounting**: DIN rail or wall bracket
-- **Access**: Front panel for status display and maintenance
+- **Access**: Front panel for enhanced UI display, buttons, and maintenance
+- **UI Panel**: Front-accessible 2.8" display with navigation buttons
 - **Ventilation**: Passive cooling with ventilation slots
 
 ### Electrical Connections
@@ -241,7 +249,7 @@ The ESP32 flash memory is partitioned to support dual-boot OTA updates:
 ## Cost Analysis
 
 ### Unit Economics (100+ units)
-- **Base Unit**: R3,120 per unit
+- **Base Unit**: R3,650 per unit (includes enhanced UI)
 - **LoRa Module**: +R250 per unit (optional)
 - **Satellite Module**: +R3,200-4,850 per unit (optional)
 - **Installation**: R500 per unit

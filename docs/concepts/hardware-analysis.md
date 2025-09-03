@@ -23,7 +23,7 @@ Both platforms **support comprehensive OTA updates**, contrary to common assumpt
 | **OTA Updates** | ✅ Native support | ✅ Full support |
 | **Remote Management** | OTA only | SSH, VPN, full remote access |
 | **Development Time** | 6 months | 8-9 months |
-| **Cost per Unit** | R3,120 total | R4,250 total |
+| **Cost per Unit** | R3,650 total (includes enhanced UI) | R4,250 total |
 | **Battery Life (48hr)** | ✅ Achievable | ⚠️ Challenging |
 | **Reliability** | Very High | High |
 | **Environmental Rating** | Industrial grade | Consumer/Light industrial |

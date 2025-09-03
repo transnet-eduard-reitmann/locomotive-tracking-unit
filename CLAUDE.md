@@ -4,18 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a South African Railway Locomotive GPS Tracking System - a comprehensive cellular-first modular tracking solution built around the LILYGO T-SIM7600G-H platform. The system provides real-time locomotive tracking with cellular connectivity, optional LoRa and satellite expansion modules, and over-the-air (OTA) update capabilities.
+This is a South African Railway Locomotive GPS Tracking System - a comprehensive cellular-first modular tracking solution built around the LILYGO T-SIM7600G-H platform. The system provides real-time locomotive tracking with cellular connectivity, optional LoRa and satellite expansion modules, over-the-air (OTA) update capabilities, and **complete train management integration** with existing Transnet systems (ITP, TMS, VDU) to solve both locomotive tracking and train identification challenges.
 
 ## Architecture
 
 The system uses a **cellular-base with modular extensions** approach:
 
-- **Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS) as base unit with optional expansion modules
-- **Firmware**: C++ on ESP32 using PlatformIO with comprehensive OTA support
-- **Backend**: .NET Core Web API with Entity Framework, MQTT services, and SignalR
-- **Database**: MS SQL Server with spatial data extensions  
+- **Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS) as base unit with enhanced UI (2.8" TFT display, 4-button navigation) and optional expansion modules
+- **Firmware**: C++ on ESP32 using PlatformIO with comprehensive OTA support and train management workflows
+- **Backend**: .NET Core Web API with Entity Framework, MQTT services, SignalR, and **Train Management Integration Services**
+- **Database**: MS SQL Server with spatial data extensions and train management tables
 - **Frontend**: React.js dashboard with real-time mapping and fleet management
 - **Communication**: MQTT over TLS for secure data transmission
+- **Integration**: Direct API connections to Transnet ITP, TMS, and VDU systems for complete train identification
 
 ## Directory Structure
 
@@ -107,9 +108,11 @@ sqlcmd -Q "ALTER DATABASE LocomotiveTracking SET COMPATIBILITY_LEVEL = 150"
 
 ### Firmware Architecture
 - **LILYGO T-SIM7600G-H Base**: Integrated ESP32 + 4G LTE + GPS foundation
+- **Enhanced User Interface**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
+- **Train Management Workflow**: On-device train number assignment, confirmation, and status display
 - **Cellular communication**: 4G/3G/2G with automatic fallback - always available
 - **Modular expansion**: Hot-swappable LoRa and satellite communication modules
-- **Power management**: Railway power integration with 48-hour battery backup
+- **Power management**: Railway power integration with 48-hour battery backup (updated for enhanced UI: 0.6W idle, 7.7W peak)
 - **Route-based profiles**: Adaptive reporting intervals and module activation based on location
 - **Comprehensive OTA system**: Secure fleet-wide firmware updates via cellular
 
@@ -122,10 +125,12 @@ The firmware includes enterprise-grade OTA capabilities:
 - **Partition management**: Dual-partition setup with automatic failover
 
 ### Backend Services
-- **Web API**: RESTful endpoints for device and fleet management
-- **MQTT Integration**: Real-time telemetry ingestion from tracking devices
+- **Web API**: RESTful endpoints for device and fleet management, train management
+- **Train Management Service**: Complete integration with ITP (train planning), TMS (train management), VDU (TCO interface)
+- **Integration Gateway**: API connectors for existing Transnet systems with data validation
+- **MQTT Integration**: Real-time telemetry ingestion from tracking devices and train assignment commands
 - **SignalR Hub**: Live dashboard updates and notifications
-- **Background Services**: Data processing, maintenance, and alerting
+- **Background Services**: Data processing, maintenance, alerting, and train synchronization
 - **Spatial Data**: MS SQL Server with geography extensions for route management
 
 ### Communication Strategy
@@ -141,6 +146,7 @@ Key configuration files in `firmware/config/`:
 - `apn_settings.h`: Private APN configuration for cellular connectivity
 - `routes.h`: Geographic boundaries and communication preferences
 - `device_config.h`: Device-specific settings and debug levels
+- `ui_config.h`: Display settings, button mappings, and user interface preferences
 
 ### Backend Configuration
 ```json
@@ -153,6 +159,13 @@ Key configuration files in `firmware/config/`:
     "ClientId": "railway-backend",
     "Username": "railway",
     "QosLevel": 1
+  },
+  "IntegrationSettings": {
+    "ITPApiUrl": "https://itp.transnet.net/api/v1",
+    "TMSApiUrl": "https://tms.transnet.net/api/v2",
+    "VDUApiUrl": "https://vdu.transnet.net/api/v1",
+    "SyncInterval": 300,
+    "MaxRetryAttempts": 3
   }
 }
 ```
@@ -171,8 +184,10 @@ Key configuration files in `firmware/config/`:
 - **API Tests**: WebApplicationFactory endpoint testing
 
 ### System Testing
-- **End-to-end**: Complete data flow from device to dashboard
+- **End-to-end**: Complete data flow from device to dashboard including train management
+- **Integration Testing**: Validate connectivity with ITP, TMS, and VDU systems
 - **Failover Tests**: Network switching and recovery validation
+- **Train Workflow Tests**: Complete train assignment and deactivation workflow validation
 - **Performance Tests**: Load testing for fleet-scale operations
 
 ## Safety & Standards
@@ -207,7 +222,11 @@ This is a **safety-critical railway system** that must comply with:
 
 ## Important Notes
 - Each tracking device requires unique Device ID configuration during deployment
+- Enhanced UI provides operator interface for train number assignment and confirmation
 - Route profiles automatically adjust communication method and reporting frequency
 - System supports 100+ simultaneous devices with real-time updates
+- Complete integration with Transnet ITP, TMS, and VDU systems for train identification
+- Train management workflow enables TCO-initiated train assignments with device confirmation
 - OTA updates can be deployed to entire fleet or specific device groups
 - All communications use MQTT over TLS for security and reliability
+- Base unit cost updated to R3,650 (includes enhanced UI components)

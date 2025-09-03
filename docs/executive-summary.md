@@ -16,7 +16,7 @@
 - **Maintenance delays** from poor location data
 
 ### Proposed Solution
-Deploy GPS tracking units based on **LILYGO T-SIM7600G-H** platform with cellular connectivity and optional expansion modules for areas with poor coverage.
+Deploy GPS tracking units based on **LILYGO T-SIM7600G-H** platform with enhanced user interface, cellular connectivity, train management integration, and optional expansion modules for areas with poor coverage.
 
 ### Key Operational Improvements
 | Benefit | Expected Improvement | Measurement |
@@ -44,10 +44,11 @@ graph LR
 | Component | Base Unit | Optional Modules |
 |-----------|-----------|------------------|
 | **Platform** | LILYGO T-SIM7600G-H | Expansion Board |
+| **Enhanced UI** | 2.8" Color TFT, 4-button nav, status LEDs | - |
 | **Communication** | 4G/3G/2G Cellular | LoRa 868MHz / Satellite |
 | **GPS** | Multi-GNSS Integrated | - |
 | **Power** | 110V Railway + 48hr Battery | - |
-| **Cost** | R3,120 | R300-3,250 per module |
+| **Cost** | R3,650 (includes enhanced UI) | R300-3,250 per module |
 
 ### Coverage Strategy
 ```mermaid
@@ -64,18 +65,18 @@ pie title "Fleet Communication Mix (100 Units)"
 ### Capital Expenditure (CAPEX)
 ```mermaid
 graph TD
-    A[Total CAPEX: R512,000] --> B[Hardware: R312,000<br/>60.9%]
-    A --> C[Development: R150,000<br/>29.3%]
-    A --> D[Installation: R50,000<br/>9.8%]
+    A[Total CAPEX: R595,000] --> B[Hardware: R365,000<br/>61.3%]
+    A --> C[Development: R180,000<br/>30.3%]
+    A --> D[Installation: R50,000<br/>8.4%]
 ```
 
 ### Detailed Cost Breakdown
 | Category | Component | Cost |
 |----------|-----------|------|
-| **Hardware** | 100x Base Units @ R3,120 | R312,000 |
-| **Development** | Firmware & Backend | R150,000 |
+| **Hardware** | 100x Base Units @ R3,650 (includes enhanced UI) | R365,000 |
+| **Development** | Firmware, Backend & Train Management Integration | R180,000 |
 | **Installation** | Labor & Testing | R50,000 |
-| **Total CAPEX** | | **R512,000** |
+| **Total CAPEX** | | **R595,000** |
 
 ### Operating Expenditure (OPEX)
 | Service | Monthly Cost | Annual Cost |
@@ -88,7 +89,7 @@ graph TD
 ### 5-Year Total Cost of Ownership
 ```mermaid
 graph LR
-    A[Year 1<br/>R579,500] --> B[Year 2<br/>R67,500]
+    A[Year 1<br/>R662,500] --> B[Year 2<br/>R67,500]
     B --> C[Year 3<br/>R67,500]
     C --> D[Year 4<br/>R67,500]
     D --> E[Year 5<br/>R67,500]
@@ -100,7 +101,7 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure: R849,500**
+**Total 5-Year Expenditure: R932,500**
 
 ---
 
@@ -127,7 +128,7 @@ gantt
 ### Deployment Milestones
 | Phase | Timeline | Units | Capability | Budget |
 |-------|----------|-------|------------|--------|
-| **Phase 1** | Months 1-6 | 100 | Cellular tracking operational | R512,000 |
+| **Phase 1** | Months 1-6 | 100 | Cellular tracking + train management operational | R595,000 |
 | **Phase 2** | Months 7-12 | +30 modules | Depot cost optimization | R150,000 |
 | **Phase 3** | Months 13-18 | +5 modules | Complete coverage | R75,000 |
 
@@ -187,8 +188,8 @@ graph TD
 | Criteria | Selected Solution | Alternative 1 | Alternative 2 |
 |----------|------------------|---------------|---------------|
 | **Approach** | Cellular + Modular | Fixed Hybrid | Full Modular |
-| **Initial Cost** | R512K | R1,013K | R542K |
-| **5-Year Total Cost** | R849K | R1,343K | R880K |
+| **Initial Cost** | R595K | R1,013K | R542K |
+| **5-Year Total Cost** | R932K | R1,343K | R1,035K |
 | **Deployment Time** | 6 months | 18 months | 12 months |
 | **Flexibility** | High | Low | Very High |
 | **Complexity** | Low | Medium | High |
@@ -197,9 +198,9 @@ graph TD
 ### Cost Efficiency Analysis
 ```mermaid
 graph TD
-    A[Solution Options] --> B[Selected: R849K<br/>Cellular + Modular]
+    A[Solution Options] --> B[Selected: R932K<br/>Cellular + Train Mgmt]
     A --> C[Alternative 1: R1,343K<br/>Fixed Hybrid]
-    A --> D[Alternative 2: R880K<br/>Full Modular]
+    A --> D[Alternative 2: R1,035K<br/>Full Modular]
     
     style B fill:#90EE90
     style C fill:#FFB6C1
@@ -211,7 +212,7 @@ graph TD
 ## 8. Recommendations
 
 ### Immediate Actions (Month 1)
-1. **Approve budget** allocation of R512,000 CAPEX
+1. **Approve budget** allocation of R595,000 CAPEX
 2. **Engage network provider** for private APN setup
 3. **Order pilot hardware** (10 units) for testing
 4. **Assign project team** with IT and operations representatives
@@ -242,18 +243,18 @@ graph LR
 ### Total Project Expenditure
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R512,000 | R67,500 | R579,500 |
-| **Year 2** | - | R67,500 | R647,000 |
-| **Year 3** | - | R67,500 | R714,500 |
-| **Year 4** | - | R67,500 | R782,000 |
-| **Year 5** | - | R67,500 | R849,500 |
+| **Year 1** | R595,000 | R67,500 | R662,500 |
+| **Year 2** | - | R67,500 | R730,000 |
+| **Year 3** | - | R67,500 | R797,500 |
+| **Year 4** | - | R67,500 | R865,000 |
+| **Year 5** | - | R67,500 | R932,500 |
 
 ### Budget Allocation by Category
 ```mermaid
 pie title "5-Year Cost Distribution"
-    "Initial Hardware" : 312
-    "Development & Integration" : 220
-    "Operating Costs (5 years)" : 322.5
+    "Initial Hardware" : 365
+    "Development & Integration" : 230
+    "Operating Costs (5 years)" : 337.5
 ```
 
 ---
@@ -266,7 +267,7 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 | Factor | Assessment |
 |--------|------------|
 | **Strategic Alignment** | ✅ Supports fleet modernization objectives |
-| **Budget Requirements** | ✅ R512K initial + R64.5K annual |
+| **Budget Requirements** | ✅ R595K initial + R67.5K annual |
 | **Technical Risk** | ✅ Low - proven hardware platform |
 | **Operational Impact** | ✅ Immediate visibility improvement |
 | **Scalability** | ✅ Easily expanded to 1000+ units |

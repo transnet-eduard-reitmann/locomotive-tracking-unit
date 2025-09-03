@@ -7,9 +7,11 @@ ESP32-based firmware for the LILYGO T-SIM7600G-H locomotive tracking system.
 The firmware is designed with a modular architecture supporting:
 
 - **Core tracking functionality** - GPS positioning and data logging
+- **Enhanced User Interface** - 2.8" color TFT display, 4-button navigation, train management workflow
+- **Train Management Integration** - Train number assignment, confirmation, and status display
 - **Cellular communication** - 4G/3G/2G connectivity with automatic fallback
 - **Expansion modules** - Optional LoRa and satellite communication
-- **Power management** - Railway power integration with battery backup
+- **Power management** - Railway power integration with battery backup (updated for enhanced UI)
 - **Configuration management** - Route-based profiles and settings
 
 ## Directory Structure
@@ -20,7 +22,9 @@ firmware/
 │   ├── main.cpp       # Main application entry point
 │   ├── gps_manager.cpp    # GPS positioning and tracking
 │   ├── cellular_manager.cpp  # SIM7600G cellular modem control
-│   ├── power_manager.cpp     # Power optimization and management
+│   ├── ui_manager.cpp     # Enhanced UI management (TFT display, buttons)
+│   ├── train_manager.cpp  # Train assignment workflow and management
+│   ├── power_manager.cpp     # Power optimization and management (updated for UI)
 │   └── storage_manager.cpp   # SD card data logging
 ├── modules/           # Communication module drivers
 │   ├── lora_module.cpp      # LoRa communication (optional)
@@ -29,7 +33,8 @@ firmware/
 ├── config/            # Configuration management
 │   ├── apn_settings.h       # Private APN configuration
 │   ├── routes.h             # Route profiles and boundaries
-│   └── device_config.h      # Device-specific settings
+│   ├── device_config.h      # Device-specific settings
+│   └── ui_config.h          # UI settings, display configuration, button mappings
 └── tests/             # Unit tests and hardware tests
     ├── test_gps.cpp         # GPS functionality tests
     ├── test_cellular.cpp    # Cellular communication tests
@@ -42,8 +47,9 @@ firmware/
 - **MCU**: ESP32-WROVER (240MHz dual-core)
 - **Cellular**: SIM7600G (4G LTE Cat-4, 3G, 2G)
 - **GPS**: Integrated GNSS (GPS, GLONASS, BeiDou, Galileo)
+- **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **Storage**: 32GB MicroSD card
-- **Power**: 110V railway power with battery backup
+- **Power**: 110V railway power with battery backup (0.6W idle, 7.7W peak including UI)
 
 ## Key Features
 
@@ -53,17 +59,31 @@ firmware/
 - **Moving 20-60km/h**: 2-minute intervals
 - **Moving >60km/h**: 1-minute intervals
 
+### Enhanced User Interface
+- **2.8" TFT Display**: High-resolution color display (320x240)
+- **4-Button Navigation**: Up, Down, Left, Right navigation pad + OK/Cancel buttons
+- **Status LEDs**: Multi-color LEDs for GPS, cellular, train assignment, and system status
+- **Menu System**: Intuitive menu navigation for device information and train status
+- **Train Assignment Workflow**: Clear prompts for train number assignment and confirmation
+
 ### Communication Priority
-1. **Cellular** (primary) - Real-time MQTT transmission
+1. **Cellular** (primary) - Real-time MQTT transmission with train assignment commands
 2. **LoRa** (optional) - Cost-effective depot communication
 3. **Satellite** (optional) - Remote area coverage
 4. **Store & Forward** - Local buffering when offline
 
+### Train Management Features
+- **MQTT Command Processing**: Listen for train assignment commands from backend
+- **User Confirmation Workflow**: Display train assignment request and prompt for confirmation
+- **Train Status Display**: Show current assigned train number on main screen
+- **Assignment History**: Local logging of train assignments for audit purposes
+- **Auto-clear on Train Complete**: Automatic train number clearing on completion signal
+
 ### Route-Based Profiles
-- **Urban Routes**: Cellular priority, 1-minute updates
-- **Main Lines**: Cellular with LoRa backup, 2-minute updates
-- **Remote Routes**: Satellite primary, 5-minute updates
-- **Depot Operations**: LoRa only, 10-minute updates
+- **Urban Routes**: Cellular priority, 1-minute updates, train assignment enabled
+- **Main Lines**: Cellular with LoRa backup, 2-minute updates, train assignment enabled
+- **Remote Routes**: Satellite primary, 5-minute updates, train assignment enabled
+- **Depot Operations**: LoRa only, 10-minute updates, train assignment disabled
 
 ## Development Environment
 
@@ -84,6 +104,8 @@ pio lib install "SIM7600"
 pio lib install "TinyGPSPlus"
 pio lib install "ArduinoJson"
 pio lib install "PubSubClient"
+pio lib install "TFT_eSPI"
+pio lib install "XPT2046_Touchscreen"
 pio run
 ```
 
@@ -105,6 +127,31 @@ const char* APN_PASS = "your_password";
 ### Route Profiles
 Edit `config/routes.h` to define geographical boundaries and communication preferences for different route types.
 
+### UI Configuration
+Edit `config/ui_config.h`:
+```cpp
+// Display settings
+#define TFT_WIDTH 320
+#define TFT_HEIGHT 240
+#define BACKGROUND_COLOR TFT_BLACK
+#define TEXT_COLOR TFT_WHITE
+#define HIGHLIGHT_COLOR TFT_CYAN
+
+// Button mappings
+#define BTN_UP_PIN 25
+#define BTN_DOWN_PIN 26
+#define BTN_LEFT_PIN 27
+#define BTN_RIGHT_PIN 14
+#define BTN_OK_PIN 12
+#define BTN_CANCEL_PIN 13
+
+// Status LED pins
+#define LED_GPS_PIN 2
+#define LED_CELLULAR_PIN 4
+#define LED_TRAIN_PIN 16
+#define LED_STATUS_PIN 17
+```
+
 ### Device ID
 Each device must be assigned a unique ID during deployment for tracking and identification.
 
@@ -113,13 +160,16 @@ Each device must be assigned a unique ID during deployment for tracking and iden
 ### Hardware Tests
 - **GPS Signal Test**: Validate satellite reception and positioning accuracy
 - **Cellular Test**: Verify network connectivity and data transmission
-- **Power Test**: Confirm railway power integration and battery backup
+- **UI Hardware Test**: Test display, buttons, and LED functionality
+- **Power Test**: Confirm railway power integration and battery backup (with UI load)
 - **Environmental Test**: Validate operation in temperature/vibration conditions
 
 ### Integration Tests
-- **End-to-end Communication**: Test data flow from device to backend
+- **End-to-end Communication**: Test data flow from device to backend including train assignments
+- **Train Assignment Workflow**: Test complete train assignment and confirmation process
+- **UI Interaction Tests**: Test all menu navigation and button responses
 - **Failover Tests**: Validate automatic network switching
-- **Power Cycle Tests**: Ensure proper recovery after power interruption
+- **Power Cycle Tests**: Ensure proper recovery after power interruption (with UI state retention)
 - **Route Transition Tests**: Validate profile switching based on GPS location
 
 ## Deployment
@@ -135,8 +185,11 @@ Each device must be assigned a unique ID during deployment for tracking and iden
 ### Common Issues
 - **No GPS Fix**: Check antenna connection and sky view
 - **Cellular Connection Failed**: Verify APN settings and SIM activation
+- **Display Not Working**: Check TFT display connections and power supply
+- **Buttons Not Responsive**: Verify button pin assignments and debouncing settings
+- **Train Assignments Not Working**: Check MQTT subscription topics and backend connectivity
 - **Data Not Transmitting**: Check MQTT broker connectivity
-- **High Power Consumption**: Review sleep mode configuration
+- **High Power Consumption**: Review sleep mode configuration (UI increases base consumption)
 
 ### Debug Output
 Enable serial debugging by setting `DEBUG_LEVEL` in `config/device_config.h`.

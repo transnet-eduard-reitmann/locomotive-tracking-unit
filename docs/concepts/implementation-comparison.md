@@ -12,7 +12,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | **Cellular-Only** | Simplicity & Real-time | R937K | Immediate deployment, real-time operations |
 | **LoRa-Only** | Cost Optimization | R551K | Budget-conscious, historical tracking |
 | **Satellite-Only** | Global Coverage | R1,179K-R9,195K | Remote routes, cross-border operations |
-| **Modular T-SIM** | Cellular-Base + Expansion | R880K | Adaptive cellular-base solution ⭐ **SELECTED** |
+| **Modular T-SIM** | Cellular-Base + Train Integration | R935K | Complete solution with train management ⭐ **SELECTED** |
 | **Modular Pi** | Advanced Computing | R1,150K | Complex analytics requirements |
 
 ---
@@ -32,7 +32,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | **Field Reconfigurable** | No | No | No | Yes (modules) | Yes (HATs) |
 | **Hot-Swap Support** | No | No | No | Yes | Yes |
 | **Boot Time** | <1 second | <1 second | <1 second | <1 second | 30-45 seconds |
-| **Cost per Unit** | R2,870 | R1,550 | R4,790-R18,950 | R3,120-R7,970 | R3,200-R8,200 |
+| **Cost per Unit** | R2,870 | R1,550 | R4,790-R18,950 | R3,650-R8,500 (includes enhanced UI) | R3,200-R8,200 |
 
 ### 1.2 Communication Capabilities
 
@@ -69,12 +69,12 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 
 | Cost Component | Cellular-Only | LoRa-Only | Satellite-Only | Modular T-SIM | Modular Pi |
 |----------------|---------------|-----------|----------------|---------------|------------|
-| **Base Hardware** | R287,000 | R155,000 | R479,000-R1,895,000 | R312,000 | R320,000 |
+| **Base Hardware** | R287,000 | R155,000 | R479,000-R1,895,000 | R365,000 | R320,000 |
 | **Expansion Modules** | R0 | R0 | R0 | R85,000 (avg) | R150,000 (avg) |
 | **Infrastructure** | R0 | R396,000 | R0 | R0 | R0 |
-| **Development** | R350,000 | R0 | R200,000 | R245,000 | R250,000 |
+| **Development** | R350,000 | R0 | R200,000 | R275,000 | R250,000 |
 | **Integration & Testing** | R0 | R0 | R0 | R0 | R0 |
-| ****TOTAL CAPEX** | **R637,000** | **R551,000** | **R679,000-R2,095,000** | **R642,000** | **R720,000** |
+| ****TOTAL CAPEX** | **R637,000** | **R551,000** | **R679,000-R2,095,000** | **R695,000** | **R720,000** |
 
 ### 2.2 Operational Costs (Annual, 100 Units)
 
@@ -92,7 +92,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | Solution | Initial Investment | 5-Year Operations | **Total 5-Year Cost** | Cost Rank |
 |----------|-------------------|-------------------|----------------------|-----------|
 | **LoRa-Only** | R551K | R30K | **R581K** | 1st (lowest) |
-| **Modular T-SIM** | R642K | R340K | **R982K** | 2nd ⭐ **SELECTED** |
+| **Modular T-SIM** | R695K (with enhanced UI + integration) | R340K | **R1,035K** | 2nd ⭐ **SELECTED** |
 | **Cellular-Only** | R637K | R300K | **R937K** | 3rd |
 | **Modular Pi** | R720K | R414K | **R1,134K** | 4th |
 | **Satellite-Only** | R679K-R2,095K | R500K-R6,000K | **R1,179K-R8,095K** | 5th (highest) |

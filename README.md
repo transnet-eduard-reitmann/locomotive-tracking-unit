@@ -1,21 +1,24 @@
 # South African Railway Locomotive GPS Tracking System
-**Cellular-Base with Modular Extensions**
+**Cellular-Base with Modular Extensions + Train Management Integration**
 
 ## Overview
 
-A comprehensive GPS tracking system for locomotive fleet management across the South African rail network. This solution provides real-time location data through cellular connectivity with modular expansion capabilities for LoRa and satellite communication.
+A comprehensive GPS tracking system for locomotive fleet management across the South African rail network. This solution provides real-time location data through cellular connectivity with modular expansion capabilities for LoRa and satellite communication, **plus complete train management integration** with existing Transnet systems (ITP, TMS, VDU) to solve both locomotive tracking and train identification challenges.
 
-**Solution:** LILYGO T-SIM7600G-H platform with cellular-first approach and optional expansion modules for comprehensive coverage.
+**Solution:** LILYGO T-SIM7600G-H platform with enhanced user interface, cellular-first approach, optional expansion modules, and direct integration with Transnet's train management ecosystem.
 
 ## Key Features
 
+- **Complete Train Management** - Full integration with ITP, TMS, and VDU systems for train identification
+- **Enhanced User Interface** - 2.8" color TFT display, 4-button navigation, train assignment workflow
 - **Immediate Deployment** - Works out-of-box with cellular networks
 - **Over-the-Air Updates** - Remote firmware deployment to entire fleet via cellular
 - **Modular Expansion** - Add LoRa or satellite modules for dead zones  
 - **Real-time Tracking** - 1-minute update intervals on main routes
 - **Private Network Access** - APN configuration for secure company network
 - **Fleet Management** - Centralized monitoring and control of all tracking units
-- **Cost-Optimized** - R3,120 base unit with optional modules as needed
+- **Cost-Optimized** - R3,650 base unit with enhanced UI, optional modules as needed
+- **TCO Workflow Integration** - Seamless train number assignment and confirmation process
 - **Future-Proof** - Expandable design accommodates new technologies
 
 ## Quick Start
@@ -76,16 +79,18 @@ locomotive-tracking-unit/
 
 ### Hardware
 - **Core Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
+- **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **Expansion**: Optional LoRa and satellite communication modules
-- **Power**: 110V railway power with 48-hour battery backup
+- **Power**: 110V railway power with 48-hour battery backup (0.6W idle, 7.7W peak including UI)
 - **Environment**: IP67 rated, -20°C to +70°C operation
 
 ### Software  
-- **Embedded**: C++ on ESP32 using PlatformIO with OTA support
-- **Backend**: .NET Core Web API with Entity Framework
-- **Database**: MS SQL Server with spatial data extensions
+- **Embedded**: C++ on ESP32 using PlatformIO with OTA support and train management workflows
+- **Backend**: .NET Core Web API with Entity Framework and train management integration services
+- **Database**: MS SQL Server with spatial data extensions and train management tables
 - **Frontend**: React.js dashboard with real-time mapping and fleet management
-- **Communication**: MQTT over TLS for secure data transmission
+- **Communication**: MQTT over TLS for secure data transmission and train assignment commands
+- **Integration**: Direct API connectivity with Transnet ITP, TMS, and VDU systems
 - **OTA System**: Secure firmware updates with rollback protection
 
 ### Network
@@ -157,10 +162,10 @@ The system includes comprehensive Over-the-Air update capabilities:
 ## Cost Summary
 
 ### Initial Investment (100 Units)
-- Base Hardware: R312,000 (100 × R3,120)
-- Development & Integration: R150,000  
+- Base Hardware: R365,000 (100 × R3,650, includes enhanced UI)
+- Development & Integration: R180,000 (includes train management integration)
 - Installation: R50,000
-- **Total CAPEX: R512,000**
+- **Total CAPEX: R595,000**
 
 ### Monthly Operating Costs (100 Units)
 - Cellular Connectivity: R4,250 (85 units)

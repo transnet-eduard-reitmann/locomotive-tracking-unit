@@ -5,9 +5,9 @@
 
 ## Executive Summary
 
-This document provides comprehensive technical documentation for implementing a GPS tracking system using the LILYGO T-SIM7600G-H as the base platform with optional expansion modules. The solution provides immediate cellular connectivity with the flexibility to add LoRa or satellite communication for areas with poor cellular coverage.
+This document provides comprehensive technical documentation for implementing a GPS tracking system using the LILYGO T-SIM7600G-H as the base platform with enhanced user interface, train management integration, and optional expansion modules. The solution provides immediate cellular connectivity with complete train identification capabilities and the flexibility to add LoRa or satellite communication for areas with poor cellular coverage.
 
-**Key Innovation:** Unlike a fixed hybrid system, this approach starts with proven cellular technology and adds modules only where operationally required, optimizing both deployment speed and total cost of ownership.
+**Key Innovation:** Unlike a fixed hybrid system, this approach starts with proven cellular technology, adds complete train management integration with existing Transnet systems (ITP, TMS, VDU), and includes expansion modules only where operationally required, optimizing both deployment speed and total cost of ownership.
 
 ---
 
@@ -15,6 +15,8 @@ This document provides comprehensive technical documentation for implementing a 
 
 ### 1.1 Core Design Principles
 - **Cellular-first approach** - Immediate real-time tracking capability
+- **Complete train management integration** - Direct connectivity with ITP, TMS, and VDU systems
+- **Enhanced user interface** - 2.8" TFT display with train assignment workflow
 - **Modular expansion** - Add communication methods as needed
 - **Private network security** - APN configuration for company network
 - **Graceful degradation** - Store-and-forward when offline
@@ -70,16 +72,20 @@ Priority 4: Store & Forward (buffer until connection available)
 | Component | Model | Unit Price (ZAR) | Quantity | Total | Purpose |
 |-----------|--------|------------------|----------|--------|----------|
 | **Main Board** | LILYGO T-SIM7600G-H | R1,500 | 1 | R1,500 | ESP32 + 4G LTE + GPS |
+| **TFT Display** | 2.8" Color TFT 320x240 | R350 | 1 | R350 | Enhanced UI display |
+| **Button Assembly** | 4-button navigation pad | R80 | 1 | R80 | User interface control |
+| **Status LEDs** | Multi-color LEDs x4 | R50 | 1 | R50 | Status indicators |
+| **UI Wiring Harness** | Connection cables | R50 | 1 | R50 | UI integration |
 | **External Antenna** | 4G/GPS Combo Antenna | R200 | 1 | R200 | Enhanced reception |
 | **Power Supply** | Mean Well DDR-30G-5 | R350 | 1 | R350 | 9-36V to 5V DC-DC |
 | **Backup Battery** | 18650 Li-ion x2 | R120 | 1 | R120 | 48-hour backup |
 | **Battery Management** | TP4056 + Protection | R50 | 1 | R50 | Charging circuit |
 | **Storage** | 32GB Industrial SD | R150 | 1 | R150 | Local data logging |
-| **Enclosure** | IP67 Railway Box | R350 | 1 | R350 | Environmental protection |
-| **Expansion Board** | Custom PCB | R200 | 1 | R200 | Module interface |
+| **Enclosure** | IP67 Railway Box (larger) | R450 | 1 | R450 | Environmental protection + UI panel |
+| **Expansion Board** | Custom PCB with UI | R250 | 1 | R250 | Module interface + UI controller |
 | **Connectors** | M12, terminal blocks | R100 | 1 | R100 | Robust connections |
 | **Surge Protection** | TVS diodes, filters | R100 | 1 | R100 | Railway EMC |
-| **TOTAL BASE** | | | | **R3,120** | **Complete base unit** |
+| **TOTAL BASE** | | | | **R3,650** | **Complete base unit (includes enhanced UI)** |
 
 ### 2.2 Expansion Modules
 
@@ -790,7 +796,7 @@ END
 - Dashboard deployment
 - Staff training
 
-**Budget:** R512,000 (hardware + development)
+**Budget:** R595,000 (hardware + development + train management integration)
 
 ### 6.2 Phase 2: LoRa Extension (Months 7-12)
 
@@ -977,11 +983,11 @@ mqttClient.setClient(secureClient);
 **Initial Investment:**
 | Item | Cost |
 |------|------|
-| Base hardware (100 units) | R312,000 |
-| Development & integration | R150,000 |
+| Base hardware (100 units) | R365,000 |
+| Development & integration | R180,000 |
 | Private APN setup | R20,000 |
 | Installation | R50,000 |
-| **Total CAPEX** | **R512,000** |
+| **Total CAPEX** | **R595,000** |
 
 **Monthly Operating Costs:**
 | Service | Units | Cost/Unit | Total |

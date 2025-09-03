@@ -140,7 +140,7 @@ Modular platform using LILYGO T-SIM7600G-H as the cellular-base foundation with 
 - **Base Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS integrated)
 - **Primary Communication**: Cellular (4G/3G/2G) always available
 - **Expansion Modules**: Optional LoRa and satellite modules via expansion slots
-- **Cost Structure**: R3,120 base unit + R250-R4,850/expansion module + variable operational
+- **Cost Structure**: R3,650 base unit (includes enhanced UI) + R250-R4,850/expansion module + variable operational
 - **Deployment**: 12 months for 100-unit rollout with initial configurations
 - **Reconfiguration**: Field-swappable expansion modules in <5 minutes
 
@@ -253,7 +253,7 @@ Linux-based modular platform using Raspberry Pi Zero 2W with HAT-based communica
 | **Real-time Capability** | ✅ Excellent | ❌ Poor | ⚠️ Variable | ✅ Excellent (cellular base) | ✅ Configurable |
 | **Coverage Completeness** | 99%+ SA | 30-90% | 100% Global | 99%+ expandable to 100% | 100% Configurable |
 | **Initial Cost (100 units)** | R637K | R551K | R679K-R2.95M | R642K-R1.12M | R720K-R1.82M |
-| **5-Year Total Cost** | R937K | R551K | R1,179K-R9.19M | R880K | R1,150K |
+| **5-Year Total Cost** | R937K | R551K | R1,179K-R9.19M | R935K | R1,150K |
 | **Base Platform** | T-SIM7600G-H | ESP32+LoRa | ESP32+Satellite | T-SIM7600G-H | Pi Zero 2W |
 | **Power Consumption** | Medium | Low | High | Medium | High |
 | **Deployment Timeline** | 15 months | 24 months | 12 months | 12 months | 15 months |

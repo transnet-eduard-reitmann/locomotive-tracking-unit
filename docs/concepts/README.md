@@ -9,7 +9,7 @@ After extensive analysis, the **Modular System with Cellular-Base (LILYGO T-SIM7
 - **Cost optimization** through route-specific module configurations  
 - **Future flexibility** via hot-swappable communication modules
 - **Standardized platform** for entire fleet regardless of configuration
-- **Total 5-year cost**: R880K for 100 units (2nd lowest among all concepts)
+- **Total 5-year cost**: R935K for 100 units (2nd lowest among all concepts, includes train management integration)
 
 ## Research Navigation
 
@@ -70,7 +70,7 @@ Strategic analysis explaining the final decision, implementation strategy, and l
 - **Base Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS integrated)
 - **Primary Communication**: Cellular (4G/3G/2G) always available
 - **Expansion**: Hot-swappable LoRa and satellite modules
-- **Cost**: R880K total 5-year cost for 100 units
+- **Cost**: R935K total 5-year cost for 100 units (includes enhanced UI and train management integration)
 - **Timeline**: 12 months for complete deployment
 
 ### Key Decision Factors
@@ -82,7 +82,7 @@ Strategic analysis explaining the final decision, implementation strategy, and l
 
 ### Concept Rankings by Total 5-Year Cost (100 units)
 1. **LoRa-Only**: R551K (lowest cost, limited real-time capability)
-2. **Modular T-SIM**: R880K ⭐ **SELECTED** (best value, cellular-base)
+2. **Modular T-SIM**: R935K ⭐ **SELECTED** (best value, cellular-base + train management)
 3. **Cellular-Only**: R937K (simple but inflexible)
 4. **Modular Pi**: R1,150K (advanced computing capabilities)
 5. **Satellite-Only**: R1,179K+ (global coverage, high cost)
