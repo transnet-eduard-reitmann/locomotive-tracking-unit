@@ -218,6 +218,102 @@ enum DisplayState {
 └─────────────────────────────────────┘
 ```
 
+### Debug Mode Activation Screen
+**Purpose**: Confirm debug mode activation and display access credentials
+**Layout**:
+```
+┌─────────────────────────────────────┐
+│ 🔧 DEBUG MODE ACTIVATION            │
+│                                     │
+│ Activating WiFi Access Point...     │
+│                                     │
+│ SSID: LOCO-001234-DEBUG             │
+│ Password: 00123420250904            │
+│                                     │
+│ Please wait for confirmation...     │
+│                                     │
+│ Status: Starting WiFi AP            │
+│                [CANCEL]             │
+└─────────────────────────────────────┘
+```
+
+### Debug Mode Status Screen
+**Purpose**: Active debug mode status and connection management
+**Layout**:
+```
+┌─────────────────────────────────────┐
+│ 📶 DEBUG MODE ACTIVE                │
+│                                     │
+│ WiFi AP: LOCO-001234-DEBUG          │
+│ Password: 00123420250904            │
+│ IP: 192.168.4.1                    │
+│                                     │
+│ Connected Clients: 1/4              │
+│ Data Downloaded: 127.3 MB          │
+│ Session Time: 15:23 / 120:00       │
+│                                     │
+│ Web: http://192.168.4.1             │
+│                [EXIT]    [STATUS]   │
+└─────────────────────────────────────┘
+```
+
+### Debug Mode Menu Option
+**Purpose**: Menu-based debug mode activation
+**Layout** (Addition to Main Menu):
+```
+┌─────────────────────────────────────┐
+│ MAIN MENU                           │
+│                                     │
+│   System Information                │
+│   Train History                     │
+│   Network Status                    │
+│   Settings                          │
+│ > Debug Mode                        │
+│   Diagnostics                       │
+│                                     │
+│              [↑] [↓] [SELECT] [BACK]│
+└─────────────────────────────────────┘
+```
+
+### Debug Mode Confirmation Screen
+**Purpose**: Confirm debug mode activation via menu
+**Layout**:
+```
+┌─────────────────────────────────────┐
+│ DEBUG MODE CONFIRMATION             │
+│                                     │
+│ Activate Debug Mode?                │
+│                                     │
+│ • Creates WiFi Access Point         │
+│ • Allows data extraction            │
+│ • Increases power consumption       │
+│ • Auto-exits after 2 hours         │
+│                                     │
+│ This action is logged and audited   │
+│                                     │
+│              [YES]       [NO]       │
+└─────────────────────────────────────┘
+```
+
+### Debug Mode Exit Confirmation
+**Purpose**: Confirm debug mode exit and show session summary
+**Layout**:
+```
+┌─────────────────────────────────────┐
+│ DEBUG SESSION COMPLETE              │
+│                                     │
+│ Session Duration: 23:45             │
+│ Clients Connected: 2                │
+│ Data Downloaded: 847.2 MB          │
+│ Files Accessed: 156                 │
+│                                     │
+│ Session logged to audit trail       │
+│                                     │
+│ Returning to normal operation...    │
+│                [OK]                 │
+└─────────────────────────────────────┘
+```
+
 ## User Interface Guidelines
 
 ### Typography
@@ -252,6 +348,7 @@ enum DisplayState {
 - **Long Press (1 second)**: Alternative actions, shortcuts
 - **Double Press**: Quick actions (back to main screen)
 - **Button Feedback**: Visual highlight + optional beep
+- **Debug Activation**: OK+Cancel held simultaneously for 3 seconds
 
 ### Screen Transitions
 - **Transition Type**: Slide left/right for screen changes
@@ -290,6 +387,14 @@ LED_SYS_RED      // System error/fault
 LED_SYS_YELLOW   // System warning/limited operation
 LED_SYS_GREEN    // System operational
 LED_SYS_BLUE     // System optimal/all modules active
+LED_SYS_BLUE_FLASH // Debug mode active
+
+// Debug Status LED (GPIO Expander Pin 9)
+LED_DEBUG_OFF           // Debug mode inactive
+LED_DEBUG_GREEN_SOLID   // WiFi AP active, no clients connected
+LED_DEBUG_ORANGE_SOLID  // Client connected, data access in progress
+LED_DEBUG_RED_FLASH     // Debug mode error or timeout warning
+LED_DEBUG_BLUE_PULSE    // Debug mode activation sequence
 ```
 
 ### LED Patterns
@@ -328,6 +433,12 @@ BEEP_STARTUP         // 1× 200ms, 3kHz - System boot complete
 // Network Events
 BEEP_CONNECTED       // 1× 100ms, 3.5kHz - Network connected
 BEEP_DISCONNECTED    // 1× 300ms, 2kHz - Network disconnected
+
+// Debug Mode Events  
+BEEP_DEBUG_ACTIVATED // 3× 200ms, 3.5kHz - Debug mode activated
+BEEP_DEBUG_CLIENT    // 1× 100ms, 4kHz - Client connected to WiFi AP
+BEEP_DEBUG_EXIT      // 2× 200ms, 2.5kHz - Debug mode exiting
+BEEP_DEBUG_TIMEOUT   // 3× 100ms, 1.5kHz - Debug session timeout warning
 ```
 
 ### Audio Settings

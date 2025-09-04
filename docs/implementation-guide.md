@@ -993,7 +993,172 @@ mqttClient.setClient(secureClient);
    - Test data flow to SQL Server
    - Document installation
 
-### 9.2 Maintenance Procedures
+### 9.2 Field Debugging and Data Extraction
+
+The system includes a comprehensive WiFi Access Point-based debug mode that enables field technicians to extract data and perform diagnostics without physical connections to the device.
+
+#### 9.2.1 Debug Mode Overview
+
+Debug mode creates a temporary WiFi Access Point that provides:
+- Complete access to on-board SD card data and logs
+- Real-time system status and diagnostics
+- Browser-based interface for manual data extraction
+- Python API for automated data collection
+- Secure, audited access with session timeouts
+
+#### 9.2.2 Activation Procedures
+
+**Primary Activation Method (Hardware):**
+1. Approach the locomotive tracking device
+2. Hold OK+Cancel buttons simultaneously for 3 seconds
+3. Watch for Enhanced UI confirmation screen showing WiFi credentials
+4. Listen for three confirmation beeps
+5. Observe system LED change to blue flashing pattern
+
+**Secondary Activation Method (Menu):**
+1. Navigate to Main Menu using button navigation
+2. Select "Debug Mode" option
+3. Confirm activation on confirmation screen
+4. Follow same visual and audio confirmation as hardware method
+
+**WiFi Access Point Configuration:**
+- **SSID**: `LOCO-{DEVICE_ID}-DEBUG` (e.g., "LOCO-001234-DEBUG")
+- **Password**: `{DEVICE_ID}{YYYYMMDD}` (daily rotation, e.g., "00123420250904")
+- **IP Address**: `192.168.4.1`
+- **Maximum Clients**: 4 concurrent connections
+- **Session Timeout**: 30 minutes inactivity, 2 hours maximum duration
+
+#### 9.2.3 Data Extraction Procedures
+
+**Browser-Based Access:**
+1. Connect laptop/tablet to debug WiFi network using displayed credentials
+2. Navigate to `http://192.168.4.1` in web browser
+3. Access features:
+   - **File Browser**: Navigate SD card directory structure
+   - **Log Viewer**: Real-time log streaming and historical access
+   - **System Status**: Live GPS, cellular, train assignment data
+   - **Bulk Download**: Create ZIP archives of selected files/folders
+   - **Configuration Viewer**: Current device settings (read-only)
+
+**Python Script Automation:**
+```bash
+# Example automated data extraction
+python3 extract_data.py 192.168.4.1 --all
+python3 extract_data.py 192.168.4.1 --logs --config
+```
+
+**Available REST API Endpoints:**
+- `GET /api/system/info` - Device information and uptime
+- `GET /api/system/status` - Real-time system status
+- `GET /api/files` - List all files and directories
+- `GET /api/files/{path}` - Download specific file
+- `POST /api/files/archive` - Create ZIP archive
+- `GET /api/logs` - Available log files
+- `GET /api/logs/{type}` - Specific log type (system, gps, cellular, train)
+- `GET /api/config` - Current device configuration (read-only)
+
+#### 9.2.4 Field Technician Workflow
+
+1. **Approach Device**: Locate locomotive tracking unit in electrical cabinet
+2. **Safety Check**: Ensure power is stable and system is operational
+3. **Activate Debug Mode**: Use hardware button combination (OK+Cancel 3 seconds)
+4. **Verify Activation**: Check display for WiFi credentials and status confirmation
+5. **Connect Equipment**: Join debug WiFi network from field laptop
+6. **Extract Data**: Use browser interface or Python scripts as required
+7. **Document Session**: Note any issues, data extracted, session duration
+8. **Exit Cleanly**: Press EXIT button or wait for auto-timeout
+9. **Verify Normal Operation**: Confirm device returns to normal tracking mode
+
+#### 9.2.5 Data Organization on Device
+
+Debug mode provides access to organized SD card structure:
+
+```
+/data/
+├── logs/
+│   ├── system/          # System logs by date (YYYY-MM-DD.log)
+│   ├── gps/             # GPS tracking data and positioning logs
+│   ├── cellular/        # Cellular connection and network logs
+│   ├── train/           # Train assignment history and workflow logs
+│   └── debug/           # Debug session logs and access history
+├── config/
+│   ├── device.json      # Device configuration backup
+│   ├── routes.json      # Route profile data and boundaries
+│   ├── gpio_state.json  # GPIO and expander configuration
+│   └── calibration.json # Sensor calibration and offset data
+├── exports/
+│   ├── daily/           # Daily data exports and summaries
+│   └── sessions/        # Debug session data exports
+└── temp/
+    └── debug_archives/  # Temporary ZIP files for bulk downloads
+```
+
+#### 9.2.6 Security and Audit Controls
+
+**Access Security:**
+- Daily password rotation prevents unauthorized access
+- Session timeouts limit exposure window
+- Maximum 4 concurrent client connections
+- All debug sessions logged to audit trail
+- Read-only access prevents configuration tampering
+
+**Audit Logging:**
+- Debug session start/end times
+- Client connections and IP addresses
+- Files accessed and downloaded
+- Total data transferred
+- Session termination reason (manual exit, timeout, error)
+
+**Session Summary Display:**
+After debug session completion, Enhanced UI shows:
+- Session duration and data transferred
+- Number of clients connected
+- Files accessed and downloaded
+- Confirmation that session logged to audit trail
+
+#### 9.2.7 Troubleshooting Debug Mode
+
+**Common Issues and Solutions:**
+
+| Issue | Probable Cause | Solution |
+|-------|----------------|----------|
+| WiFi AP not visible | Button activation failed | Ensure OK+Cancel held for full 3 seconds |
+| Cannot connect to AP | Wrong password format | Use {DEVICE_ID}{YYYYMMDD} format |
+| Web interface won't load | Firewall blocking access | Check client firewall, use http:// not https:// |
+| File downloads failing | Session timeout | Complete downloads within 30-minute limit |
+| Debug mode won't activate | GPIO expander communication issue | Check I2C connections, review system logs |
+
+**Debug Mode Diagnostic Tests:**
+```bash
+# Test debug mode functionality during development
+pio test -e debug-mode-activation    # Hardware activation test
+pio test -e debug-wifi-ap            # WiFi AP functionality
+pio test -e debug-web-server         # Web server endpoints
+pio test -e debug-file-operations    # File access and downloads
+pio test -e debug-security           # Security and session management
+```
+
+
+#### 9.2.8 Integration with Maintenance Procedures
+
+Debug mode supports various maintenance scenarios:
+
+**Routine Maintenance:**
+- Monthly data extraction for trend analysis
+- Configuration backup before system updates
+- Performance monitoring and diagnostics
+
+**Troubleshooting:**
+- Real-time log access during issue investigation
+- Historical data analysis for intermittent problems
+- Network connectivity diagnostics
+
+**Compliance and Auditing:**
+- Complete operational history extraction
+- Train assignment audit trails
+- System configuration documentation
+
+### 9.3 Maintenance Procedures
 
 **Regular Maintenance:**
 - Monthly: Check dashboard for all units reporting

@@ -124,7 +124,9 @@ CREATE TABLE Devices (
     LastSeen DATETIME2,
     CurrentRoute NVARCHAR(100),
     CurrentTrainNumber NVARCHAR(50), -- Current assigned train
-    Configuration NVARCHAR(MAX) -- JSON configuration
+    Configuration NVARCHAR(MAX), -- JSON configuration
+    DebugSessionsEnabled BIT DEFAULT 1, -- Allow debug sessions
+    LastDebugSession DATETIME2 -- Most recent debug session
 );
 
 -- Train management and assignments
@@ -193,6 +195,24 @@ CREATE TABLE SystemEvents (
     Acknowledged BIT DEFAULT 0,
     AcknowledgedBy NVARCHAR(100),
     AcknowledgedAt DATETIME2
+);
+
+-- Debug session tracking and auditing
+CREATE TABLE DebugSessions (
+    SessionID BIGINT IDENTITY PRIMARY KEY,
+    DeviceID INT FOREIGN KEY REFERENCES Devices(DeviceID),
+    SessionStart DATETIME2 NOT NULL,
+    SessionEnd DATETIME2,
+    InitiatedBy NVARCHAR(100), -- Technician ID or system
+    ClientIP NVARCHAR(45), -- IPv4 or IPv6 address
+    ClientMAC NVARCHAR(17), -- MAC address if available
+    DataTransferredMB DECIMAL(10,2) DEFAULT 0,
+    FilesAccessed INT DEFAULT 0,
+    SessionDurationMinutes AS DATEDIFF(MINUTE, SessionStart, SessionEnd),
+    TerminationReason NVARCHAR(50), -- 'manual_exit', 'timeout', 'power_low', 'system_error'
+    SessionNotes NVARCHAR(500),
+    AuditFlags NVARCHAR(100), -- JSON flags for compliance
+    CreatedAt DATETIME2 DEFAULT GETDATE()
 );
 ```
 
@@ -378,6 +398,17 @@ export MqttSettings__Password="production-mqtt-password"
 - **Function**: Send alerts and notifications
 - **Frequency**: Event-driven
 - **Tasks**: Geofence violations, device offline alerts, train assignment notifications, system notifications
+
+### Debug Session Monitoring Service
+- **Function**: Monitor and log device debug mode sessions
+- **Frequency**: Real-time event-driven
+- **Tasks**: Debug session tracking, audit logging, data access monitoring, session analytics
+- **Capabilities**: 
+  - Track debug session start/end events
+  - Monitor data extraction volumes and file access patterns
+  - Generate debug session reports for compliance auditing
+  - Alert on unauthorized or extended debug sessions
+  - Collect debug session statistics for operational insights
 
 ## Real-time Features
 

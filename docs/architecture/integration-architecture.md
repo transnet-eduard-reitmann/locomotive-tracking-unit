@@ -299,6 +299,103 @@ POST /api/integration/vdu/notifications
    └─────────────────┘
 ```
 
+### Debug Mode Data Extraction Workflow
+
+```
+1. FIELD TECHNICIAN
+   ┌─────────────────┐
+   │ Technician      │
+   │ activates debug │
+   │ mode on device  │
+   │ (OK+Cancel 3s)  │
+   └────────┬────────┘
+            │
+            ▼
+2. DEVICE ACTIVATION
+   ┌─────────────────┐
+   │ - WiFi AP starts│
+   │ - Debug LED on  │
+   │ - UI shows creds│
+   │ - Session logged│
+   └────────┬────────┘
+            │
+            ▼
+3. BACKEND NOTIFICATION
+   ┌─────────────────┐
+   │ Device publishes│
+   │ debug session   │
+   │ start event via │
+   │ MQTT to backend │
+   └────────┬────────┘
+            │
+            ▼
+4. SESSION MONITORING
+   ┌─────────────────┐
+   │ Backend tracks: │
+   │ - Session start │
+   │ - Client IPs    │
+   │ - Data accessed │
+   │ - Files downloaded
+   └────────┬────────┘
+            │
+            ▼
+5. DATA EXTRACTION
+   ┌─────────────────┐
+   │ Technician uses │
+   │ browser/Python  │
+   │ to access logs, │
+   │ config, history │
+   └────────┬────────┘
+            │
+            ▼
+6. SESSION COMPLETION
+   ┌─────────────────┐
+   │ - Session ends  │
+   │ - Summary logged│
+   │ - Audit trail   │
+   │ - WiFi AP stops │
+   └────────┬────────┘
+            │
+            ▼
+7. BACKEND RECORDING
+   ┌─────────────────┐
+   │ - Update DB     │
+   │ - Generate      │
+   │   session report│
+   │ - Compliance log│
+   └─────────────────┘
+```
+
+### Debug Data Integration with Core Systems
+
+The debug mode integrates with the train management systems to provide comprehensive diagnostic capabilities:
+
+```
+DEBUG SESSION CONTEXT           INTEGRATED SYSTEM DATA
+┌─────────────────────────┐     ┌─────────────────────────┐
+│ • Device logs & config  │────►│ • ITP train plans       │
+│ • GPS positioning data  │     │ • TMS vehicle lists     │  
+│ • Cellular connectivity │     │ • VDU command history   │
+│ • Train assignment hist │     │ • Integration logs      │
+│ • System error logs     │     │ • Backend processing    │
+│ • Power & sensor data   │     │ • MQTT message flows    │
+└─────────────────────────┘     └─────────────────────────┘
+            │                               │
+            └─────────────┬─────────────────┘
+                          ▼
+            ┌─────────────────────────┐
+            │  COMPREHENSIVE DEBUG    │
+            │       DATASET           │
+            │                         │
+            │ • Complete operational  │
+            │   history with context  │
+            │ • Integration status    │  
+            │ • Performance metrics   │
+            │ • Error correlation     │
+            │ • Compliance audit data │
+            └─────────────────────────┘
+```
+
 ---
 
 ## Database Schema Integration

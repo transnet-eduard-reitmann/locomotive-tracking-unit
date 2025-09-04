@@ -209,12 +209,12 @@ Remaining spare pins:             4
 #define EXP_LED_GPS      4   // Output, LED drive
 #define EXP_LED_CELLULAR 5   // Output, LED drive
 #define EXP_LED_TRAIN    6   // Output, LED drive
-#define EXP_SPARE_A7     7   // Spare
+#define EXP_LED_SYSTEM   7   // Output, system status LED
 
 // Port B (pins 8-15)  
 #define EXP_TRAIN_BUZZER 8   // Output, buzzer drive
-#define EXP_DEBUG_LED    9   // Output, debug LED
-#define EXP_SPARE_B2     10  // Future expansion
+#define EXP_LED_DEBUG    9   // Output, debug mode status LED
+#define EXP_DEBUG_SPARE  10  // Debug mode future expansion
 #define EXP_SPARE_B3     11  // Future expansion
 #define EXP_SPARE_B4     12  // Future expansion
 #define EXP_SPARE_B5     13  // Future expansion
@@ -242,11 +242,39 @@ MCP23017 Specifications:
 - Output Current: 25mA per pin maximum
 - Total Current: 125mA maximum
 
-LED Load Calculation:
+LED Load Calculation (Normal Operation):
 - 4 status LEDs × 10mA = 40mA
+- 1 debug LED × 10mA = 10mA  
 - Buzzer: 20mA peak
-- Total GPIO Expander Load: 60mA typical
+- Total GPIO Expander Load: 70mA typical
+
+Debug Mode Additional Load:
+- Debug LED Active: 10mA
 ```
+
+### Debug Mode GPIO Requirements
+
+Debug mode adds minimal GPIO requirements while providing comprehensive field debugging capabilities:
+
+#### WiFi Access Point Integration
+- **No Additional ESP32 GPIO Required**: Uses built-in WiFi capability
+- **Antenna Considerations**: Existing ESP32 WiFi antenna sufficient for short-range AP
+
+#### Debug Mode Status Indication
+```cpp
+// Debug LED States (via GPIO Expander Pin 9)
+#define DEBUG_LED_OFF           0    // Debug mode inactive
+#define DEBUG_LED_GREEN_SOLID   1    // WiFi AP active, no clients
+#define DEBUG_LED_ORANGE_SOLID  2    // Client connected, data transfer
+#define DEBUG_LED_RED_FLASHING  3    // Debug error or timeout warning
+#define DEBUG_LED_BLUE_PULSE    4    // Debug mode activation sequence
+```
+
+#### Hardware Activation Method
+- **Button Combination**: Uses existing buttons (OK + Cancel)
+- **Activation Sequence**: 3-second hold detected via GPIO expander
+- **No Additional Hardware**: Leverages enhanced UI button matrix
+
 
 ### Software Implementation Requirements
 ```cpp
@@ -272,6 +300,12 @@ void setupGPIOExpander() {
         gpio_expander.pinMode(i, OUTPUT);
         gpio_expander.digitalWrite(i, LOW);
     }
+    
+    // Configure debug mode LED and buzzer
+    gpio_expander.pinMode(EXP_TRAIN_BUZZER, OUTPUT);
+    gpio_expander.pinMode(EXP_LED_DEBUG, OUTPUT);
+    gpio_expander.digitalWrite(EXP_TRAIN_BUZZER, LOW);
+    gpio_expander.digitalWrite(EXP_LED_DEBUG, LOW);
 }
 ```
 

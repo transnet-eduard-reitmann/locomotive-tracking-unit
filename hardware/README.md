@@ -54,11 +54,12 @@ hardware/
 
 ### Connectivity
 - **Cellular Antenna**: 4G/GPS combo antenna (external)
+- **WiFi**: Built-in ESP32 WiFi (2.4GHz) - used for debug mode Access Point
 - **Expansion**: 4× M.2 Key-E slots for optional modules
 - **Data Storage**: 32GB industrial MicroSD card
 - **Enhanced UI Display**: 2.8" color TFT touch display (320x240 resolution)
 - **User Interface**: 4-button navigation pad (Up/Down/Left/Right + OK/Cancel)
-- **Status Indicators**: 4× multi-color LEDs (GPS, Cellular, Train Assignment, System Status)
+- **Status Indicators**: 4× multi-color LEDs (GPS, Cellular, Train Assignment, System Status) + 1× debug status LED
 
 ## Bill of Materials (Base Unit)
 
@@ -208,6 +209,9 @@ The ESP32 flash memory is partitioned to support dual-boot OTA updates:
 - **Battery Backup**: Maintains power during 45-60 second updates  
 - **Power Monitoring**: Prevents updates on low battery (<50%)
 - **UPS Integration**: Railway power with seamless backup switching
+
+### Debug Mode Specifications
+- **Antenna Requirements**: Existing ESP32 WiFi antenna adequate for short-range AP (10-50m range)
 
 ### Security Hardware Features
 - **Secure Element**: Optional crypto accelerator

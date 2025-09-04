@@ -106,6 +106,36 @@ docker run -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto
 sqlcmd -Q "ALTER DATABASE LocomotiveTracking SET COMPATIBILITY_LEVEL = 150"
 ```
 
+### Debug Mode Development
+```bash
+# Install additional libraries for debug mode
+cd firmware/core
+pio lib install "WiFi"
+pio lib install "WebServer" 
+pio lib install "ESPAsyncWebServer"
+pio lib install "AsyncTCP"
+
+# Build with debug mode enabled
+pio run -e debug-enabled
+
+# Test debug mode activation
+# Hardware: Hold OK+Cancel buttons for 3 seconds on device
+# Monitor serial output for WiFi AP activation
+
+# Connect to debug WiFi AP
+# SSID: LOCO-{DEVICE_ID}-DEBUG
+# Password: {DEVICE_ID}{YYYYMMDD} (daily rotation)
+# Access: http://192.168.4.1
+
+# Run debug mode tests
+pio test -e debug-mode
+
+# Test debug API endpoints
+curl http://192.168.4.1/api/files
+curl http://192.168.4.1/api/logs
+curl http://192.168.4.1/api/system/status
+```
+
 ## Key Features & Patterns
 
 ### Firmware Architecture
@@ -118,6 +148,7 @@ sqlcmd -Q "ALTER DATABASE LocomotiveTracking SET COMPATIBILITY_LEVEL = 150"
 - **Power management**: Railway power integration with 38-hour battery backup (updated for enhanced UI + GPIO expander: 0.65W idle, 7.7W peak)
 - **Route-based profiles**: Adaptive reporting intervals and module activation based on location
 - **Comprehensive OTA system**: Secure fleet-wide firmware updates via cellular
+- **WiFi Debug Mode**: On-demand WiFi Access Point for field data extraction and debugging
 
 ### OTA Update System
 The firmware includes enterprise-grade OTA capabilities:
@@ -151,6 +182,7 @@ Key configuration files in `firmware/config/`:
 - `device_config.h`: Device-specific settings and debug levels
 - `ui_config.h`: Display settings, button mappings, and user interface preferences
 - `gpio_config.h`: GPIO pin assignments and expander configuration
+- `debug_config.h`: WiFi Access Point and debug mode configuration
 
 ### Backend Configuration
 ```json
@@ -181,6 +213,7 @@ Key configuration files in `firmware/config/`:
 - **Integration Tests**: Hardware component interaction testing
 - **Hardware-in-Loop**: Testing under actual railway conditions
 - **OTA Testing**: Comprehensive update process validation
+- **Debug Mode Testing**: WiFi AP functionality and data extraction validation
 
 ### Backend Testing
 - **Unit Tests**: xUnit for business logic
@@ -238,3 +271,4 @@ This is a **safety-critical railway system** that must comply with:
 - Power consumption includes enhanced UI: 0.65W idle, 38-hour battery life with UI active
 - Complete GPIO pin analysis available in `hardware/gpio-analysis.md`
 - Enhanced UI specifications detailed in `firmware/ui-specifications.md`
+- Debug mode procedures detailed in `firmware/debug-mode-guide.md`

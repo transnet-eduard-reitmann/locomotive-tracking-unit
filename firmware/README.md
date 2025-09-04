@@ -26,7 +26,10 @@ firmware/
 │   ├── gpio_expander.cpp  # MCP23017 GPIO expander driver
 │   ├── train_manager.cpp  # Train assignment workflow and management
 │   ├── power_manager.cpp     # Power optimization and management (updated for UI)
-│   └── storage_manager.cpp   # SD card data logging
+│   ├── storage_manager.cpp   # SD card data logging
+│   ├── debug_manager.cpp     # Debug mode coordination and control
+│   ├── wifi_ap_manager.cpp   # WiFi Access Point setup and management
+│   └── web_server.cpp        # HTTP server and API endpoints
 ├── modules/           # Communication module drivers
 │   ├── lora_module.cpp      # LoRa communication (optional)
 │   ├── satellite_module.cpp # Satellite interface (optional)
@@ -34,18 +37,24 @@ firmware/
 ├── drivers/           # Hardware drivers
 │   ├── tft_display.cpp      # 2.8" TFT display driver
 │   ├── button_matrix.cpp    # 4-button navigation driver
-│   └── led_controller.cpp   # Multi-color LED control
+│   ├── led_controller.cpp   # Multi-color LED control
+│   └── debug_led.cpp        # Debug-specific LED control
 ├── config/            # Configuration management
 │   ├── apn_settings.h       # Private APN configuration
 │   ├── routes.h             # Route profiles and boundaries
 │   ├── device_config.h      # Device-specific settings
 │   ├── ui_config.h          # UI settings, display configuration, button mappings
-│   └── gpio_config.h        # GPIO pin assignments and expander configuration
+│   ├── gpio_config.h        # GPIO pin assignments and expander configuration
+│   └── debug_config.h       # WiFi Access Point and debug mode configuration
+├── docs/              # Firmware documentation
+│   ├── debug-mode-guide.md     # Complete debug mode documentation
+│   └── debug-api-reference.md  # Python/API interface documentation
 └── tests/             # Unit tests and hardware tests
     ├── test_gps.cpp         # GPS functionality tests
     ├── test_cellular.cpp    # Cellular communication tests
     ├── test_ui.cpp          # Enhanced UI functionality tests
     ├── test_gpio_expander.cpp # GPIO expander tests
+    ├── test_debug_mode.cpp  # Debug mode functionality tests
     └── test_integration.cpp # Full system integration tests
 ```
 
@@ -623,6 +632,311 @@ void testOTAFunctionality() {
 #define TOPIC_FLEET_STATUS "fleet/status/" DEVICE_ID
 #define TOPIC_FLEET_UPDATE_REPORT "fleet/update/report"
 ```
+
+## Debug Mode - WiFi Access Point Data Extraction
+
+The firmware includes a comprehensive debug mode that creates a WiFi Access Point for field data extraction and debugging. This enables technicians to access on-board data without physical connections, supporting both manual browser access and automated Python scripts.
+
+### Debug Mode Overview
+
+**Purpose**: Field-accessible data extraction and system diagnostics
+**Activation**: Hardware trigger (OK+Cancel buttons for 3 seconds) or UI menu
+**Interface**: WiFi Access Point with web server at 192.168.4.1
+**Security**: Daily-rotating passwords and session timeouts
+
+### WiFi Access Point Configuration
+
+```cpp
+// Debug WiFi AP Settings
+SSID: "LOCO-{DEVICE_ID}-DEBUG"    // e.g., "LOCO-001234-DEBUG"
+Password: "{DEVICE_ID}{YYYYMMDD}" // e.g., "00123420250904" (daily rotation)
+IP Address: 192.168.4.1
+Gateway: 192.168.4.1
+Subnet: 255.255.255.0
+Channel: 6 (2.4GHz)
+Max Clients: 4 concurrent connections
+Session Timeout: 30 minutes inactivity
+Auto-Exit: 2 hours maximum duration
+```
+
+### Activation Methods
+
+#### Hardware Activation (Primary)
+1. **Button Combination**: Hold OK+Cancel buttons simultaneously for 3 seconds
+2. **Display Confirmation**: Enhanced UI shows debug mode activation screen
+3. **LED Indication**: System LED changes to blue flashing pattern
+4. **Audio Feedback**: Three beeps confirm debug mode activation
+
+#### UI Menu Activation (Secondary)
+1. Navigate to Main Menu → Settings → Debug Mode
+2. Select "Activate Debug Mode"
+3. Confirm activation on confirmation screen
+4. Debug mode starts with visual and audio feedback
+
+### Web Interface Features
+
+#### Browser Access (http://192.168.4.1)
+- **Landing Page**: Device information, storage statistics, connection status
+- **File Browser**: Hierarchical SD card explorer with download capabilities
+- **Log Viewer**: Real-time log streaming and historical log access
+- **System Status**: Live GPS, cellular, train assignment, and sensor data
+- **Bulk Download**: ZIP archive creation for selected files/folders
+- **Configuration Viewer**: Current device settings (read-only access)
+
+#### REST API Endpoints
+```bash
+# System Information
+GET /api/system/info          # Device info, uptime, version
+GET /api/system/status        # Real-time system status
+GET /api/system/storage       # SD card usage statistics
+
+# File Operations
+GET /api/files                # List all files and directories
+GET /api/files/{path}         # Download specific file
+POST /api/files/archive       # Create ZIP archive of selected files
+GET /api/files/tree           # Complete directory tree structure
+
+# Log Access
+GET /api/logs                 # Available log files
+GET /api/logs/{type}          # Specific log type (system, gps, cellular, train)
+GET /api/logs/stream          # WebSocket for real-time log streaming
+
+# Configuration
+GET /api/config               # Current device configuration (read-only)
+GET /api/config/routes        # Route profiles and boundaries
+GET /api/config/gpio          # GPIO pin assignments and expander status
+```
+
+### SD Card File Organization
+
+Debug mode provides access to organized data structure:
+
+```
+/data/
+├── logs/
+│   ├── system/              # System logs by date (YYYY-MM-DD.log)
+│   ├── gps/                 # GPS tracking data and positioning logs
+│   ├── cellular/            # Cellular connection and network logs
+│   ├── train/               # Train assignment history and workflow logs
+│   └── debug/               # Debug session logs and access history
+├── config/
+│   ├── device.json          # Device configuration backup
+│   ├── routes.json          # Route profile data and boundaries
+│   ├── gpio_state.json      # GPIO and expander configuration
+│   └── calibration.json     # Sensor calibration and offset data
+├── exports/
+│   ├── daily/               # Daily data exports and summaries
+│   └── sessions/            # Debug session data exports
+└── temp/
+    └── debug_archives/      # Temporary ZIP files for bulk downloads
+```
+
+### Python API Integration
+
+```python
+import requests
+import json
+from datetime import datetime
+
+# Connect to debug device
+base_url = "http://192.168.4.1/api"
+
+# Get device information
+response = requests.get(f"{base_url}/system/info")
+device_info = response.json()
+print(f"Device: {device_info['device_id']}")
+print(f"Uptime: {device_info['uptime_hours']} hours")
+
+# Download specific log file
+log_response = requests.get(f"{base_url}/logs/system")
+with open(f"system_log_{datetime.now().strftime('%Y%m%d')}.log", 'wb') as f:
+    f.write(log_response.content)
+
+# Create and download archive of all GPS data
+archive_request = {
+    "paths": ["/data/logs/gps/"],
+    "archive_name": "gps_data_export"
+}
+archive_response = requests.post(f"{base_url}/files/archive", json=archive_request)
+archive_url = archive_response.json()['download_url']
+
+# Download the created archive
+archive_data = requests.get(f"{base_url}{archive_url}")
+with open("gps_data_export.zip", 'wb') as f:
+    f.write(archive_data.content)
+```
+
+### Enhanced UI Integration
+
+Debug mode integrates seamlessly with the existing Enhanced UI system:
+
+#### Debug Mode Status Screen
+```
+┌─────────────────────────────────────┐
+│ 📶 DEBUG MODE ACTIVE                │
+│                                     │
+│ WiFi AP: LOCO-001234-DEBUG          │
+│ Password: 00123420250904            │
+│ IP: 192.168.4.1                    │
+│                                     │
+│ Connected Clients: 1/4              │
+│ Data Downloaded: 127.3 MB          │
+│ Session Time: 15:23 / 120:00       │
+│                                     │
+│ Web: http://192.168.4.1             │
+│                [EXIT]    [STATUS]   │
+└─────────────────────────────────────┘
+```
+
+#### Status LED Integration
+- **System LED**: Blue flashing pattern during debug mode (vs. normal green)
+- **Debug LED**: New LED via GPIO expander (pin 9)
+  - Green solid: WiFi AP active, no clients connected
+  - Orange solid: Client connected, data access in progress
+  - Red flashing: Debug mode error or timeout warning
+
+### Security Features
+
+#### Access Control
+- **Dynamic Passwords**: Daily rotation based on device ID + date
+- **Session Management**: 30-minute inactivity timeout, 2-hour maximum duration
+- **Client Limits**: Maximum 4 concurrent connections
+- **IP Restrictions**: Optional MAC address whitelist for authorized devices
+
+#### Data Protection
+- **Read-Only Access**: No configuration modification via debug interface
+- **Selective Exposure**: Excludes sensitive files (keys, credentials, certificates)
+- **Audit Logging**: All debug sessions and file access logged to `/data/logs/debug/`
+- **Secure Deletion**: Option to securely wipe debug logs after export
+- **Access Verification**: Debug session summary shown on Enhanced UI after exit
+
+
+### Troubleshooting Debug Mode
+
+#### Common Issues and Solutions
+
+**WiFi AP Not Visible**:
+- Verify debug mode activation (check system LED pattern)
+- Ensure WiFi is enabled on connecting device
+- Check for channel conflicts (AP uses channel 6)
+- Verify antenna connections and placement
+
+**Cannot Connect to WiFi AP**:
+- Confirm correct password format: {DEVICE_ID}{YYYYMMDD}
+- Check device limit (maximum 4 concurrent clients)
+- Verify client device WiFi compatibility (2.4GHz only)
+- Try reactivating debug mode to reset AP
+
+**Web Interface Not Loading**:
+- Confirm connection to debug WiFi network
+- Navigate to http://192.168.4.1 (not https)
+- Check client device firewall settings
+- Try different browser or clear cache
+
+**File Downloads Failing**:
+- Verify sufficient storage space on client device
+- Check file permissions and SD card health
+- Monitor session timeout (30-minute limit)
+- Try smaller file selections for bulk downloads
+
+**Debug Mode Won't Activate**:
+- Ensure buttons held for full 3 seconds
+- Check GPIO expander I2C communication
+- Verify Enhanced UI functionality
+- Review system error logs for conflicts
+
+#### Debug Mode Testing
+
+```bash
+# Test debug mode activation
+pio test -e debug-mode-activation
+
+# Test WiFi AP functionality  
+pio test -e debug-wifi-ap
+
+# Test web server endpoints
+pio test -e debug-web-server
+
+# Test file access and downloads
+pio test -e debug-file-operations
+
+# Test security and session management
+pio test -e debug-security
+
+# Full debug mode integration test
+pio test -e debug-mode-full
+```
+
+### Development Integration
+
+Debug mode requires additional PlatformIO libraries:
+
+```bash
+# Install debug mode dependencies
+pio lib install "WiFi"           # ESP32 WiFi library
+pio lib install "WebServer"      # Basic HTTP server
+pio lib install "ESPAsyncWebServer" # Async web server for better performance  
+pio lib install "AsyncTCP"       # TCP library for async server
+pio lib install "ArduinoJson"    # JSON processing (already included)
+```
+
+### Field Usage Workflow
+
+#### Technician Procedure
+1. **Approach Device**: Locate locomotive tracking unit
+2. **Activate Debug Mode**: Hold OK+Cancel buttons for 3 seconds
+3. **Confirm Activation**: Check display for WiFi credentials
+4. **Connect Laptop**: Join "LOCO-{ID}-DEBUG" network with displayed password
+5. **Access Interface**: Navigate to http://192.168.4.1 in browser
+6. **Extract Data**: Download required logs, configuration, or use Python scripts
+7. **Exit Cleanly**: Press EXIT button or wait for auto-timeout
+8. **Verify Completion**: Confirm normal operation resumed
+
+#### Python Script Automation
+```python
+#!/usr/bin/env python3
+"""
+Automated locomotive data extraction script
+Usage: python3 extract_data.py <device_ip> [--logs] [--config] [--all]
+"""
+
+import argparse
+import requests
+import os
+from datetime import datetime
+
+def extract_locomotive_data(device_ip, options):
+    base_url = f"http://{device_ip}/api"
+    
+    # Create timestamped output directory
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_dir = f"locomotive_data_{timestamp}"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    if options.logs or options.all:
+        print("Downloading log files...")
+        download_logs(base_url, output_dir)
+    
+    if options.config or options.all:
+        print("Downloading configuration...")
+        download_config(base_url, output_dir)
+    
+    print(f"Data extraction complete. Files saved to: {output_dir}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Extract locomotive data via debug mode")
+    parser.add_argument("device_ip", default="192.168.4.1", help="Device IP address")
+    parser.add_argument("--logs", action="store_true", help="Download log files")
+    parser.add_argument("--config", action="store_true", help="Download configuration")
+    parser.add_argument("--all", action="store_true", help="Download everything")
+    
+    args = parser.parse_args()
+    extract_locomotive_data(args.device_ip, args)
+```
+
+---
+
+*For complete debug mode specifications, see [debug-mode-guide.md](debug-mode-guide.md) and [debug-api-reference.md](debug-api-reference.md).*
 
 ---
 
