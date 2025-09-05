@@ -16,7 +16,7 @@
 - **Maintenance delays** from poor location data
 
 ### Proposed Solution
-Deploy GPS tracking units based on **LILYGO T-SIM7600G-H** platform with enhanced user interface, cellular connectivity, train management integration, and optional expansion modules for areas with poor coverage.
+Deploy GPS tracking units based on **LILYGO T-A7670G R2 Q425** platform with enhanced user interface, cellular connectivity, train management integration, and optional expansion modules for areas with poor coverage.
 
 ### Key Operational Improvements
 | Benefit | Expected Improvement | Measurement |
@@ -33,7 +33,7 @@ Deploy GPS tracking units based on **LILYGO T-SIM7600G-H** platform with enhance
 ### System Architecture
 ```mermaid
 graph LR
-    A[Locomotive Units<br/>T-SIM7600G-H] -->|Private APN| B[Cellular Network<br/>MTN/Vodacom]
+    A[Locomotive Units<br/>T-A7670G R2 Q425] -->|Private APN| B[Cellular Network<br/>MTN/Vodacom]
     B --> C[Company Network<br/>Secure Tunnel]
     C --> D[MS SQL Server<br/>Spatial Database]
     C --> E[Dashboard<br/>Real-time Monitoring]
@@ -43,12 +43,12 @@ graph LR
 ### Hardware Configuration
 | Component | Base Unit | Optional Modules |
 |-----------|-----------|------------------|
-| **Platform** | LILYGO T-SIM7600G-H | Expansion Board |
+| **Platform** | LILYGO T-A7670G R2 Q425 | Expansion Board |
 | **Enhanced UI** | 2.8" Color TFT, 4-button nav, status LEDs | - |
-| **Communication** | 4G/3G/2G Cellular | LoRa 868MHz / Satellite |
+| **Communication** | LTE CAT-1/3G/2G Cellular | LoRa 868MHz / Satellite |
 | **GPS** | Multi-GNSS Integrated | - |
 | **Power** | 110V Railway + 48hr Battery | - |
-| **Cost** | R3,650 (includes enhanced UI) | R300-3,250 per module |
+| **Cost** | R3,375 (includes enhanced UI) | R300-3,250 per module |
 
 ### Coverage Strategy
 ```mermaid
@@ -65,18 +65,18 @@ pie title "Fleet Communication Mix (100 Units)"
 ### Capital Expenditure (CAPEX)
 ```mermaid
 graph TD
-    A[Total CAPEX: R595,000] --> B[Hardware: R365,000<br/>61.3%]
-    A --> C[Development: R180,000<br/>30.3%]
-    A --> D[Installation: R50,000<br/>8.4%]
+    A[Total CAPEX: R565,000] --> B[Hardware: R337,500<br/>59.7%]
+    A --> C[Development: R180,000<br/>31.9%]
+    A --> D[Installation: R47,500<br/>8.4%]
 ```
 
 ### Detailed Cost Breakdown
 | Category | Component | Cost |
 |----------|-----------|------|
-| **Hardware** | 100x Base Units @ R3,675 (includes enhanced UI + GPIO expander) | R367,500 |
+| **Hardware** | 100x Base Units @ R3,375 (includes enhanced UI + GPIO expander) | R337,500 |
 | **Development** | Firmware, Backend & Train Management Integration | R180,000 |
-| **Installation** | Labor & Testing | R50,000 |
-| **Total CAPEX** | | **R597,500** |
+| **Installation** | Labor & Testing | R47,500 |
+| **Total CAPEX** | | **R565,000** |
 
 ### Operating Expenditure (OPEX)
 | Service | Monthly Cost | Annual Cost |
@@ -89,7 +89,7 @@ graph TD
 ### 5-Year Total Cost of Ownership
 ```mermaid
 graph LR
-    A[Year 1<br/>R665,000] --> B[Year 2<br/>R67,500]
+    A[Year 1<br/>R632,500] --> B[Year 2<br/>R67,500]
     B --> C[Year 3<br/>R67,500]
     C --> D[Year 4<br/>R67,500]
     D --> E[Year 5<br/>R67,500]
@@ -101,7 +101,7 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure: R935,000**
+**Total 5-Year Expenditure: R902,500**
 
 ---
 
@@ -128,7 +128,7 @@ gantt
 ### Deployment Milestones
 | Phase | Timeline | Units | Capability | Budget |
 |-------|----------|-------|------------|--------|
-| **Phase 1** | Months 1-6 | 100 | Cellular tracking + train management operational | R597,500 |
+| **Phase 1** | Months 1-6 | 100 | Cellular tracking + train management operational | R565,000 |
 | **Phase 2** | Months 7-12 | +30 modules | Depot cost optimization | R150,000 |
 | **Phase 3** | Months 13-18 | +5 modules | Complete coverage | R75,000 |
 
@@ -166,11 +166,24 @@ graph TD
 ## 6. Key Success Factors
 
 ### Technical Advantages
-✅ **Proven Technology** - LILYGO T-SIM7600G-H widely deployed  
+✅ **Cost-Optimized Platform** - LILYGO T-A7670G R2 Q425 platform  
+✅ **Power Efficient** - 65% power reduction vs alternatives (48-hour battery life)
+✅ **Procurement Flexibility** - T-SIM7600G-H available as drop-in replacement
 ✅ **Immediate Deployment** - No infrastructure development required  
 ✅ **Modular Design** - Add capabilities only where needed  
 ✅ **Secure Connectivity** - Private APN to company network  
-✅ **Future-Proof** - Expandable for new technologies  
+✅ **Future-Proof** - Expandable for new technologies
+
+### Hardware Flexibility
+**Primary Platform**: T-A7670G R2 Q425 (ESP32-WROVER-E + A7670G + L76K GPS)
+- Cost effective at R3,375 per unit
+- Better power efficiency (0.26W vs 0.65W idle)
+- Direct battery operation capability
+
+**Backup Platform**: T-SIM7600G-H (ESP32-WROVER-B + SIM7600G + integrated GPS)  
+- Proven track record and extensive documentation
+- Available if T-A7670G supply issues arise
+- Requires minor firmware modifications for drop-in replacement  
 
 ### Operational Benefits
 | Metric | Current State | Target State | Improvement |
@@ -188,8 +201,8 @@ graph TD
 | Criteria | Selected Solution | Alternative 1 | Alternative 2 |
 |----------|------------------|---------------|---------------|
 | **Approach** | Cellular + Modular | Fixed Hybrid | Full Modular |
-| **Initial Cost** | R595K | R1,013K | R542K |
-| **5-Year Total Cost** | R932K | R1,343K | R1,035K |
+| **Initial Cost** | R565K | R1,013K | R542K |
+| **5-Year Total Cost** | R902.5K | R1,343K | R1,035K |
 | **Deployment Time** | 6 months | 18 months | 12 months |
 | **Flexibility** | High | Low | Very High |
 | **Complexity** | Low | Medium | High |
@@ -198,7 +211,7 @@ graph TD
 ### Cost Efficiency Analysis
 ```mermaid
 graph TD
-    A[Solution Options] --> B[Selected: R932K<br/>Cellular + Train Mgmt]
+    A[Solution Options] --> B[Selected: R902.5K<br/>T-A7670G + Train Mgmt]
     A --> C[Alternative 1: R1,343K<br/>Fixed Hybrid]
     A --> D[Alternative 2: R1,035K<br/>Full Modular]
     
@@ -212,9 +225,9 @@ graph TD
 ## 8. Recommendations
 
 ### Immediate Actions (Month 1)
-1. **Approve budget** allocation of R597,500 CAPEX
+1. **Approve budget** allocation of R565,000 CAPEX
 2. **Engage network provider** for private APN setup
-3. **Order pilot hardware** (10 units) for testing
+3. **Order pilot hardware** (10 T-A7670G units) for testing
 4. **Assign project team** with IT and operations representatives
 5. **Begin database setup** with MS SQL Server spatial extensions
 
@@ -243,17 +256,17 @@ graph LR
 ### Total Project Expenditure
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R597,500 | R67,500 | R665,000 |
-| **Year 2** | - | R67,500 | R732,500 |
-| **Year 3** | - | R67,500 | R800,000 |
-| **Year 4** | - | R67,500 | R867,500 |
-| **Year 5** | - | R67,500 | R935,000 |
+| **Year 1** | R565,000 | R67,500 | R632,500 |
+| **Year 2** | - | R67,500 | R700,000 |
+| **Year 3** | - | R67,500 | R767,500 |
+| **Year 4** | - | R67,500 | R835,000 |
+| **Year 5** | - | R67,500 | R902,500 |
 
 ### Budget Allocation by Category
 ```mermaid
 pie title "5-Year Cost Distribution"
-    "Initial Hardware" : 367.5
-    "Development & Integration" : 230
+    "Initial Hardware" : 337.5
+    "Development & Integration" : 227.5  
     "Operating Costs (5 years)" : 337.5
 ```
 
@@ -267,7 +280,7 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 | Factor | Assessment |
 |--------|------------|
 | **Strategic Alignment** | ✅ Supports fleet modernization objectives |
-| **Budget Requirements** | ✅ R597.5K initial + R67.5K annual |
+| **Budget Requirements** | ✅ R565K initial + R67.5K annual |
 | **Technical Risk** | ✅ Low - proven hardware platform |
 | **Operational Impact** | ✅ Immediate visibility improvement |
 | **Scalability** | ✅ Easily expanded to 1000+ units |

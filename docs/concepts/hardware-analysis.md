@@ -32,14 +32,14 @@ Both platforms **support comprehensive OTA updates**, contrary to common assumpt
 
 ### Hardware Characteristics
 
-**LILYGO T-SIM7600G-H Integrated Solution**
-- **MCU**: ESP32-WROVER dual-core @ 240MHz
-- **Cellular**: SIM7600G (4G LTE Cat-4, 3G, 2G)
-- **GPS**: Integrated GNSS (GPS, GLONASS, BeiDou, Galileo)
+**LILYGO T-A7670G R2 Q425 Integrated Solution**
+- **MCU**: ESP32-WROVER-E dual-core @ 240MHz
+- **Cellular**: A7670G (LTE CAT-1, 3G, 2G)  
+- **GPS**: L76K GPS module (GPS, GLONASS, BeiDou, Galileo)
 - **Memory**: 4MB Flash, 8MB PSRAM
 - **Connectivity**: WiFi 802.11b/g/n, Bluetooth 4.2
 - **I/O**: 36 GPIO pins, SPI, I2C, UART interfaces
-- **Power**: 3.3V operation, low-power sleep modes
+- **Power**: 3.4-4.2V operation, ultra-low-power sleep modes
 
 ### ESP32 OTA Capabilities (Comprehensive)
 
@@ -224,12 +224,12 @@ class RailwayPiUpdater:
 
 ## Power Consumption Analysis
 
-### ESP32 Power Profile
-- **Idle State**: 130mA @ 5V = 650mW (includes enhanced UI + GPIO expander)
-- **Active Tracking**: 180mA @ 5V = 900mW (includes display backlight)
-- **Sleep Mode**: 50mA @ 5V = 250mW (display off, expander standby)
-- **Deep Sleep**: 5mA @ 5V = 25mW (display sleep mode)
-- **38-hour Battery Backup**: Achievable with 10Ah battery (with enhanced UI)
+### ESP32 Power Profile (T-A7670G)
+- **Idle State**: 70mA @ 3.7V = 260mW (includes enhanced UI + GPIO expander)
+- **Active Tracking**: 180mA @ 3.7V = 670mW (includes display backlight)
+- **Sleep Mode**: 30mA @ 3.7V = 110mW (display off, expander standby)
+- **Deep Sleep**: 3mA @ 3.7V = 11mW (display sleep mode)
+- **48-hour Battery Backup**: Achievable with 10Ah battery (with enhanced UI)
 
 ### Raspberry Pi Power Profile
 - **Idle State**: 150mA @ 5V = 750mW
@@ -240,11 +240,11 @@ class RailwayPiUpdater:
 
 ### Battery Backup Implications
 
-**ESP32 Solution**:
-- 10Ah battery provides 38+ hours backup (with enhanced UI active)
-- Compact battery housing fits locomotive installation requirements
-- Lower charging system complexity
-- 60+ hours backup with display auto-off after inactivity
+**ESP32 Solution (T-A7670G)**:
+- 10Ah battery provides 48+ hours backup (with enhanced UI active)
+- Compact battery housing fits locomotive installation requirements  
+- Lower charging system complexity with direct battery operation
+- 72+ hours backup with display auto-off after inactivity
 
 **Raspberry Pi Solution**:
 - 20Ah+ battery system required for 48-hour backup
@@ -310,15 +310,17 @@ class RailwayPiUpdater:
 
 ## Final Platform Recommendation
 
-### Recommended: ESP32 (LILYGO T-SIM7600G-H)
+### Recommended: ESP32 (LILYGO T-A7670G R2 Q425)
 
 **Primary Reasons**:
-1. **Power Efficiency**: Critical for 48-hour battery backup requirement
-2. **Reliability**: Proven industrial-grade platform for harsh environments
-3. **Cost Effectiveness**: Lower total system cost and complexity
+1. **Power Efficiency**: Critical for 48-hour battery backup requirement (0.26W idle)
+2. **Cost Effectiveness**: Optimized unit cost at R3,375 including enhanced UI
+3. **Reliability**: Industrial-grade platform for harsh environments
 4. **OTA Capability**: Comprehensive update system suitable for fleet deployment
 5. **Development Speed**: Faster time to production deployment
 6. **Boot Performance**: Instant startup for rapid recovery
+
+**Alternative Option**: LILYGO T-SIM7600G-H available as drop-in replacement (+R300 per unit, higher power consumption) if T-A7670G procurement becomes challenging.
 
 ### When to Consider Raspberry Pi
 

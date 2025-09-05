@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-This document provides comprehensive technical documentation for implementing a GPS tracking system using the LILYGO T-SIM7600G-H as the base platform with enhanced user interface, train management integration, and optional expansion modules. The solution provides immediate cellular connectivity with complete train identification capabilities and the flexibility to add LoRa or satellite communication for areas with poor cellular coverage.
+This document provides comprehensive technical documentation for implementing a GPS tracking system using the LILYGO T-A7670G R2 Q425 as the base platform with enhanced user interface, train management integration, and optional expansion modules. The solution provides immediate cellular connectivity with complete train identification capabilities and the flexibility to add LoRa or satellite communication for areas with poor cellular coverage.
 
 **Key Innovation:** Unlike a fixed hybrid system, this approach starts with proven cellular technology, adds complete train management integration with existing Transnet systems (ITP, TMS, VDU), and includes expansion modules only where operationally required, optimizing both deployment speed and total cost of ownership.
 
@@ -71,14 +71,14 @@ Priority 4: Store & Forward (buffer until connection available)
 
 | Component | Model | Unit Price (ZAR) | Quantity | Total | Purpose |
 |-----------|--------|------------------|----------|--------|----------|
-| **Main Board** | LILYGO T-SIM7600G-H | R1,500 | 1 | R1,500 | ESP32 + 4G LTE + GPS |
+| **Main Board** | LILYGO T-A7670G R2 Q425 | R1,200 | 1 | R1,200 | ESP32-WROVER-E + LTE CAT-1 + L76K GPS |
 | **TFT Display** | 2.8" Color TFT 320x240 | R350 | 1 | R350 | Enhanced UI display |
 | **Button Assembly** | 4-button navigation pad | R80 | 1 | R80 | User interface control |
 | **Status LEDs** | Multi-color LEDs x4 | R50 | 1 | R50 | Status indicators |
 | **GPIO Expander** | MCP23017 I2C 16-port | R25 | 1 | R25 | Additional GPIO capacity |
 | **UI Wiring Harness** | Connection cables | R50 | 1 | R50 | UI integration |
-| **External Antenna** | 4G/GPS Combo Antenna | R200 | 1 | R200 | Enhanced reception |
-| **Power Supply** | Mean Well DDR-30G-5 | R350 | 1 | R350 | 9-36V to 5V DC-DC |
+| **External Antenna** | LTE/GPS Combo Antenna | R200 | 1 | R200 | Enhanced reception |
+| **Power Supply** | Simplified/Optional DC-DC | R150 | 1 | R150 | Direct battery or 3.7V to 5V |
 | **Backup Battery** | 18650 Li-ion x2 | R120 | 1 | R120 | 48-hour backup |
 | **Battery Management** | TP4056 + Protection | R50 | 1 | R50 | Charging circuit |
 | **Storage** | 32GB Industrial SD | R150 | 1 | R150 | Local data logging |
@@ -86,7 +86,7 @@ Priority 4: Store & Forward (buffer until connection available)
 | **Expansion Board** | Custom PCB with UI | R250 | 1 | R250 | Module interface + UI controller |
 | **Connectors** | M12, terminal blocks | R100 | 1 | R100 | Robust connections |
 | **Surge Protection** | TVS diodes, filters | R100 | 1 | R100 | Railway EMC |
-| **TOTAL BASE** | | | | **R3,675** | **Complete base unit (includes enhanced UI + GPIO expander)** |
+| **TOTAL BASE** | | | | **R3,375** | **Complete base unit (includes enhanced UI + GPIO expander)** |
 
 ### 2.2 Expansion Modules
 
@@ -106,14 +106,27 @@ Priority 4: Store & Forward (buffer until connection available)
 | **Interface** | UART connection | R50 | Connection to main board |
 | **Total** | | **R3,250** | Satellite capability |
 
-### 2.3 Pin Assignments
+### 2.3 Platform Alternative
+
+**LILYGO T-SIM7600G-H** can be used as a drop-in replacement for the T-A7670G:
+
+#### High-Level Modification Requirements for T-SIM7600G-H
+- **Cellular Interface**: Change AT command set from A7670G to SIM7600G commands
+- **GPS Handling**: Use integrated GPS instead of separate L76K module  
+- **Power Supply**: Add DC-DC converter for 5V operation instead of direct battery
+- **Pin Mapping**: Update GPIO assignments for different module interface
+- **Firmware Libraries**: Switch from A7670G to SIM7600G driver libraries
+- **Cost Impact**: +R300 per unit, -65% power efficiency
+- **BOM Changes**: Different main board (R1,500 vs R1,200), power supply (R350 vs R150)
+
+### 2.4 Pin Assignments
 
 ```cpp
-// T-SIM7600G-H Pin Assignments with GPIO Expander Integration
+// T-A7670G R2 Q425 Pin Assignments with GPIO Expander Integration
 
 // Built-in peripherals (already connected internally)
-// GPS: Connected via UART to SIM7600G
-// Cellular: Integrated in SIM7600G
+// GPS: L76K GPS module via dedicated UART
+// Cellular: A7670G module communication
 // SD Card: GPIO5 (CS), GPIO18 (CLK), GPIO19 (MISO), GPIO23 (MOSI)
 
 // Enhanced UI - Direct ESP32 GPIO (high-speed requirements)
@@ -831,7 +844,7 @@ END
 - Dashboard deployment
 - Staff training
 
-**Budget:** R595,000 (hardware + development + train management integration)
+**Budget:** R565,000 (hardware + development + train management integration)
 
 ### 6.2 Phase 2: LoRa Extension (Months 7-12)
 
@@ -1183,11 +1196,10 @@ Debug mode supports various maintenance scenarios:
 **Initial Investment:**
 | Item | Cost |
 |------|------|
-| Base hardware (100 units) | R365,000 |
+| Base hardware (100 units) | R337,500 |
 | Development & integration | R180,000 |
-| Private APN setup | R20,000 |
-| Installation | R50,000 |
-| **Total CAPEX** | **R595,000** |
+| Installation | R47,500 |
+| **Total CAPEX** | **R565,000** |
 
 **Monthly Operating Costs:**
 | Service | Units | Cost/Unit | Total |

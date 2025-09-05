@@ -1,6 +1,6 @@
 # Firmware
 
-ESP32-based firmware for the LILYGO T-SIM7600G-H locomotive tracking system.
+ESP32-based firmware for the LILYGO T-A7670G R2 Q425 locomotive tracking system.
 
 ## Architecture
 
@@ -60,14 +60,14 @@ firmware/
 
 ## Hardware Platform
 
-- **Board**: LILYGO T-SIM7600G-H
-- **MCU**: ESP32-WROVER (240MHz dual-core)
-- **Cellular**: SIM7600G (4G LTE Cat-4, 3G, 2G)
-- **GPS**: Integrated GNSS (GPS, GLONASS, BeiDou, Galileo)
+- **Board**: LILYGO T-A7670G R2 Q425
+- **MCU**: ESP32-WROVER-E (240MHz dual-core)
+- **Cellular**: A7670G (LTE CAT-1, 3G, 2G)
+- **GPS**: L76K GPS module (GPS, GLONASS, BeiDou, Galileo)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **GPIO Expander**: MCP23017 I2C 16-port expander for UI components
 - **Storage**: 32GB MicroSD card
-- **Power**: 110V railway power with battery backup (0.65W idle, 7.7W peak including UI + expander)
+- **Power**: Railway power with battery backup (0.26W idle, 3.7W peak including UI + expander - 65% power reduction)
 
 ## Key Features
 
@@ -118,7 +118,7 @@ pio platform install espressif32
 ```bash
 cd firmware/core
 pio init --board esp32dev
-pio lib install "SIM7600"
+pio lib install "A7670G"
 pio lib install "TinyGPSPlus"
 pio lib install "ArduinoJson"
 pio lib install "PubSubClient"
@@ -142,6 +142,7 @@ Edit `config/apn_settings.h`:
 const char* APN = "transnet.m2m";
 const char* APN_USER = "railway";
 const char* APN_PASS = "your_password";
+// A7670G uses same APN configuration format
 ```
 
 ### Route Profiles

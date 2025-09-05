@@ -5,7 +5,7 @@
 
 A comprehensive GPS tracking system for locomotive fleet management across the South African rail network. This solution provides real-time location data through cellular connectivity with modular expansion capabilities for LoRa and satellite communication, **plus complete train management integration** with existing Transnet systems (ITP, TMS, VDU) to solve both locomotive tracking and train identification challenges.
 
-**Solution:** LILYGO T-SIM7600G-H platform with enhanced user interface, cellular-first approach, optional expansion modules, and direct integration with Transnet's train management ecosystem.
+**Solution:** LILYGO T-A7670G R2 Q425 platform with enhanced user interface, cellular-first approach, optional expansion modules, and direct integration with Transnet's train management ecosystem.
 
 ## Key Features
 
@@ -17,13 +17,13 @@ A comprehensive GPS tracking system for locomotive fleet management across the S
 - **Real-time Tracking** - 1-minute update intervals on main routes
 - **Private Network Access** - APN configuration for secure company network
 - **Fleet Management** - Centralized monitoring and control of all tracking units
-- **Cost-Optimized** - R3,675 base unit with enhanced UI + GPIO expander, optional modules as needed
+- **Cost-Optimized** - R3,375 base unit with enhanced UI + GPIO expander, optional modules as needed
 - **TCO Workflow Integration** - Seamless train number assignment and confirmation process
 - **Future-Proof** - Expandable design accommodates new technologies
 
 ## Quick Start
 
-1. **Hardware**: LILYGO T-SIM7600G-H development board
+1. **Hardware**: LILYGO T-A7670G R2 Q425 development board
 2. **Network**: Configure private APN with cellular provider
 3. **Database**: MS SQL Server with spatial extensions  
 4. **Deploy**: Install on test locomotives for pilot validation
@@ -78,11 +78,11 @@ locomotive-tracking-unit/
 ## Technology Stack
 
 ### Hardware
-- **Core Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
+- **Core Platform**: LILYGO T-A7670G R2 Q425 (ESP32-WROVER-E + LTE CAT-1 + L76K GPS)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI)
 - **Expansion**: Optional LoRa and satellite communication modules
-- **Power**: 110V railway power with 38-hour battery backup (0.65W idle, 7.7W peak including UI + expander)
+- **Power**: Railway power with 48-hour battery backup (0.26W idle, 3.7W peak including UI + expander - 65% power reduction)
 - **Environment**: IP67 rated, -20°C to +70°C operation
 
 ### Software  
@@ -146,8 +146,8 @@ The system includes comprehensive Over-the-Air update capabilities:
 ### Hardware Setup
 
 1. **Acquire Hardware**
-   - LILYGO T-SIM7600G-H development board
-   - External GPS/4G antenna
+   - LILYGO T-A7670G R2 Q425 development board  
+   - External GPS/LTE antenna
    - Power supply and enclosure
 
 2. **Configure Network**
@@ -163,10 +163,10 @@ The system includes comprehensive Over-the-Air update capabilities:
 ## Cost Summary
 
 ### Initial Investment (100 Units)
-- Base Hardware: R367,500 (100 × R3,675, includes enhanced UI + GPIO expander)
+- Base Hardware: R337,500 (100 × R3,375, includes enhanced UI + GPIO expander)
 - Development & Integration: R180,000 (includes train management integration)
-- Installation: R50,000
-- **Total CAPEX: R597,500**
+- Installation: R47,500
+- **Total CAPEX: R565,000**
 
 ### Monthly Operating Costs (100 Units)
 - Cellular Connectivity: R4,250 (85 units)
@@ -196,6 +196,15 @@ This project evolved from comprehensive analysis of five communication concepts 
 - **[Concept Analysis](docs/concepts/concept-analysis.md)** - Five communication approaches evaluated
 - **[Decision Rationale](docs/concepts/decision-rationale.md)** - Why cellular-base modular system was chosen
 - **[Hardware Analysis](docs/concepts/hardware-analysis.md)** - ESP32 vs Raspberry Pi platform comparison
+
+## Hardware Flexibility
+
+**Primary Platform**: LILYGO T-A7670G R2 Q425
+- Cost optimized platform
+- Power efficient (65% reduction vs alternatives)
+- Direct battery operation capability
+
+**Alternative Platform**: LILYGO T-SIM7600G-H available as drop-in replacement if T-A7670G procurement becomes challenging. Requires minor firmware modifications but supports identical functionality.
 
 ## Support
 

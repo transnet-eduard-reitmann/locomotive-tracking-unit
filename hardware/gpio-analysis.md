@@ -1,8 +1,8 @@
-# GPIO Pin Analysis - LILYGO T-SIM7600G-H Enhanced UI Integration
+# GPIO Pin Analysis - LILYGO T-A7670G R2 Q425 Enhanced UI Integration
 
 ## Executive Summary
 
-This document provides a comprehensive analysis of GPIO pin requirements for integrating enhanced UI components (2.8" TFT display, 4-button navigation, multi-color status LEDs) with the LILYGO T-SIM7600G-H platform. The analysis demonstrates that **a GPIO expander is mandatory** for implementing the complete enhanced UI functionality.
+This document provides a comprehensive analysis of GPIO pin requirements for integrating enhanced UI components (2.8" TFT display, 4-button navigation, multi-color status LEDs) with the LILYGO T-A7670G R2 Q425 platform. The analysis demonstrates that **a GPIO expander is mandatory** for implementing the complete enhanced UI functionality.
 
 ## ESP32 GPIO Pin Inventory
 
@@ -31,13 +31,13 @@ GPIO34, GPIO35, GPIO36, GPIO39  // 4 pins (ADC only, no internal pull-up)
 VCC, GND, EN (Reset)  // Not available for general use
 ```
 
-### LILYGO T-SIM7600G-H Pre-allocated Pins
+### LILYGO T-A7670G R2 Q425 Pre-allocated Pins
 
-#### Internal SIM7600G Module
+#### Internal A7670G Module
 ```cpp
-// UART communication to SIM7600G modem (internal)
+// UART communication to A7670G modem (internal)
 // Specific pins not exposed but uses internal ESP32 UART
-// GPS data received via same interface
+// L76K GPS module uses separate dedicated UART
 ```
 
 #### SD Card Interface (Pre-wired)
@@ -413,6 +413,24 @@ The MCP23017 GPIO expander is **mandatory** for implementing the enhanced UI fun
 - **Operational Value**: Essential for complete solution
 
 The GPIO expander transforms a GPIO-limited platform into a capable enhanced UI system, enabling the complete train management functionality that differentiates this solution from basic tracking systems.
+
+## T-SIM7600G-H GPIO Differences
+
+**LILYGO T-SIM7600G-H** can be used as an alternative platform with the following GPIO considerations:
+
+### Key GPIO Mapping Changes
+- **Cellular Module**: SIM7600G uses same ESP32 UART but different AT command interface
+- **GPS Handling**: Uses integrated GPS instead of separate L76K module UART pins
+- **Power Supply**: Requires 5V operation, affecting power management GPIO
+- **Module Interface**: Slightly different pinout for expansion module connections
+
+### Compatibility Assessment
+- **Enhanced UI Components**: Identical GPIO requirements and expander usage
+- **Expansion Modules**: Same SPI/UART interfaces, compatible connections  
+- **Development Complexity**: Minor firmware changes for AT commands and GPS handling
+- **Cost Impact**: +R300 per unit vs T-A7670G platform
+
+The GPIO expander design ensures both platforms support identical enhanced UI functionality with minimal modification requirements.
 
 ---
 

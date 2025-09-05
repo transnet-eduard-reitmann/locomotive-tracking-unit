@@ -4,7 +4,7 @@ Hardware designs and specifications for the locomotive GPS tracking system.
 
 ## Overview
 
-The hardware is built around the LILYGO T-SIM7600G-H platform, providing integrated ESP32 processing, 4G cellular communication, and GPS positioning in a single development board.
+The hardware is built around the LILYGO T-A7670G R2 Q425 platform, providing integrated ESP32 processing, LTE CAT-1 cellular communication, and GPS positioning in a single development board.
 
 ## Directory Structure
 
@@ -32,18 +32,18 @@ hardware/
 ## Base Unit Specifications
 
 ### Core Components
-- **Main Board**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS)
+- **Main Board**: LILYGO T-A7670G R2 Q425 (ESP32-WROVER-E + LTE CAT-1 + L76K GPS)
 - **Enhanced UI**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI)
-- **Unit Price**: R3,675 (includes enhanced UI components + GPIO expander)
+- **Unit Price**: R3,375 (includes enhanced UI components + GPIO expander)
 - **Dimensions**: 120mm × 90mm × 25mm (increased for UI integration)
 
 ### Power System
-- **Input**: 110V DC railway power
-- **Power Supply**: Mean Well DDR-30G-5 (5V/6A output) - upgraded for UI power requirements
-- **Backup Battery**: 2× 18650 Li-ion (7.4V, 6800mAh)
-- **Battery Life**: 38 hours continuous operation (with enhanced UI active)
-- **Power Consumption**: 0.65W idle (including UI + GPIO expander), 7.7W peak transmission
+- **Input**: 110V DC railway power or direct battery (3.4-4.2V)
+- **Power Supply**: Simplified design - optional DC-DC converter or direct battery operation
+- **Backup Battery**: 2× 18650 Li-ion (7.4V, 6800mAh) with built-in battery holder
+- **Battery Life**: 48 hours continuous operation (with enhanced UI active - 65% improvement)
+- **Power Consumption**: 0.26W idle (including UI + GPIO expander), 3.7W peak transmission
 
 ### Environmental Protection
 - **Enclosure Rating**: IP67 (dust/water resistant)
@@ -65,14 +65,14 @@ hardware/
 
 | Component | Model | Quantity | Unit Price (ZAR) | Total |
 |-----------|--------|----------|------------------|-------|
-| Main Board | LILYGO T-SIM7600G-H | 1 | R1,500 | R1,500 |
+| Main Board | LILYGO T-A7670G R2 Q425 | 1 | R1,200 | R1,200 |
 | TFT Display | 2.8" Color TFT 320x240 | 1 | R350 | R350 |
 | Button Assembly | 4-button navigation pad | 1 | R80 | R80 |
 | Status LEDs | Multi-color LEDs x4 | 1 | R50 | R50 |
 | GPIO Expander | MCP23017 I2C 16-port | 1 | R25 | R25 |
 | Wiring Harness | UI connection cables | 1 | R50 | R50 |
-| External Antenna | 4G/GPS Combo Antenna | 1 | R200 | R200 |
-| Power Supply | Mean Well DDR-30G-5 | 1 | R350 | R350 |
+| External Antenna | LTE/GPS Combo Antenna | 1 | R200 | R200 |
+| Power Supply | Simplified/Optional DC-DC | 1 | R150 | R150 |
 | Backup Battery | 18650 Li-ion x2 + BMS | 1 | R120 | R120 |
 | Storage | 32GB Industrial SD | 1 | R150 | R150 |
 | Enclosure | IP67 Railway Box (larger) | 1 | R450 | R450 |
@@ -80,7 +80,7 @@ hardware/
 | Connectors | M12, terminal blocks | 1 | R100 | R100 |
 | Protection | TVS diodes, filters | 1 | R100 | R100 |
 | Assembly | Labor and testing | 1 | R100 | R100 |
-| **TOTAL** | | | | **R3,675** |
+| **TOTAL** | | | | **R3,375** |
 
 ## Expansion Modules
 
@@ -255,7 +255,7 @@ The ESP32 flash memory is partitioned to support dual-boot OTA updates:
 ## Cost Analysis
 
 ### Unit Economics (100+ units)
-- **Base Unit**: R3,675 per unit (includes enhanced UI + GPIO expander)
+- **Base Unit**: R3,375 per unit (includes enhanced UI + GPIO expander)
 - **LoRa Module**: +R250 per unit (optional)
 - **Satellite Module**: +R3,200-4,850 per unit (optional)
 - **Installation**: R500 per unit
@@ -264,6 +264,26 @@ The ESP32 flash memory is partitioned to support dual-boot OTA updates:
 - **25-99 units**: Standard pricing
 - **100-499 units**: 10% discount
 - **500+ units**: 15% discount + design optimization
+
+## Alternative Platform (T-SIM7600G-H)
+
+**LILYGO T-SIM7600G-H** can serve as a drop-in replacement if T-A7670G procurement becomes challenging:
+
+### Key Differences from T-A7670G
+- **Cellular Module**: SIM7600G (CAT-4) vs A7670G (CAT-1)
+- **GPS**: Integrated GPS vs separate L76K module  
+- **Processor**: ESP32-WROVER-B vs ESP32-WROVER-E
+- **Power**: 5V operation vs 3.4-4.2V direct battery
+- **Cost Impact**: +R300 per unit (+R30,000 for 100 units)
+- **Power Consumption**: 65% higher (0.65W vs 0.26W idle)
+
+### Required Modifications
+- **Power Supply**: Add DC-DC converter for 5V operation
+- **Firmware**: Update cellular AT commands and GPS handling
+- **BOM Changes**: Different main board price and power components
+- **Libraries**: Replace A7670G drivers with SIM7600G equivalents
+
+Both platforms support identical functionality including enhanced UI, train management integration, OTA updates, and modular expansion capabilities.
 
 ---
 

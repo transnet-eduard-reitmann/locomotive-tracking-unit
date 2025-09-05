@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines the complete technical specifications for the enhanced user interface implementation on the LILYGO T-SIM7600G-H locomotive tracking system. The enhanced UI enables train assignment workflows, system status monitoring, and operator interaction through a 2.8" color TFT display with 4-button navigation.
+This document defines the complete technical specifications for the enhanced user interface implementation on the LILYGO T-A7670G R2 Q425 locomotive tracking system. The enhanced UI enables train assignment workflows, system status monitoring, and operator interaction through a 2.8" color TFT display with 4-button navigation.
 
 ## Hardware Specifications
 
