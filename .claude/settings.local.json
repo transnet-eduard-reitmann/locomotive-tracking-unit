@@ -10,7 +10,8 @@
       "Bash(grep:*)",
       "Bash(git rm:*)",
       "Bash(python -c \"\nimport docx\nimport os\n\n# Check what specification files exist\nspec_files = []\nfor file in os.listdir(''./docs/user-specifications/''):\n    if file.endswith(''.docx''):\n        spec_files.append(file)\n        \nprint(''Found specification files:'')\nfor file in spec_files:\n    print(f''  - {file}'')\n\")",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []
