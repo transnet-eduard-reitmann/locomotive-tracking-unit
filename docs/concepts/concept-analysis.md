@@ -7,13 +7,13 @@ This document presents the five core communication concepts evaluated for South 
 ## Concept 1: Cellular-Only Communication
 
 ### Approach
-Straightforward implementation using LILYGO T-SIM7600G-H with 4G LTE communication, providing real-time location data through established cellular networks.
+Straightforward implementation using LILYGO T-A7670G R2 Q425 with LTE CAT-1 communication, providing real-time location data through established cellular networks.
 
 ### Key Characteristics
-- **Hardware**: LILYGO T-SIM7600G-H integrated board
+- **Hardware**: LILYGO T-A7670G R2 Q425 integrated board
 - **Communication**: 4G LTE primary, 3G/2G fallback
 - **Coverage**: 99%+ across SA rail network using multi-carrier approach
-- **Cost Structure**: R3,675/unit (includes enhanced UI + GPIO expander) + R50/month operational
+- **Cost Structure**: R3,375/unit (includes enhanced UI + GPIO expander) + R50/month operational
 - **Deployment**: 15 months for 100-unit rollout
 - **Update Frequency**: 1-minute real-time intervals
 
@@ -131,13 +131,13 @@ Global coverage implementation using satellite IoT services (Swarm or Iridium) f
 
 ---
 
-## Concept 4: Modular System with Cellular-Base (LILYGO T-SIM7600G-H)
+## Concept 4: Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)
 
 ### Approach
-Modular platform using LILYGO T-SIM7600G-H as the cellular-base foundation with hot-swappable expansion modules for LoRa and satellite communication when needed.
+Modular platform using LILYGO T-A7670G R2 Q425 as the cellular-base foundation with hot-swappable expansion modules for LoRa and satellite communication when needed.
 
 ### Key Characteristics
-- **Base Hardware**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS integrated)
+- **Base Hardware**: LILYGO T-A7670G R2 Q425 (ESP32-WROVER-E + LTE CAT-1 + L76K GPS)
 - **Primary Communication**: Cellular (4G/3G/2G) always available
 - **Expansion Modules**: Optional LoRa and satellite modules via expansion slots
 - **Cost Structure**: R3,650 base unit (includes enhanced UI) + R250-R4,850/expansion module + variable operational
@@ -145,9 +145,9 @@ Modular platform using LILYGO T-SIM7600G-H as the cellular-base foundation with 
 - **Reconfiguration**: Field-swappable expansion modules in <5 minutes
 
 ### Technical Specifications
-- **Base Platform**: LILYGO T-SIM7600G-H with SIM7600G cellular modem
+- **Base Platform**: LILYGO T-A7670G R2 Q425 with A7670G cellular modem
 - **Integrated GPS**: Built-in GNSS (GPS, GLONASS, BeiDou, Galileo)
-- **Cellular Capability**: 4G LTE Cat-4, 3G HSPA+, 2G GPRS fallback
+- **Cellular Capability**: LTE CAT-1, 3G HSPA+, 2G GPRS fallback
 - **Expansion Slots**: 2x module slots for additional communication methods
 - **LoRa Module**: R250 (868MHz with configurable power)
 - **Satellite Module**: R3,200-R4,850 (Swarm or Iridium options)
@@ -166,11 +166,11 @@ Modular platform using LILYGO T-SIM7600G-H as the cellular-base foundation with 
 | **Critical** | Base + LoRa + Satellite | R175 | 100% | High-value cargo |
 
 ### Advantages
-- **Cellular Always Available**: LILYGO T-SIM base provides immediate day-one tracking
+- **Cellular Always Available**: LILYGO T-A7670G base provides immediate day-one tracking
 - **Cost Optimization**: Add expansion modules only where needed per route
 - **Hot-swappable Modules**: Change expansion configuration in field without tools
 - **Future-proof**: Add new communication technologies as expansion modules
-- **Proven Base Platform**: LILYGO T-SIM7600G-H is established, reliable hardware
+- **Proven Base Platform**: LILYGO T-A7670G R2 Q425 is established, reliable hardware
 - **Dynamic Failover**: Automatic switching between cellular and expansion modules
 - **Power Efficient**: Base platform optimized for 48-hour backup operation
 
@@ -296,14 +296,14 @@ The choice between ESP32 and Raspberry Pi fundamentally affects:
 
 ## Final Selection: Modular T-SIM (Concept 4)
 
-The **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** was selected as the optimal solution because it provides:
+The **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** was selected as the optimal solution because it provides:
 
-1. **Immediate Value**: LILYGO T-SIM base provides proven cellular tracking from day one
+1. **Immediate Value**: LILYGO T-A7670G base provides proven cellular tracking from day one
 2. **Cost Optimization**: Add expansion modules only where route requirements justify the cost
-3. **Proven Platform**: T-SIM7600G-H is established, reliable hardware with integrated cellular+GPS
+3. **Proven Platform**: T-A7670G R2 Q425 is established, reliable hardware with integrated cellular+GPS
 4. **Environmental Suitability**: Industrial-grade platform proven for railway conditions
 5. **Future Flexibility**: Hot-swappable expansion modules support new communication technologies
-6. **Standardization**: Single T-SIM base platform for entire fleet with configurable expansions
+6. **Standardization**: Single T-A7670G base platform for entire fleet with configurable expansions
 
 This concept transforms traditional trade-offs between cost, coverage, and flexibility into a unified solution that adapts to operational requirements while maintaining cost efficiency and reliability.
 

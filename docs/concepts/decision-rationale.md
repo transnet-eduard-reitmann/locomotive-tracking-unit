@@ -2,12 +2,12 @@
 
 ## Executive Summary
 
-After comprehensive analysis of five distinct communication concepts, the **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** was selected as the optimal solution for South African railway locomotive tracking. This decision balances immediate operational needs with long-term flexibility, cost optimization, technology evolution requirements, and **complete train management integration** with existing Transnet systems.
+After comprehensive analysis of five distinct communication concepts, the **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** was selected as the optimal solution for South African railway locomotive tracking. This decision balances immediate operational needs with long-term flexibility, cost optimization, technology evolution requirements, and **complete train management integration** with existing Transnet systems.
 
 ## Selected Solution: Modular T-SIM with Cellular-Base
 
 ### Core Architecture
-- **Base Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS integrated)
+- **Base Platform**: LILYGO T-A7670G R2 Q425 (ESP32-WROVER-E + LTE CAT-1 + L76K GPS)
 - **Enhanced User Interface**: 2.8" color TFT display, 4-button navigation, train management workflow
 - **Primary Communication**: Cellular (4G/3G/2G) always available for immediate deployment
 - **Train Management Integration**: Direct API connectivity with Transnet ITP, TMS, and VDU systems
@@ -61,7 +61,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 ## Modular T-SIM Advantages
 
 ### Immediate Value Delivery
-- **T-SIM Base Platform**: LILYGO T-SIM7600G-H provides proven cellular+GPS foundation
+- **T-A7670G Base Platform**: LILYGO T-A7670G R2 Q425 provides proven cellular+GPS foundation
 - **99%+ Coverage**: Excellent cellular coverage on urban and main freight routes
 - **Real-time Capability**: 1-minute update intervals during operation
 - **Established Technology**: Mature T-SIM platform and development ecosystem
@@ -75,7 +75,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 ### Future-Proofing Architecture
 - **Technology Evolution**: Add 5G, WiFi 6, or Starlink expansion modules as available
 - **Hot-Swappable Expansion**: Change module configuration in field without specialized tools
-- **Standardized Base**: T-SIM platform provides consistent foundation with expansion slots
+- **Standardized Base**: T-A7670G platform provides consistent foundation with expansion slots
 - **Software Adaptable**: Single firmware supports all expansion module combinations
 
 ### Operational Excellence
@@ -88,7 +88,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 
 ### Technical Risks
 - **Expansion Development**: Custom expansion board design required
-  - **Mitigation**: Phased development approach with proven T-SIM7600G-H foundation
+  - **Mitigation**: Phased development approach with proven T-A7670G R2 Q425 foundation
 - **Module Interface Standards**: Ensuring long-term expansion compatibility
   - **Mitigation**: Standardized expansion interface specification
 - **Field Configuration**: Expansion module management and inventory complexity
@@ -105,7 +105,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 ## Implementation Strategy
 
 ### Phase 1: T-SIM Foundation (Months 1-4)
-- Develop T-SIM7600G-H base platform with expansion interface
+- Develop T-A7670G R2 Q425 base platform with expansion interface
 - Create standardized expansion module interface
 - Deploy initial 20 units with T-SIM base only configuration
 - Validate cellular communication and basic tracking functionality
@@ -192,7 +192,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 
 ## Conclusion
 
-The **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** represents the optimal balance of immediate value delivery, long-term cost optimization, and future technology adaptation. This decision enables:
+The **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** represents the optimal balance of immediate value delivery, long-term cost optimization, and future technology adaptation. This decision enables:
 
 1. **Immediate ROI** through cellular-based tracking from day one
 2. **Cost Optimization** through route-appropriate module selection  

@@ -23,7 +23,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 
 | Component | Cellular-Only | LoRa-Only | Satellite-Only | Modular T-SIM | Modular Pi |
 |-----------|---------------|-----------|----------------|---------------|------------|
-| **Primary Platform** | T-SIM7600G-H | T-Beam V1.2 | ESP32 + Satellite | T-SIM7600G-H Base | Pi Zero 2W + HATs |
+| **Primary Platform** | T-A7670G R2 Q425 | T-Beam V1.2 | ESP32 + Satellite | T-A7670G R2 Q425 Base | Pi Zero 2W + HATs |
 | **Processing** | ESP32 240MHz | ESP32 240MHz | ESP32 240MHz | ESP32 240MHz | ARM Cortex-A53 1GHz |
 | **Memory** | 4MB Flash | 4MB Flash | 4MB Flash | 4MB Flash | 512MB RAM |
 | **Communication** | 4G/3G/2G | 868MHz LoRa | Swarm/Iridium | Cellular + expansions | Any via HATs |
@@ -183,7 +183,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 - ❌ Latency and limited real-time capability acceptable
 - ❌ Message size limitations are manageable
 
-**Choose Modular T-SIM if:** ⭐ **RECOMMENDED**
+**Choose Modular T-A7670G if:** ⭐ **RECOMMENDED**
 - ✅ Mixed fleet operations across diverse route types
 - ✅ Want to optimize costs per individual route
 - ✅ Future flexibility and technology evolution important
@@ -205,13 +205,13 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 |------------|----------------------|---------------------|----------|
 | **<25 units** | Cellular-Only | R50-150K | 15 months |
 | **25-50 units** | Cellular-Only or Modular T-SIM | R150-500K | 12-15 months |
-| **50-100 units** | Modular T-SIM ⭐ | R500-1,000K | 12 months |
-| **100-200 units** | Modular T-SIM ⭐ | R1,000-2,000K | 12 months |
-| **200+ units** | Modular T-SIM + Specialized variants | R2,000K+ | 12-18 months |
+| **50-100 units** | Modular T-A7670G ⭐ | R500-1,000K | 12 months |
+| **100-200 units** | Modular T-A7670G ⭐ | R1,000-2,000K | 12 months |
+| **200+ units** | Modular T-A7670G + Specialized variants | R2,000K+ | 12-18 months |
 
 ---
 
-## 6. Modular T-SIM Concept Advantages
+## 6. Modular T-A7670G Concept Advantages
 
 ### 6.1 Unique Value Proposition
 
@@ -242,7 +242,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 ### 7.1 Phased Deployment Strategy
 
 **Phase 1: Foundation (Months 1-4)**
-- Develop T-SIM7600G-H base platform with expansion interface
+- Develop T-A7670G R2 Q425 base platform with expansion interface
 - Create standardized expansion module interface specification
 - Deploy 20 pilot units with T-SIM base only configuration
 - Validate cellular communication and core tracking functionality
@@ -298,12 +298,12 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 
 ### 9.1 Overall Winner: Modular T-SIM Concept ⭐
 
-The **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** emerges as the optimal solution because:
+The **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** emerges as the optimal solution because:
 
 1. **Immediate Value Delivery** - T-SIM base provides proven cellular tracking from day one
 2. **Cost Optimization** - Route-specific expansion modules minimize operational costs  
 3. **Future Flexibility** - Hot-swappable expansions adapt to technology evolution
-4. **Proven Foundation** - T-SIM7600G-H is established, reliable hardware platform
+4. **Proven Foundation** - T-A7670G R2 Q425 is established, reliable hardware platform
 5. **Operational Excellence** - Single base platform with configurable expansions
 6. **Risk Mitigation** - Multiple communication paths reduce single points of failure
 
@@ -312,7 +312,7 @@ The **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** emerges as the o
 | Priority | Fleet Size | Recommended Approach | Timeline |
 |----------|------------|---------------------|----------|
 | **Immediate** | Any size | Cellular-Only for urgent needs | 15 months |
-| **Optimal** | 50+ units | Modular T-SIM development | 12 months |
+| **Optimal** | 50+ units | Modular T-A7670G development | 12 months |
 | **Budget** | Any size | LoRa-Only where real-time not critical | 24 months |
 | **Global** | Any size | Satellite-Only for remote/international | 12 months |
 | **Advanced** | 100+ units | Modular Pi for complex requirements | 15 months |
@@ -321,11 +321,11 @@ The **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** emerges as the o
 
 ## Conclusion
 
-The **Modular T-SIM concept represents the best overall value** for South African railway operations, providing the optimal balance of immediate operational capability, long-term cost optimization, and future technology adaptation. 
+The **Modular T-A7670G concept represents the best overall value** for South African railway operations, providing the optimal balance of immediate operational capability, long-term cost optimization, and future technology adaptation. 
 
-While other concepts excel in specific scenarios, the modular T-SIM approach transforms traditional trade-offs between cost, coverage, and flexibility into a unified solution that adapts to operational requirements while maintaining reliability and cost efficiency.
+While other concepts excel in specific scenarios, the modular T-A7670G approach transforms traditional trade-offs between cost, coverage, and flexibility into a unified solution that adapts to operational requirements while maintaining reliability and cost efficiency.
 
-For immediate deployment needs, **Cellular-Only provides the fastest path to operation**. For budget-constrained deployments, **LoRa-Only offers the lowest operational costs**. However, for comprehensive fleet management across diverse operational requirements, **the Modular T-SIM concept delivers superior long-term value** through its combination of proven cellular foundation and adaptive expansion capabilities.
+For immediate deployment needs, **Cellular-Only provides the fastest path to operation**. For budget-constrained deployments, **LoRa-Only offers the lowest operational costs**. However, for comprehensive fleet management across diverse operational requirements, **the Modular T-A7670G concept delivers superior long-term value** through its combination of proven cellular foundation and adaptive expansion capabilities.
 
 ---
 

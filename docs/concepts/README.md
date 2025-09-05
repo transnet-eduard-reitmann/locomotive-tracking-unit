@@ -4,7 +4,7 @@ This folder contains the comprehensive research and analysis that led to the cel
 
 ## Research Outcome
 
-After extensive analysis, the **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** was selected, providing:
+After extensive analysis, the **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** was selected, providing:
 - **Immediate deployment** via cellular networks (99%+ coverage)
 - **Cost optimization** through route-specific module configurations  
 - **Future flexibility** via hot-swappable communication modules
@@ -29,7 +29,7 @@ Detailed examination of each communication approach considered:
 - **Concept 1**: Cellular-Only Communication
 - **Concept 2**: LoRa-Only Store-and-Forward  
 - **Concept 3**: Satellite-Only Communication
-- **Concept 4**: Modular System with Cellular-Base (LILYGO T-SIM7600G-H) ⭐ **SELECTED**
+- **Concept 4**: Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425) ⭐ **SELECTED**
 - **Concept 5**: Modular System with Raspberry Pi
 
 *Key topics: Technical specifications, advantages/limitations, cost structures, use cases*
@@ -66,18 +66,18 @@ Strategic analysis explaining the final decision, implementation strategy, and l
 ## Quick Reference
 
 ### Final Decision Summary
-- **Selected**: Modular System with Cellular-Base (LILYGO T-SIM7600G-H)
-- **Base Platform**: LILYGO T-SIM7600G-H (ESP32 + 4G LTE + GPS integrated)
+- **Selected**: Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)
+- **Base Platform**: LILYGO T-A7670G R2 Q425 (ESP32-WROVER-E + LTE CAT-1 + L76K GPS)
 - **Primary Communication**: Cellular (4G/3G/2G) always available
 - **Expansion**: Hot-swappable LoRa and satellite modules
 - **Cost**: R935K total 5-year cost for 100 units (includes enhanced UI and train management integration)
 - **Timeline**: 12 months for complete deployment
 
 ### Key Decision Factors
-1. **Immediate Value**: LILYGO T-SIM base provides proven cellular tracking from day one
+1. **Immediate Value**: LILYGO T-A7670G base provides proven cellular tracking from day one
 2. **Cost Optimization**: Add expansion modules only where route requirements justify cost
-3. **Proven Platform**: T-SIM7600G-H is established, reliable hardware with integrated cellular+GPS
-4. **Standardization**: Single T-SIM base platform for entire fleet with configurable expansions
+3. **Proven Platform**: T-A7670G R2 Q425 is established, reliable hardware with integrated cellular+GPS
+4. **Standardization**: Single T-A7670G base platform for entire fleet with configurable expansions
 5. **Future-Proofing**: Hot-swappable expansion modules support new communication technologies
 
 ### Concept Rankings by Total 5-Year Cost (100 units)

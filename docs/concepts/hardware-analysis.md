@@ -12,7 +12,7 @@ Both platforms **support comprehensive OTA updates**, contrary to common assumpt
 
 ### Quick Comparison Matrix
 
-| Feature | ESP32 (T-SIM7600G-H) | Raspberry Pi Zero 2W |
+| Feature | ESP32 (T-A7670G R2 Q425) | Raspberry Pi Zero 2W |
 |---------|---------------------|---------------------|
 | **Processing Power** | Dual-core 240MHz ARM | Quad-core 1GHz ARM Cortex-A53 |
 | **Memory** | 4MB Flash, 520KB RAM | 512MB LPDDR2 SDRAM |
@@ -23,7 +23,7 @@ Both platforms **support comprehensive OTA updates**, contrary to common assumpt
 | **OTA Updates** | ✅ Native support | ✅ Full support |
 | **Remote Management** | OTA only | SSH, VPN, full remote access |
 | **Development Time** | 6 months | 8-9 months |
-| **Cost per Unit** | R3,675 total (includes enhanced UI + GPIO expander) | R4,250 total |
+| **Cost per Unit** | R3,375 total (includes enhanced UI + GPIO expander) | R4,250 total |
 | **Battery Life (48hr)** | ✅ Achievable | ⚠️ Challenging |
 | **Reliability** | Very High | High |
 | **Environmental Rating** | Industrial grade | Consumer/Light industrial |

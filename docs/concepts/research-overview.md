@@ -67,12 +67,12 @@ This research document outlines the comprehensive analysis conducted to determin
 1. **Cellular-Only Concept**: 4G/3G/2G communication using existing network infrastructure
 2. **LoRa-Only Concept**: Private LoRa network with gateway infrastructure deployment
 3. **Satellite-Only Concept**: Global coverage using IoT satellite services
-4. **Modular System with Cellular-Base Concept**: LILYGO T-SIM7600G-H base with hot-swappable expansion modules
+4. **Modular System with Cellular-Base Concept**: LILYGO T-A7670G R2 Q425 base with hot-swappable expansion modules
 5. **Modular System with Raspberry Pi Concept**: Linux-based platform with HAT expansion modules
 
 ### Hardware Platform Analysis
-- **LILYGO T-SIM7600G-H vs Raspberry Pi**: Processing capability, power consumption, and development complexity
-- **Integrated vs Modular Design**: T-SIM base platform versus Pi HAT-based architectures
+- **LILYGO T-A7670G R2 Q425 vs Raspberry Pi**: Processing capability, power consumption, and development complexity
+- **Integrated vs Modular Design**: T-A7670G base platform versus Pi HAT-based architectures
 - **Commercial vs Custom Hardware**: Proven platforms versus custom development approaches
 
 ### Cost-Benefit Analysis
@@ -90,8 +90,8 @@ Different route types and operational requirements benefit from different commun
 - **Mixed Operations**: Require adaptable solutions with multiple communication options
 
 ### Power Consumption Critical Factor
-- **T-SIM Platform Advantage**: Significantly lower power consumption than Raspberry Pi
-- **Integrated Design**: T-SIM7600G-H combines ESP32, cellular, and GPS in single package
+- **T-A7670G Platform Advantage**: Significantly lower power consumption than Raspberry Pi
+- **Integrated Design**: T-A7670G R2 Q425 combines ESP32, cellular, and GPS in single package
 - **Battery Backup Requirements**: 48-hour operation during power outages essential
 - **Sleep Mode Optimization**: Adaptive power management based on operational status
 
@@ -105,17 +105,17 @@ Different route types and operational requirements benefit from different commun
 - **Field Serviceability**: Preference for solutions requiring minimal field maintenance
 - **Component Failure Recovery**: Need for modular expansion replacement capability
 - **Over-the-Air Updates**: Essential for fleet-wide firmware management
-- **Standardization Benefits**: Single T-SIM base platform reduces training and inventory costs
+- **Standardization Benefits**: Single T-A7670G base platform reduces training and inventory costs
 
 ## Research Outcomes
 
-The comprehensive analysis revealed that **no single communication technology** optimally serves all railway operational requirements. This key insight led to the development of the **Modular System with Cellular-Base Concept** - a flexible platform using LILYGO T-SIM7600G-H as the foundation that can be configured with appropriate expansion modules based on specific route characteristics and operational needs.
+The comprehensive analysis revealed that **no single communication technology** optimally serves all railway operational requirements. This key insight led to the development of the **Modular System with Cellular-Base Concept** - a flexible platform using LILYGO T-A7670G R2 Q425 as the foundation that can be configured with appropriate expansion modules based on specific route characteristics and operational needs.
 
 This approach enables:
 - **Cost Optimization**: Add expansion modules only where route requirements justify the cost
 - **Operational Flexibility**: Adapt to changing requirements through expansion module swapping
 - **Future-Proofing**: Add new communication technologies as expansion modules become available
-- **Standardization**: Single T-SIM base platform for entire fleet regardless of expansion configuration
+- **Standardization**: Single T-A7670G base platform for entire fleet regardless of expansion configuration
 
 ---
 
