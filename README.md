@@ -3,7 +3,7 @@
 
 ## Overview
 
-A comprehensive GPS tracking system for locomotive fleet management across the South African rail network. This solution provides real-time location data through cellular connectivity with modular expansion capabilities for LoRa and satellite communication, **plus complete train management integration** with existing Transnet systems (ITP, TMS, VDU) to solve both locomotive tracking and train identification challenges.
+A comprehensive GPS tracking system for locomotive fleet management across the South African rail network. This solution provides real-time location data through cellular connectivity with modular expansion capabilities for LoRa and satellite communication, plus complete train management integration with existing Transnet systems (ITP, TMS, VDU) to solve both locomotive tracking and train identification challenges.
 
 **Solution:** LILYGO T-A7670G R2 Q425 platform with enhanced user interface, cellular-first approach, optional expansion modules, and direct integration with Transnet's train management ecosystem.
 
@@ -205,6 +205,16 @@ This project evolved from comprehensive analysis of five communication concepts 
 - Direct battery operation capability
 
 **Alternative Platform**: LILYGO T-SIM7600G-H available as drop-in replacement if T-A7670G procurement becomes challenging. Requires minor firmware modifications but supports identical functionality.
+
+## Future Evolution: Industrial-Grade PCB
+
+While the LILYGO platform is ideal for prototyping and initial deployment, a custom industrial-grade PCB is planned for high-volume production and enhanced robustness. This future phase will focus on:
+
+- **Industrial Components**: Utilizing automotive or industrial-rated components, such as the **Quectel BG95-M3** cellular module and an industrial-grade **ESP32-S3-WROOM-1**.
+- **Custom Carrier Board**: A purpose-built PCB with M12 connectors, conformal coating, and enhanced power protection (EN50155 compliant).
+- **Mass Production**: The design will be optimized for automated assembly and large-scale manufacturing.
+
+This forward-looking approach ensures that a successful prototype can be seamlessly transitioned into a rugged, reliable, and commercially viable product for the demanding railway environment.
 
 ## Support
 

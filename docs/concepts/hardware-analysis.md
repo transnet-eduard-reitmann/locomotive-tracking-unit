@@ -339,6 +339,17 @@ For the **modular system concept**, ESP32 provides the optimal balance:
 - **Update Management**: Unified OTA across all module configurations
 - **Standardization**: Single platform regardless of module configuration
 
+### Long-Term Production Strategy
+
+While the LILYGO T-A7670G R2 Q425 is the ideal platform for the initial prototype and deployment phases, the long-term strategy for large-scale production involves a transition to a custom, industrial-grade PCB.
+
+This approach allows for:
+- **Component Optimization**: Selection of automotive or industrial-rated components, such as the **Quectel BG95-M3** cellular module, for enhanced reliability and longevity.
+- **Environmental Hardening**: A purpose-built board with conformal coating, robust M12 connectors, and an EN50155 compliant power supply.
+- **Cost Reduction at Scale**: Design-for-manufacturing (DFM) principles will be applied to reduce per-unit costs in high-volume production runs.
+
+The ESP32-based architecture of the prototype ensures that the core firmware and software can be migrated to the custom PCB with minimal changes, providing a seamless path from prototype to a rugged, commercially viable product.
+
 ---
 
 ## Implementation Considerations

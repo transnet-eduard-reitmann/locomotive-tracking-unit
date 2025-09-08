@@ -11,7 +11,7 @@ The hardware is built around the LILYGO T-A7670G R2 Q425 platform, providing int
 ```
 hardware/
 ├── base-unit/         # Main tracking unit design
-│   ├── pcb/          # PCB layout files (KiCad)
+│   ├── pcb/          # PCB layout files (EasyEDA)
 │   ├── enclosure/    # 3D models and mounting hardware
 │   ├── assembly/     # Assembly instructions and diagrams
 │   └── testing/      # Hardware test procedures
@@ -102,6 +102,63 @@ hardware/
 - **Latency**: <30 seconds
 - **Cost**: R4,850
 
+## Future Development: Custom Industrial PCB
+
+Following a successful prototype phase with the LILYGO platform, the next step is to develop a custom carrier board for industrial-grade reliability and high-volume production. This board will be designed specifically for the demanding railway environment.
+
+### Custom Carrier Board Design: Railway Tracking Unit v2.0
+
+```
+Railway Tracking Unit v2.0
+├── Core Processing
+│   ├── ESP32-S3-WROOM-1 (main controller, industrial temp range)
+│   └── Quectel BG95-M3 (cellular + GNSS)
+├── Power Management
+│   ├── Wide input: 24-110VDC (EN50155 compliant)
+│   ├── Isolated DC-DC: 5V @ 2A
+│   ├── LDO: 3.3V @ 1A
+│   └── Backup: Supercapacitor for graceful shutdown
+├── Expansion Interface (M12 8-pin)
+│   ├── Pin 1: 5V (500mA max, switched)
+│   ├── Pin 2: 3.3V (300mA max)
+│   ├── Pin 3: GND
+│   ├── Pin 4: UART_TX (ESP32 to Satellite)
+│   ├── Pin 5: UART_RX (Satellite to ESP32)
+│   ├── Pin 6: MODULE_DETECT (100k pull-up)
+│   ├── Pin 7: RESET_N (active low)
+│   └── Pin 8: Reserved/Shield
+├── Memory
+│   ├── FRAM: 256KB (Fujitsu MB85RS256 for high-endurance logging)
+│   └── EEPROM: 32KB (for configuration backup)
+├── User Interface
+│   ├── 2.8" TFT (via SPI)
+│   ├── 4x tactile buttons (sealed)
+│   └── RGB status LED
+└── Protection
+    ├── TVS diodes on all I/O
+    ├── Isolated RS485 for train bus
+    └── Watchdog timer (external)
+```
+
+### Power Architecture (Critical for BG95-M3)
+
+```
+Railway Power (24-110VDC)
+    ↓
+[EMI Filter + TVS Protection]
+    ↓
+[Isolated DC-DC: TEN 30-2413WI]
+    ↓ (12V @ 2.5A isolated)
+[Buck: 5V @ 2A] → BG95-M3 (requires clean, stable power)
+[LDO: 3.3V @ 1A] → ESP32-S3 + peripherals
+```
+
+### BG95-M3 Specific Requirements
+
+- **Peak Current**: The BG95-M3 has specific peak supply current requirements (Ivbat) that must be managed.
+- **Capacitor Support**: A 2200µF low-ESR capacitor must be placed close to the BG95-M3 power pins to handle current spikes during transmission.
+- **Power Plane**: A separate power plane for the cellular module is required to ensure clean power and prevent noise from affecting other components.
+
 ## Installation Requirements
 
 ### Mechanical Mounting
@@ -126,13 +183,12 @@ hardware/
 ## Design Files
 
 ### PCB Design
-- **Tool**: KiCad 6.0+
+- **Tool**: KiCad 6.0+ 
 - **Layers**: 4-layer PCB for optimal signal integrity
 - **Impedance Control**: 50Ω single-ended, 100Ω differential
 - **Manufacturing**: Standard FR4, HASL finish
 
 ### Mechanical Design
-- **Tool**: Fusion 360
 - **Materials**: Aluminum enclosure, ABS plastic components
 - **Manufacturing**: CNC machining for enclosures, 3D printing for prototypes
 

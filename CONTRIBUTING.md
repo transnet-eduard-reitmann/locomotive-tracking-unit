@@ -29,7 +29,6 @@ This project is developed for critical railway infrastructure. All contributors 
 
 1. **Hardware Development**
    - KiCad 6.0+ for PCB design
-   - Fusion 360 for mechanical design
    - LILYGO T-A7670G R2 Q425 development boards for testing
 
 2. **Firmware Development**

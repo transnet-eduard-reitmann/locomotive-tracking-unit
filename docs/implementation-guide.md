@@ -29,16 +29,16 @@ This document provides comprehensive technical documentation for implementing a 
 ┌────────────────────────────────────────┐    ┌─────────────────────────┐
 │                                        │    │                         │
 │  Locomotive Unit #1 (Urban)            │    │   Company Data Center   │
-│  └─ T-SIM7600G-H (Cellular only)       │───►│                         │
+│  └─ T-A7670G R2 Q425 (Cellular only)   │───►│                         │
 │                                        │    │   ┌──────────────────┐  │
 │  Locomotive Unit #2 (Depot)            │    │   │  MS SQL Server   │  │
-│  └─ T-SIM7600G-H + LoRa Module         │───►│   │  Spatial DB      │  │
+│  └─ T-A7670G R2 Q425 + LoRa Module     │───►│   │  Spatial DB      │  │
 │                                        │    │   └──────────────────┘  │
 │  Locomotive Unit #3 (Remote)           │    │                         │
-│  └─ T-SIM7600G-H + Satellite Module    │───►│   ┌──────────────────┐  │
+│  └─ T-A7670G R2 Q425 + Satellite Module│───►│   ┌──────────────────┐  │
 │                                        │    │   │  MQTT Broker     │  │
 │  Locomotive Unit #4 (Cross-border)     │    │   │  (Mosquitto)     │  │
-│  └─ T-SIM7600G-H + Sat + LoRa          │───►│   └──────────────────┘  │
+│  └─ T-A7670G R2 Q425 + Sat + LoRa      │───►│   └──────────────────┘  │
 │                                        │    │                         │
 └────────────────────────────────────────┘    │   ┌──────────────────┐  │
                     │                         │   │  Web Dashboard   │  │
@@ -203,9 +203,9 @@ graph TD
 ```
 
 **Power Consumption:**
-- **Idle:** 130mA @ 5V (0.65W) - includes enhanced UI and GPIO expander
-- **GPS Active:** 180mA @ 5V (0.9W) - includes display backlight
-- **Cellular TX:** 1.5A @ 5V peak (7.5W)
+- **Idle:** 70mA @ 3.7V (0.26W) - includes enhanced UI and GPIO expander
+- **GPS Active:** 180mA @ 3.7V (0.67W) - includes display backlight
+- **Cellular TX:** 1A @ 3.7V peak (3.7W)
 - **LoRa TX:** 120mA @ 3.3V (0.4W)
 - **Satellite TX:** 1A @ 5V (5W)
 - **Enhanced UI Components:**
@@ -214,10 +214,10 @@ graph TD
   - Status LEDs: 10mA @ 3.3V total (0.033W)
 
 **Battery Life (6800mAh @ 7.4V = 50Wh):**
-- **Cellular only:** 38 hours continuous operation (with enhanced UI active)
-- **With LoRa:** 36 hours
-- **With Satellite:** 30 hours
-- **Sleep mode with UI off:** 60+ hours (display auto-off after inactivity)
+- **Cellular only:** 48 hours continuous operation (with enhanced UI active)
+- **With LoRa:** 45 hours
+- **With Satellite:** 35 hours
+- **Sleep mode with UI off:** 72+ hours (display auto-off after inactivity)
 
 ---
 
@@ -883,6 +883,29 @@ END
 - Final system acceptance
 
 **Budget:** R75,000 (satellite modules + service)
+
+### Phase 4: Industrialization (Optional, Post-Prototype)
+
+Upon successful validation of the prototype, this optional phase focuses on developing a custom, industrial-grade PCB for mass production and enhanced environmental robustness.
+
+#### Phase 4.1: Industrial Carrier Board Design (Months 6-9)
+
+- **Objective**: Design a custom carrier board for a production-level device.
+- **Core Components**:
+  - **Quectel BG95-M3**: A multi-mode cellular module with 2G fallback, essential for South African coverage gaps and proven for industrial reliability.
+  - **ESP32-S3-WROOM-1**: An industrial-grade version of the ESP32, rated for -40°C to 85°C.
+  - **M12 Connectors**: For robust, sealed connections for power and satellite module expansion.
+  - **Conformal Coating**: To protect all boards from moisture and contaminants.
+- **Power System**: Design an EN50155 compliant power management system with a wide input range (24-110VDC), isolated DC-DC converters, and a supercapacitor for graceful shutdowns.
+
+#### Phase 4.2: Production and Deployment
+
+- **Objective**: Manufacture and deploy the industrial-grade units.
+- **Manufacturing**: Partner with a PCB assembly house for automated manufacturing and testing.
+- **Railway-Specific Features**:
+  - **Protection**: Integrate TVS diodes on all I/O, isolated RS485 for train bus communication, and an external watchdog timer.
+  - **Memory**: Utilize FRAM (256KB) for high-endurance data logging and EEPROM (32KB) for configuration backup.
+- **Rollout**: Replace prototype units with the new industrial hardware in a phased deployment.
 
 ---
 

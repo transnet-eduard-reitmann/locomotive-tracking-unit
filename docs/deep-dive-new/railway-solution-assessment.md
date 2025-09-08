@@ -25,7 +25,7 @@
 ## Executive Summary
 
 ### Assessment Verdict
-The proposed **Modular System with Cellular-Base (LILYGO T-SIM7600G-H)** with enhanced UI and train management integration is **fundamentally sound** for addressing Transnet's locomotive tracking and train identification challenges. However, several critical enhancements are required to ensure complete problem resolution.
+The proposed **Modular System with Cellular-Base (LILYGO T-A7670G R2 Q425)** with enhanced UI and train management integration is **fundamentally sound** for addressing Transnet's locomotive tracking and train identification challenges. However, several critical enhancements are required to ensure complete problem resolution.
 
 ### Key Findings
 - ✅ **Correct Problem Focus**: Addresses both tracking (80%) and identification (20%) challenges
@@ -278,7 +278,7 @@ UI Fallback Hierarchy:
 ### Technology Stack - Enhanced
 
 #### Core Platform (Unchanged)
-- **Hardware**: LILYGO T-SIM7600G-H
+- **Hardware**: LILYGO T-A7670G R2 Q425
 - **Processor**: ESP32 240MHz dual-core
 - **Communication**: 4G/3G/2G cellular + optional modules
 - **Power**: 110V railway + 48hr battery backup

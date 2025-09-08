@@ -6,7 +6,7 @@ This repository contains the full-stack implementation of a GPS tracking system 
 
 **Core Technologies:**
 
-*   **Hardware:** LILYGO T-SIM7600G-H (ESP32)
+*   **Hardware:** LILYGO T-A7670G R2 Q425 (ESP32)
 *   **Firmware:** C++ with PlatformIO
 *   **Backend:** .NET Core, C#, MS SQL Server
 *   **Frontend:** React.js, Redux, Material-UI

@@ -1,4 +1,5 @@
 # Prompts to run:
+
 * read both user requirements specifications in the docs/user-specifications folder in detail using python -c "" commands. ignore the satellite-first approach from the LTUSpec.docx (because cellular-first has been adopted), but check if the current state of the project (read and understand every single markdown file in the entire repo) will be a comprehensive solution to the fundamental problem and technical user requirements. make additional suggestions to close any gaps, if required. finally, do a comprehensive logic check and cross-reference check of all the documentation to ensure everything makes sense and puts forward a water-tight technical proposal. the aim of the current state of the project is to get a solid framework and gameplan proposal before any actual coding/work is started. be specific on what markdown documents you plan to update/modify/add and how.
 
 
@@ -8,11 +9,11 @@
 
 ### Phase 1: Core Development (Months 1-6)
 - [ ] **Hardware Development**
-  - [ ] Order LILYGO T-SIM7600G-H development boards
+  - [ ] Order LILYGO T-A7670G R2 Q425 development boards
   - [ ] Design enhanced UI hardware (2.8" TFT display, 4-button navigation, status LEDs)
   - [ ] Design PCB layout for production version with UI integration
   - [ ] Create enclosure design for railway environment with front-accessible UI panel
-  - [ ] Test power supply integration with 110V railway power (updated for UI: 0.6W idle, 7.7W peak)
+  - [ ] Test power supply integration with 110V railway power (updated for UI: 0.26W idle, 3.7W peak)
   - [ ] Validate GPS performance and antenna placement
   - [ ] Environmental testing (-20°C to +70°C, vibration)
 
@@ -21,7 +22,7 @@
   - [ ] Implement enhanced UI management (TFT display, button navigation, menu system)
   - [ ] Develop train management workflow (assignment confirmation, display)
   - [ ] Implement GPS positioning and tracking logic
-  - [ ] Develop cellular communication with SIM7600G
+  - [ ] Develop cellular communication with LILYGO T-A7670G R2 Q425
   - [ ] Implement MQTT client with TLS security for train assignment commands
   - [ ] Create power management and sleep modes (updated for enhanced UI)
   - [ ] Add data logging to SD card
@@ -109,6 +110,17 @@
   - [ ] Test Iridium module alternative
   - [ ] Implement satellite communication for remote routes
   - [ ] Add global coverage capability
+
+### Industrial-Grade Hardware
+- [ ] **Custom Carrier Board Design**
+  - [ ] Design custom PCB with industrial-grade components (Quectel BG95-M3, ESP32-S3).
+  - [ ] Implement EN50155 compliant power supply and M12 connectors.
+  - [ ] Add conformal coating and enhanced protection circuits.
+- [ ] **Manufacturing and Sourcing**
+  - [ ] Source industrial-grade components for mass production.
+  - [ ] Establish partnership with a PCB assembly house.
+- [ ] **Deployment**
+  - [ ] Plan phased rollout of industrial-grade units to replace prototypes.
 
 ### Advanced Features
 - [ ] **AI and Analytics**

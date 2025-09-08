@@ -139,7 +139,7 @@ curl http://192.168.4.1/api/system/status
 ## Key Features & Patterns
 
 ### Firmware Architecture
-- **LILYGO T-SIM7600G-H Base**: Integrated ESP32 + 4G LTE + GPS foundation
+- **LILYGO T-A7670G R2 Q425 Base**: Integrated ESP32 + 4G LTE + GPS foundation
 - **Enhanced User Interface**: 2.8" color TFT display (320x240), 4-button navigation pad, multi-color status LEDs
 - **GPIO Expander**: MCP23017 I2C 16-port expander (mandatory for enhanced UI implementation)
 - **Train Management Workflow**: On-device train number assignment, confirmation, and status display

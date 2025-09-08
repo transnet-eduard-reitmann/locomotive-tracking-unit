@@ -50,24 +50,6 @@ yarn-error.log*
 *.bin
 *.hex
 
-## KiCad (PCB Design)
-*.kicad_pcb-bak
-*.sch-bak
-*-cache.lib
-*-cache.dcm
-*.net
-*.dsn
-*.ses
-fp-info-cache
-*.xml
-*.csv#
-*.tsv#
-
-## Fusion 360 (3D Design)
-*.f3d
-*.f3z
-**/Fusion 360 Export/
-
 ## Configuration Files (Security Sensitive)
 **/config/secrets/
 **/config/production/
@@ -106,6 +88,17 @@ Thumbs.db
 **/hardware/**/production/
 **/hardware/**/gerber/
 **/hardware/**/assembly/output/
+
+# KiCad
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_pro
+*.kicad_prl
+*-cache.lib
+fp-info-cache
+*.net
+*.rpt
+*.tmp
 
 ## Test Results
 TestResults/
