@@ -107,8 +107,8 @@
 
 - [ ] **Satellite Module Development (REVISED SCOPE)**
   - [ ] **CRITICAL**: Limit satellite to emergency communications only (15+ minute intervals)
-  - [ ] Integrate 1-2 Swarm satellite modules for testing (not routine use)
-  - [ ] Evaluate Iridium as emergency backup only (R3,309-R9,384/month per unit)
+  - [ ] Integrate 1-2 satellite modules for testing (Iridium 9603 preferred, Swarm M138 alternative)
+  - [ ] Evaluate satellite options as emergency backup only (Iridium preferred, R3,309-R9,384/month per unit)
   - [ ] Implement satellite communication for true emergencies only
   - [ ] Position satellite as last resort, not routine coverage solution
 

@@ -91,18 +91,18 @@ Cost-optimized solution using ESP32-based devices with LoRa communication and st
 ## Concept 3: Satellite-Only Communication
 
 ### Approach
-Global coverage implementation using satellite IoT services (Swarm or Iridium) for completely infrastructure-independent communication.
+Global coverage implementation using satellite IoT services (Iridium preferred, Swarm alternative) for completely infrastructure-independent communication.
 
 ### Key Characteristics
-- **Hardware**: ESP32 + satellite modem (Swarm M138 or Iridium 9603)
-- **Communication**: VHF satellite (Swarm) or L-band (Iridium)
+- **Hardware**: ESP32 + satellite modem (Iridium 9603 preferred, Swarm M138 alternative)
+- **Communication**: L-band satellite (Iridium) or VHF satellite (Swarm alternative)
 - **Coverage**: 100% global coverage including extreme remote areas
 - **Cost Structure**: R4,200-R19,500/unit + R3,309-R9,384/month operational (per unit)
 - **Deployment**: 12 months for 100-unit rollout
 - **Update Method**: Store-and-forward with satellite pass optimization
 
 ### Technical Specifications
-- **Swarm Option**: VHF (137-138 MHz), 192-byte messages, limited to 3,000 packets/month maximum (inadequate for continuous tracking)
+- **Swarm Option**: VHF (137-138 MHz), 192-byte messages, limited to 3,000 packets/month maximum (suitable for emergency use only)
 - **Iridium Option**: L-band (1616-1626.5 MHz), 340-byte messages, R3,309-R9,384/month per unit (15-5 minute intervals)
 - **Message Latency**: Minutes to hours depending on satellite constellation
 - **Power Requirements**: Higher power consumption during transmission
@@ -152,7 +152,7 @@ Modular platform using LILYGO T-A7670G R2 Q425 as the cellular-base foundation w
 - **Cellular Capability**: LTE CAT-1, 3G HSPA+, 2G GPRS fallback
 - **Expansion Slots**: 2x module slots for additional communication methods
 - **LoRa Module**: R250 (868MHz with configurable power)
-- **Satellite Module**: R3,200-R4,850 (Swarm or Iridium options)
+- **Satellite Module**: R4,850 (Iridium preferred) or R3,250 (Swarm alternative)
 - **Power Consumption**: 80mA idle, 200mA active (base unit)
 - **Battery Life**: 48+ hours with 10Ah battery
 

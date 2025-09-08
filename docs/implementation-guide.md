@@ -101,10 +101,15 @@ Priority 4: Store & Forward (buffer until connection available)
 #### 2.2.2 Satellite Module (Optional)
 | Component | Model | Price | Purpose |
 |-----------|--------|-------|---------|
-| **Swarm M138** | Satellite modem | R3,200 | Global coverage |
+| **Iridium 9603** (Recommended) | Satellite modem | R4,500 | Global coverage, proven reliability |
+| **Iridium Antenna** | Patch antenna | R300 | Satellite communication |
+| **Interface** | UART connection | R50 | Connection to main board |
+| **Total (Iridium)** | | **R4,850** | Satellite capability |
+| | | | |
+| **Swarm M138** (Alternative) | Satellite modem | R3,200 | Alternative option |
 | **VHF Antenna** | Included | R0 | Satellite communication |
 | **Interface** | UART connection | R50 | Connection to main board |
-| **Total** | | **R3,250** | Satellite capability |
+| **Total (Swarm)** | | **R3,250** | Alternative satellite option |
 
 ### 2.3 Platform Alternative
 
@@ -868,7 +873,7 @@ END
 ### 6.3 Phase 3: Satellite Extension (Months 13-18)
 
 **Month 13-14: Satellite Testing**
-- Procure 5 Swarm modules for testing
+- Procure 5 satellite modules for testing (Iridium 9603 preferred, Swarm M138 alternative)
 - Validate coverage on Iron Ore line
 - Assess latency impact
 

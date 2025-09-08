@@ -26,7 +26,7 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | **Primary Platform** | T-A7670G R2 Q425 | T-Beam V1.2 | ESP32 + Satellite | T-A7670G R2 Q425 Base | Pi Zero 2W + HATs |
 | **Processing** | ESP32 240MHz | ESP32 240MHz | ESP32 240MHz | ESP32 240MHz | ARM Cortex-A53 1GHz |
 | **Memory** | 4MB Flash | 4MB Flash | 4MB Flash | 4MB Flash | 512MB RAM |
-| **Communication** | 4G/3G/2G | 868MHz LoRa | Swarm/Iridium | Cellular + expansions | Any via HATs |
+| **Communication** | 4G/3G/2G | 868MHz LoRa | Iridium/Swarm | Cellular + expansions | Any via HATs |
 | **GPS Module** | Integrated | Integrated | Integrated | Integrated | Via HAT |
 | **Expansion Capability** | None | None | None | LoRa/Satellite modules | Full HAT ecosystem |
 | **Field Reconfigurable** | No | No | No | Yes (modules) | Yes (HATs) |
