@@ -69,7 +69,8 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 ### Cost Optimization Capability
 - **Route-Based Expansion**: Add expansion modules only where route requirements justify cost
 - **Operational Cost Reduction**: LoRa expansion modules provide zero-cost depot communication
-- **Selective Satellite**: Add satellite expansion modules only where absolutely needed
+- **Emergency-Only Satellite**: Add satellite expansion modules only for emergency communications (15+ minute intervals)
+- **Cost Control**: Satellite modules reserved for safety-critical situations only (R3,309/month per unit)
 - **Inventory Efficiency**: Stock expansion modules instead of complete units
 
 ### Future-Proofing Architecture
@@ -176,7 +177,19 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 - **Year 1-2**: Cellular, LoRa, satellite modules deployment
 - **Year 3**: 5G module integration for high-bandwidth applications
 - **Year 4**: Private LTE module for dedicated railway networks
-- **Year 5+**: Next-generation satellite (Starlink) and emerging technologies
+- **Year 5+**: Starlink satellite integration and emerging technologies
+
+### Starlink Future Integration
+
+**Strategic Advantage of Modular Design**: The modular architecture specifically enables integration with future technologies like Starlink without platform replacement:
+
+- **Technology Evolution**: When Starlink becomes available in South Africa, a dedicated expansion module can be developed
+- **Cost Disruption**: Starlink may offer dramatically lower costs than traditional satellite services (currently R3,309-R9,384/month per unit)
+- **Capability Enhancement**: High-speed satellite connectivity would enable features impossible with current satellite limitations
+- **No Obsolescence**: Existing base units remain fully compatible with new communication technologies
+- **Competitive Advantage**: Early adoption capability once regulatory approval is obtained
+
+This forward-looking design ensures the investment remains valuable as satellite communication technology evolves from expensive, low-bandwidth services to cost-effective, high-performance solutions.
 
 ### Scalability Path
 - **Phase 1**: 100 units (proof of concept)

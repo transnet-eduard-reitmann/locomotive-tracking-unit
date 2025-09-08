@@ -82,9 +82,11 @@ graph TD
 | Service | Monthly Cost | Annual Cost |
 |---------|--------------|-------------|
 | **Cellular Connectivity (85 units)** | R4,250 | R51,000 |
-| **Satellite Data (5 units)** | R875 | R10,500 |
+| **Satellite Data (5 units @ 15min intervals)** | R16,545 | R198,540 |
+| **Satellite Data (5 units @ 5min intervals)** | R46,920 | R563,040 |
 | **System Maintenance** | R500 | R6,000 |
-| **Total OPEX** | **R5,625** | **R67,500** |
+| **Total OPEX (15min satellite)** | **R21,295** | **R255,540** |
+| **Total OPEX (5min satellite)** | **R51,670** | **R620,040** |
 
 ### 5-Year Total Cost of Ownership
 ```mermaid
@@ -101,7 +103,10 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure: R902,500**
+**Total 5-Year Expenditure with 15min satellite intervals: R1,842,700**  
+**Total 5-Year Expenditure with 5min satellite intervals: R3,665,200**
+
+**⚠️ Critical Note**: Satellite communication costs are extremely high (R3,309-R9,384/month per unit). Recommend satellite use only for emergency/critical communications.
 
 ---
 
@@ -254,21 +259,27 @@ graph LR
 
 ## 9. Budget Summary
 
-### Total Project Expenditure
+### Total Project Expenditure (Conservative - 15min satellite intervals)
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R565,000 | R67,500 | R632,500 |
-| **Year 2** | - | R67,500 | R700,000 |
-| **Year 3** | - | R67,500 | R767,500 |
-| **Year 4** | - | R67,500 | R835,000 |
-| **Year 5** | - | R67,500 | R902,500 |
+| **Year 1** | R565,000 | R255,540 | R820,540 |
+| **Year 2** | - | R255,540 | R1,076,080 |
+| **Year 3** | - | R255,540 | R1,331,620 |
+| **Year 4** | - | R255,540 | R1,587,160 |
+| **Year 5** | - | R255,540 | R1,842,700 |
+
+### Alternative: Aggressive satellite use (5min intervals)
+| Period | CAPEX | OPEX | Cumulative |
+|--------|-------|------|------------|
+| **Year 1** | R565,000 | R620,040 | R1,185,040 |
+| **Year 5** | - | R620,040 | R3,665,200 |
 
 ### Budget Allocation by Category
 ```mermaid
-pie title "5-Year Cost Distribution"
+pie title "5-Year Cost Distribution (15min satellite)"
     "Initial Hardware" : 337.5
     "Development & Integration" : 227.5  
-    "Operating Costs (5 years)" : 337.5
+    "Operating Costs (5 years)" : 1277.7
 ```
 
 ---

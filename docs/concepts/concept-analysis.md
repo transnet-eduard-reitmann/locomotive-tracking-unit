@@ -97,13 +97,13 @@ Global coverage implementation using satellite IoT services (Swarm or Iridium) f
 - **Hardware**: ESP32 + satellite modem (Swarm M138 or Iridium 9603)
 - **Communication**: VHF satellite (Swarm) or L-band (Iridium)
 - **Coverage**: 100% global coverage including extreme remote areas
-- **Cost Structure**: R4,200-R19,500/unit + R75-R1,200/month operational
+- **Cost Structure**: R4,200-R19,500/unit + R3,309-R9,384/month operational (per unit)
 - **Deployment**: 12 months for 100-unit rollout
 - **Update Method**: Store-and-forward with satellite pass optimization
 
 ### Technical Specifications
-- **Swarm Option**: VHF (137-138 MHz), 192-byte messages, R75-R400/month
-- **Iridium Option**: L-band (1616-1626.5 MHz), 340-byte messages, R400-R1,200/month
+- **Swarm Option**: VHF (137-138 MHz), 192-byte messages, limited to 3,000 packets/month maximum (inadequate for continuous tracking)
+- **Iridium Option**: L-band (1616-1626.5 MHz), 340-byte messages, R3,309-R9,384/month per unit (15-5 minute intervals)
 - **Message Latency**: Minutes to hours depending on satellite constellation
 - **Power Requirements**: Higher power consumption during transmission
 - **Global Roaming**: Seamless cross-border operation
@@ -123,11 +123,13 @@ Global coverage implementation using satellite IoT services (Swarm or Iridium) f
 - **Regulatory Approval**: Some services pending South African approval
 
 ### Best Use Cases
-- Cross-border railway operations
-- Remote mining and ore transport routes
-- Disaster response and emergency communications
-- High-value cargo requiring global tracking
-- Operations where cost is secondary to coverage
+- **Emergency communications only** in areas with no other coverage
+- Disaster response and emergency communications (15+ minute intervals)
+- Critical alerts and safety notifications
+- **Not suitable for routine tracking** due to prohibitive costs
+- Last resort communication when all other methods fail
+
+**Important:** At R3,309-R9,384/month per unit, satellite should be reserved for emergency use only.
 
 ---
 
@@ -160,10 +162,10 @@ Modular platform using LILYGO T-A7670G R2 Q425 as the cellular-base foundation w
 |---------------|---------------|--------------|----------|----------|
 | **Urban Only** | Base unit only | R50 | 99% | Commuter rail |
 | **Main Line** | Base + LoRa module | R50 | 99% | Freight corridors |
-| **Remote** | Base + Satellite module | R125 | 100% | Ore transport |
-| **International** | Base + Satellite module | R200 | 100% | Cross-border |
+| **Remote** | Base + Satellite module (15min) | R3,359 | 100% | Emergency communications only |
+| **International** | Base + Satellite module (15min) | R3,359 | 100% | Emergency/critical only |
 | **Depot** | Base + LoRa module (cellular off) | R0 | 95% | Yard operations |
-| **Critical** | Base + LoRa + Satellite | R175 | 100% | High-value cargo |
+| **Critical Emergency** | Base + LoRa + Satellite (15min) | R3,409 | 100% | Emergency backup only |
 
 ### Advantages
 - **Cellular Always Available**: LILYGO T-A7670G base provides immediate day-one tracking

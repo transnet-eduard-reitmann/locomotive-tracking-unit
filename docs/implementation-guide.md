@@ -882,7 +882,7 @@ END
 - Complete coverage analysis
 - Final system acceptance
 
-**Budget:** R75,000 (satellite modules + service)
+**Budget:** R400,000 (satellite modules for emergency use only due to high operational costs)
 
 ### Phase 4: Industrialization (Optional, Post-Prototype)
 
@@ -1228,9 +1228,13 @@ Debug mode supports various maintenance scenarios:
 | Service | Units | Cost/Unit | Total |
 |---------|-------|-----------|-------|
 | Cellular Connectivity | 85 | R50 | R4,250 |
-| Satellite Data | 5 | R175 | R875 |
+| Satellite Data (15min intervals) | 5 | R3,309 | R16,545 |
+| Satellite Data (5min intervals) | 5 | R9,384 | R46,920 |
 | System Maintenance | 1 | R500 | R500 |
-| **Total OPEX** | | | **R5,625/month** |
+| **Total OPEX (15min satellite)** | | | **R21,295/month** |
+| **Total OPEX (5min satellite)** | | | **R51,670/month** |
+
+**Critical Note:** Satellite costs are extremely high (R3,309-R9,384/month per unit). Satellite communication should be used only for emergency/critical situations in areas with no cellular coverage.
 
 ---
 
@@ -1249,6 +1253,24 @@ Debug mode supports various maintenance scenarios:
 - Edge computing capabilities
 - Blockchain-based audit trail
 - Advanced analytics dashboard
+
+**Year 4+: Future Satellite Technologies**
+- Starlink integration module (when available in South Africa)
+- Cost-effective satellite connectivity alternative to traditional services
+- High-bandwidth satellite communication for advanced features
+
+### Starlink Integration Potential
+
+**Modular Architecture Advantage**: The system's modular design enables seamless integration with Starlink satellite internet once available in South Africa, without requiring changes to the base hardware platform.
+
+**Key Benefits:**
+- **Cost Efficiency**: Potential for significantly lower costs compared to current satellite options (Iridium: R3,309-R9,384/month per unit)
+- **High Performance**: High-speed, low-latency connectivity enabling advanced features
+- **Global Coverage**: Seamless cross-border operation without roaming charges
+- **Future-Proof**: Expansion module approach allows immediate adoption when available
+- **Enhanced Capabilities**: Support for real-time video, large data transfers, and advanced diagnostics
+
+**Implementation Timeline**: Starlink expansion module development can commence once service launches in South Africa, with minimal impact on existing deployments.
 
 ### 11.2 Scalability
 

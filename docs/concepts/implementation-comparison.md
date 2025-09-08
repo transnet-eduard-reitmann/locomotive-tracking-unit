@@ -81,21 +81,21 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | Cost Category | Cellular-Only | LoRa-Only | Satellite-Only | Modular T-SIM | Modular Pi |
 |---------------|---------------|-----------|----------------|---------------|------------|
 | **Cellular Data** | R60,000 | R0 | R0 | R42,000 (optimized) | R50,000 |
-| **Satellite Data** | R0 | R0 | R100,000-R1,200,000 | R25,500 (selective) | R30,000 |
+| **Satellite Data** | R0 | R0 | R400,000-R11,260,800 | R198,540 (conservative 15min) | R563,040 (5min) |
 | **Gateway Maintenance** | R0 | R6,000 | R0 | R0 | R0 |
 | **Module Replacement** | R0 | R0 | R0 | R500 | R800 |
 | **System Maintenance** | R0 | R0 | R0 | R0 | R2,000 |
-| ****ANNUAL OPEX** | **R60,000** | **R6,000** | **R100,000-R1,200,000** | **R68,000** | **R82,800** |
+| ****ANNUAL OPEX** | **R60,000** | **R6,000** | **R400,000-R11,260,800** | **R255,540** (conservative) | **R620,040** (5min satellite) |
 
 ### 2.3 Total Cost of Ownership (5 Years, 100 Units)
 
 | Solution | Initial Investment | 5-Year Operations | **Total 5-Year Cost** | Cost Rank |
 |----------|-------------------|-------------------|----------------------|-----------|
 | **LoRa-Only** | R551K | R30K | **R581K** | 1st (lowest) |
-| **Modular T-SIM** | R695K (with enhanced UI + integration) | R340K | **R1,035K** | 2nd ⭐ **SELECTED** |
-| **Cellular-Only** | R637K | R300K | **R937K** | 3rd |
-| **Modular Pi** | R720K | R414K | **R1,134K** | 4th |
-| **Satellite-Only** | R679K-R2,095K | R500K-R6,000K | **R1,179K-R8,095K** | 5th (highest) |
+| **Modular T-SIM (minimal satellite)** | R695K | R1,278K | **R1,973K** | 3rd ⭐ **SELECTED** |
+| **Cellular-Only** | R637K | R300K | **R937K** | 2nd |
+| **Modular Pi** | R720K | R3,100K | **R3,820K** | 4th |
+| **Satellite-Only** | R679K-R2,095K | R2,000K-R56,304K | **R2,679K-R58,399K** | 5th (highest) |
 
 ---
 
@@ -230,10 +230,10 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 |---------------|------------------|--------------|----------|---------------------|
 | **Urban Standard** | T-SIM only | R50 | 99% | Real-time tracking, proven reliability |
 | **Main Line Optimized** | T-SIM + LoRa | R50 | 99% | Real-time + zero-cost depot communication |
-| **Remote Enhanced** | T-SIM + Satellite | R125 | 100% | Full coverage including remote areas |
-| **International** | T-SIM + Satellite | R200 | 100% | Seamless cross-border operation |
+| **Remote Enhanced** | T-SIM + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency communications only |
+| **International** | T-SIM + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency communications only |
 | **Depot Economical** | T-SIM + LoRa (cellular off) | R0 | 95% | Zero operational costs for yard operations |
-| **Mission Critical** | T-SIM + LoRa + Satellite | R175 | 100% | Triple redundancy for high-value cargo |
+| **Emergency Backup** | T-SIM + LoRa + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency backup only |
 
 ---
 

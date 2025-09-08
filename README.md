@@ -19,7 +19,7 @@ A comprehensive GPS tracking system for locomotive fleet management across the S
 - **Fleet Management** - Centralized monitoring and control of all tracking units
 - **Cost-Optimized** - R3,375 base unit with enhanced UI + GPIO expander, optional modules as needed
 - **TCO Workflow Integration** - Seamless train number assignment and confirmation process
-- **Future-Proof** - Expandable design accommodates new technologies
+- **Future-Proof** - Expandable design accommodates new technologies (including Starlink when available in South Africa)
 
 ## Quick Start
 
@@ -105,7 +105,7 @@ locomotive-tracking-unit/
 |--------|----------|--------------|----------|
 | **Cellular (Base)** | 99%+ urban/main routes | R50 | Primary tracking |
 | **LoRa (Optional)** | Depot areas, gateways | R0 | Cost optimization |
-| **Satellite (Optional)** | 100% global | R75-500 | Remote routes |
+| **Satellite (Optional)** | 100% global | R3,309-9,384 | Emergency/critical only |
 
 ## Getting Started
 
@@ -170,9 +170,11 @@ The system includes comprehensive Over-the-Air update capabilities:
 
 ### Monthly Operating Costs (100 Units)
 - Cellular Connectivity: R4,250 (85 units)
-- Satellite Data: R875 (5 units)  
+- Satellite Data: R16,545-46,920 (5 units @ 15-5 min intervals)  
 - System Maintenance: R500
-- **Total OPEX: R5,625/month**
+- **Total OPEX: R21,295-52,170/month**
+
+**Note**: Satellite costs are significantly higher than cellular and should be used only for emergency/critical communications in areas with no cellular coverage.
 
 ## Implementation Timeline
 

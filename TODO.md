@@ -105,11 +105,12 @@
   - [ ] Implement cost-optimized depot communication
   - [ ] Add automatic cellular/LoRa failover
 
-- [ ] **Satellite Module Development**
-  - [ ] Integrate Swarm satellite modules
-  - [ ] Test Iridium module alternative
-  - [ ] Implement satellite communication for remote routes
-  - [ ] Add global coverage capability
+- [ ] **Satellite Module Development (REVISED SCOPE)**
+  - [ ] **CRITICAL**: Limit satellite to emergency communications only (15+ minute intervals)
+  - [ ] Integrate 1-2 Swarm satellite modules for testing (not routine use)
+  - [ ] Evaluate Iridium as emergency backup only (R3,309-R9,384/month per unit)
+  - [ ] Implement satellite communication for true emergencies only
+  - [ ] Position satellite as last resort, not routine coverage solution
 
 ### Industrial-Grade Hardware
 - [ ] **Custom Carrier Board Design**
@@ -135,6 +136,15 @@
   - [ ] Fuel monitoring system integration
   - [ ] Wagon tracking integration
 
+## Critical Tasks (Immediate - Post Satellite Cost Analysis)
+1. [ ] **URGENT**: Review satellite communication strategy given extremely high satellite costs
+2. [ ] **URGENT**: Validate budget projections with stakeholders (5-year cost now R1.8M-R3.7M)
+3. [ ] **URGENT**: Revise satellite usage to emergency/critical communications only (15+ minute intervals)
+4. [ ] **URGENT**: Evaluate alternative solutions for remote route coverage (extended LoRa networks)
+5. [ ] **URGENT**: Update all stakeholder presentations and budget submissions with accurate satellite costs
+6. [ ] **URGENT**: Assess impact on project cost rankings and decision rationale
+7. [ ] **URGENT**: Consider reducing satellite module deployment from planned 5 units to 1-2 units maximum
+
 ## Priority Tasks (Next 30 Days)
 1. [ ] Order development hardware (LILYGO boards, antennas, power supplies)
 2. [ ] Setup development environments (PlatformIO, .NET Core, React)
@@ -152,6 +162,8 @@
 
 - [ ] **Technical Risks**
   - [ ] Cellular coverage gaps on remote routes
+  - [ ] **CRITICAL**: Satellite communication costs are prohibitively expensive (R3,309-R9,384/month per unit)
+  - [ ] **NEW**: Need alternative solutions for remote routes due to satellite cost prohibitions
   - [ ] Data cost management and optimization
   - [ ] Battery life in extreme temperatures
 
@@ -164,9 +176,12 @@
 - [x] Research and select optimal implementation approach
 - [x] Create comprehensive project structure
 - [x] Document technical specifications
-- [x] Analyze costs and create business case
+- [x] **UPDATED**: Analyze costs and create business case (satellite costs corrected across all documentation)
 - [x] Define architecture and system design
 - [x] Create development roadmap and timeline
+- [x] **COMPLETED**: Comprehensive satellite cost analysis confirming high operational costs
+- [x] **COMPLETED**: Updated all project documentation with accurate satellite costs (R3,309-R9,384/month per unit)
+- [x] **COMPLETED**: Revised strategic positioning of satellite as emergency-only communication
 
 ---
 

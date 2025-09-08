@@ -165,6 +165,19 @@ The dual-platform approach provides optimal flexibility:
 
 This strategy delivers a robust, cost-effective solution while maintaining the ability to adapt to changing procurement conditions without compromising functionality or timeline.
 
+## Future Technology Integration: Starlink
+
+**Modular Architecture Benefit**: The system's modular design enables seamless integration with emerging satellite technologies like Starlink once available in South Africa.
+
+**Key Advantages:**
+- **Cost Revolution**: Starlink may provide satellite connectivity at a fraction of current costs (vs R3,309-R9,384/month for traditional satellite)
+- **Performance Leap**: High-speed, low-latency connectivity enabling advanced railway applications
+- **Module Compatibility**: Both T-A7670G R2 Q425 and T-SIM7600G-H platforms support expansion modules
+- **No Hardware Replacement**: Existing installations can be upgraded with Starlink modules when available
+- **Strategic Positioning**: Ready for immediate adoption upon South African service launch
+
+This demonstrates the forward-looking value of the modular platform approach, ensuring long-term technology relevance and investment protection.
+
 ---
 
 *For specific implementation details, refer to hardware documentation in `hardware/README.md` and firmware specifications in `firmware/README.md`.*
