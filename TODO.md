@@ -1,6 +1,6 @@
 # Prompts to run:
 
-* read both user requirements specifications in the docs/user-specifications folder in detail using python -c "" commands. ignore the satellite-first approach from the LTUSpec.docx (because cellular-first has been adopted), but check if the current state of the project (read and understand every single markdown file in the entire repo) will be a comprehensive solution to the fundamental problem and technical user requirements. make additional suggestions to close any gaps, if required. finally, do a comprehensive logic check and cross-reference check of all the documentation to ensure everything makes sense and puts forward a water-tight technical proposal. the aim of the current state of the project is to get a solid framework and gameplan proposal before any actual coding/work is started. be specific on what markdown documents you plan to update/modify/add and how.
+* finally, do a comprehensive logic check and cross-reference check of all the documentation to ensure everything makes sense and puts forward a water-tight technical proposal. the aim of the current state of the project is to get a solid framework and gameplan proposal before any actual coding/work is started. be specific on what markdown documents you plan to update/modify/add and how.
 
 
 # TODO - Locomotive Tracking System
