@@ -101,11 +101,15 @@ locomotive-tracking-unit/
 
 ## Communication Strategy
 
-| Module | Coverage | Monthly Cost | Use Case |
-|--------|----------|--------------|----------|
-| **Cellular (Base)** | 99%+ urban/main routes | R50 | Primary tracking |
-| **LoRa (Optional)** | Depot areas, gateways | R0 | Cost optimization |
-| **Satellite (Optional)** | 100% global | R3,309-9,384 | Emergency/critical only |
+| Module | Coverage | Monthly Cost | Regulatory Status | Use Case |
+|--------|----------|--------------|-------------------|----------|
+| **Cellular (Base)** | 99%+ urban/main routes | R50 | ✅ Approved | Primary tracking |
+| **LoRa (Optional)** | Depot areas, gateways | R0 | ✅ Approved | Cost optimization |
+| **Iridium Satellite** | 100% global | R18,550 | ✅ ICASA Approved | Emergency/critical only |
+| **Astrocast (Future)** | 100% global | R5,123* | ⏳ Pending ICASA | Potential cost-effective option |
+| **Swarm (Future)** | Limited global | R3,309* | ⏳ Pending ICASA | Potential budget option |
+
+*Costs shown for future planning - deployment subject to ICASA regulatory approval
 
 ## Getting Started
 
@@ -170,11 +174,13 @@ The system includes comprehensive Over-the-Air update capabilities:
 
 ### Monthly Operating Costs (100 Units)
 - Cellular Connectivity: R4,250 (85 units)
-- Satellite Data: R16,545-46,920 (5 units @ 15-5 min intervals)  
+- Iridium Satellite Data: R92,750 (5 units @ R18,550/month - only ICASA-approved option)  
 - System Maintenance: R500
-- **Total OPEX: R21,295-52,170/month**
+- **Total OPEX: R97,500/month**
 
-**Note**: Satellite costs are significantly higher than cellular and should be used only for emergency/critical communications in areas with no cellular coverage.
+**Regulatory Note**: Only Iridium satellite service is currently confirmed ICASA-approved in South Africa. Astrocast and Swarm are potential future options pending regulatory approval.
+
+**Cost Potential**: If Astrocast receives ICASA approval, satellite costs could reduce to R25,615/month (72% savings), making operational satellite use more viable.
 
 ## Implementation Timeline
 

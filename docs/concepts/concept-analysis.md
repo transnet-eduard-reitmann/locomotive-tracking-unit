@@ -91,19 +91,20 @@ Cost-optimized solution using ESP32-based devices with LoRa communication and st
 ## Concept 3: Satellite-Only Communication
 
 ### Approach
-Global coverage implementation using satellite IoT services (Iridium preferred, Swarm alternative) for completely infrastructure-independent communication.
+Global coverage implementation using ICASA-approved satellite IoT services (Iridium 9603N only viable option, Astrocast and Swarm pending approval) for completely infrastructure-independent communication.
 
 ### Key Characteristics
-- **Hardware**: ESP32 + satellite modem (Iridium 9603 preferred, Swarm M138 alternative)
-- **Communication**: L-band satellite (Iridium) or VHF satellite (Swarm alternative)
+- **Hardware**: ESP32 + satellite modem (Iridium 9603N - ICASA approved)
+- **Communication**: L-band satellite (Iridium only viable option)
 - **Coverage**: 100% global coverage including extreme remote areas
-- **Cost Structure**: R4,200-R19,500/unit + R3,309-R9,384/month operational (per unit)
+- **Cost Structure**: R4,850/unit + R18,550/month operational (per unit at 1-min intervals)
 - **Deployment**: 12 months for 100-unit rollout
 - **Update Method**: Store-and-forward with satellite pass optimization
 
 ### Technical Specifications
-- **Swarm Option**: VHF (137-138 MHz), 192-byte messages, limited to 3,000 packets/month maximum (suitable for emergency use only)
-- **Iridium Option**: L-band (1616-1626.5 MHz), 340-byte messages, R3,309-R9,384/month per unit (15-5 minute intervals)
+- **Iridium 9603N**: L-band (1616-1626.5 MHz), 340-byte messages, R18,550/month per unit (1-minute intervals)
+- **Astrocast (Pending ICASA)**: S-band, 160-byte messages, potential R5,123/month per unit if approved
+- **Swarm (Pending ICASA)**: VHF (137-138 MHz), 192-byte messages, potential R3,309/month per unit if approved
 - **Message Latency**: Minutes to hours depending on satellite constellation
 - **Power Requirements**: Higher power consumption during transmission
 - **Global Roaming**: Seamless cross-border operation
@@ -120,7 +121,7 @@ Global coverage implementation using satellite IoT services (Iridium preferred, 
 - **Latency**: Not suitable for real-time applications
 - **Message Size Limits**: Restricted data payload per transmission
 - **Power Consumption**: High power draw during satellite communication
-- **Regulatory Approval**: Some services pending South African approval
+- **Regulatory Compliance**: Only Iridium currently ICASA-approved for deployment
 
 ### Best Use Cases
 - **Emergency communications only** in areas with no other coverage
@@ -129,7 +130,7 @@ Global coverage implementation using satellite IoT services (Iridium preferred, 
 - **Not suitable for routine tracking** due to prohibitive costs
 - Last resort communication when all other methods fail
 
-**Important:** At R3,309-R9,384/month per unit, satellite should be reserved for emergency use only.
+**Important:** At R18,550/month per unit (Iridium baseline), satellite should be reserved for emergency use only. Potential future cost reduction to R5,123/month if Astrocast receives ICASA approval.
 
 ---
 
@@ -152,7 +153,7 @@ Modular platform using LILYGO T-A7670G R2 Q425 as the cellular-base foundation w
 - **Cellular Capability**: LTE CAT-1, 3G HSPA+, 2G GPRS fallback
 - **Expansion Slots**: 2x module slots for additional communication methods
 - **LoRa Module**: R250 (868MHz with configurable power)
-- **Satellite Module**: R4,850 (Iridium preferred) or R3,250 (Swarm alternative)
+- **Satellite Module**: R4,850 (Iridium 9603N - ICASA approved)
 - **Power Consumption**: 80mA idle, 200mA active (base unit)
 - **Battery Life**: 48+ hours with 10Ah battery
 
@@ -254,8 +255,8 @@ Linux-based modular platform using Raspberry Pi Zero 2W with HAT-based communica
 |--------|---------------|-----------|----------------|---------------|------------|
 | **Real-time Capability** | ✅ Excellent | ❌ Poor | ⚠️ Variable | ✅ Excellent (cellular base) | ✅ Configurable |
 | **Coverage Completeness** | 99%+ SA | 30-90% | 100% Global | 99%+ expandable to 100% | 100% Configurable |
-| **Initial Cost (100 units)** | R637K | R551K | R679K-R2.95M | R642K-R1.12M | R720K-R1.82M |
-| **5-Year Total Cost** | R937K | R551K | R1,179K-R9.19M | R935K | R1,150K |
+| **Initial Cost (100 units)** | R637K | R551K | R1.05M (Iridium) | R642K-R1.12M | R720K-R1.82M |
+| **5-Year Total Cost** | R937K | R551K | R12.2M (Iridium only) | R6.4M (with Iridium modules) | R1,150K |
 | **Base Platform** | T-SIM7600G-H | ESP32+LoRa | ESP32+Satellite | T-SIM7600G-H | Pi Zero 2W |
 | **Power Consumption** | Medium | Low | High | Medium | High |
 | **Deployment Timeline** | 15 months | 24 months | 12 months | 12 months | 15 months |

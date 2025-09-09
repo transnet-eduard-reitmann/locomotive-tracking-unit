@@ -101,15 +101,15 @@ Priority 4: Store & Forward (buffer until connection available)
 #### 2.2.2 Satellite Module (Optional)
 | Component | Model | Price | Purpose |
 |-----------|--------|-------|---------|
-| **Iridium 9603** (Recommended) | Satellite modem | R4,500 | Global coverage, proven reliability |
+| **Iridium 9603N** (Primary) | Satellite modem | R4,500 | ICASA-approved, global coverage |
 | **Iridium Antenna** | Patch antenna | R300 | Satellite communication |
 | **Interface** | UART connection | R50 | Connection to main board |
-| **Total (Iridium)** | | **R4,850** | Satellite capability |
+| **Total (Iridium)** | | **R4,850** | Regulatory-compliant satellite |
 | | | | |
-| **Swarm M138** (Alternative) | Satellite modem | R3,200 | Alternative option |
-| **VHF Antenna** | Included | R0 | Satellite communication |
-| **Interface** | UART connection | R50 | Connection to main board |
-| **Total (Swarm)** | | **R3,250** | Alternative satellite option |
+| **Astrocast Astronode S** (Potential Future) | Satellite modem | R862 | Pending ICASA approval |
+| **Swarm M138** (Potential Future) | Satellite modem | R3,200 | Pending ICASA approval |
+
+**Regulatory Note**: Only Iridium satellite service is currently confirmed ICASA-approved in South Africa.
 
 ### 2.3 Platform Alternative
 
@@ -887,7 +887,7 @@ END
 - Complete coverage analysis
 - Final system acceptance
 
-**Budget:** R400,000 (satellite modules for emergency use only due to high operational costs)
+**Budget:** R400,000 (Iridium satellite modules for emergency use only due to high operational costs)
 
 ### Phase 4: Industrialization (Optional, Post-Prototype)
 
@@ -1012,9 +1012,45 @@ mqttClient.setClient(secureClient);
 
 ---
 
-## 10. Operational Procedures
+## 10. Regulatory Compliance
 
-### 9.1 Installation Process
+### 10.1 ICASA Satellite Communication Approval
+
+**Current Status**: Only Iridium satellite services are confirmed ICASA-approved for use in South Africa.
+
+**Approved Services**:
+- **Iridium 9603N**: Full ICASA approval, immediate deployment ready
+- **Cost**: R18,550/month per unit at 1-minute intervals
+
+**Pending Approval Services**:
+- **Astrocast**: Potentially cost-effective option (R5,123/month) pending ICASA approval
+- **Swarm**: Alternative option (R3,309/month) pending ICASA approval
+
+### 10.2 Regulatory Risk Management
+
+**Implementation Strategy**:
+1. **Primary Deployment**: Use only ICASA-approved Iridium satellite services
+2. **Future Planning**: Monitor ICASA approval status for Astrocast and Swarm
+3. **Cost Optimization**: Ready to transition to approved cost-effective alternatives when available
+
+**Compliance Monitoring**:
+- Track ICASA licensing framework developments for satellite IoT services
+- Maintain awareness of new satellite service approvals
+- Ensure all satellite modules comply with South African regulations
+
+### 10.3 Documentation Requirements
+
+All satellite communication equipment must maintain:
+- ICASA type approval certificates
+- Electronic Communications Service License documentation
+- Spectrum licensing compliance records
+- Regulatory compliance audit trail
+
+---
+
+## 11. Operational Procedures
+
+### 11.1 Installation Process
 
 1. **Pre-Installation:**
    - Register device IMEI with private APN
@@ -1217,9 +1253,9 @@ Debug mode supports various maintenance scenarios:
 
 ---
 
-## 11. Cost Analysis
+## 12. Cost Analysis
 
-### 10.1 Total Cost Breakdown (100 Units)
+### 12.1 Total Cost Breakdown (100 Units)
 
 **Initial Investment:**
 | Item | Cost |
@@ -1233,19 +1269,19 @@ Debug mode supports various maintenance scenarios:
 | Service | Units | Cost/Unit | Total |
 |---------|-------|-----------|-------|
 | Cellular Connectivity | 85 | R50 | R4,250 |
-| Satellite Data (15min intervals) | 5 | R3,309 | R16,545 |
-| Satellite Data (5min intervals) | 5 | R9,384 | R46,920 |
+| Iridium Satellite Data (1min intervals) | 5 | R18,550 | R92,750 |
 | System Maintenance | 1 | R500 | R500 |
-| **Total OPEX (15min satellite)** | | | **R21,295/month** |
-| **Total OPEX (5min satellite)** | | | **R51,670/month** |
+| **Total OPEX** | | | **R97,500/month** |
 
-**Critical Note:** Satellite costs are extremely high (R3,309-R9,384/month per unit). Satellite communication should be used only for emergency/critical situations in areas with no cellular coverage.
+**Regulatory Note**: Only Iridium satellite service is currently confirmed ICASA-approved in South Africa. Astrocast and Swarm are potential future options pending regulatory approval.
+
+**Cost Potential**: If Astrocast receives ICASA approval, satellite costs could reduce to R5,123/month per unit (72% savings).
 
 ---
 
-## 12. Future Enhancements
+## 13. Future Enhancements
 
-### 11.1 Planned Upgrades
+### 13.1 Planned Upgrades
 
 **Year 2:**
 - AI-based predictive maintenance
@@ -1269,7 +1305,7 @@ Debug mode supports various maintenance scenarios:
 **Modular Architecture Advantage**: The system's modular design enables seamless integration with Starlink satellite internet once available in South Africa, without requiring changes to the base hardware platform.
 
 **Key Benefits:**
-- **Cost Efficiency**: Potential for significantly lower costs compared to current satellite options (Iridium: R3,309-R9,384/month per unit)
+- **Cost Efficiency**: Potential for significantly lower costs compared to current ICASA-approved satellite options (Iridium: R18,550/month per unit)
 - **High Performance**: High-speed, low-latency connectivity enabling advanced features
 - **Global Coverage**: Seamless cross-border operation without roaming charges
 - **Future-Proof**: Expansion module approach allows immediate adoption when available

@@ -15,10 +15,10 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 - **Route-Based Optimization**: Automatic expansion module selection based on GPS location and operational requirements
 
 ### Total Cost of Ownership (100 units, 5 years)
-- **Initial Investment**: R597,500 (enhanced base units + GPIO expander + train management integration + initial module set)
-- **Operational Costs**: R337,500 (optimized per route)
-- **Total 5-Year Cost**: R935,000
-- **Ranking**: 2nd most cost-effective after LoRa-Only, with complete train management integration
+- **Initial Investment**: R565,000 (enhanced base units + GPIO expander + train management integration)
+- **Operational Costs**: R5,850,000 (R1,170,000 annually with Iridium satellite baseline)
+- **Total 5-Year Cost**: R6,415,000
+- **Note**: Costs reflect regulatory-compliant ICASA-approved satellite services only
 
 ## Decision Framework
 
@@ -47,10 +47,10 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 - **Coverage Limitations**: 30-90% coverage insufficient for comprehensive tracking
 
 #### Why Not Satellite-Only?
-- **Highest Operational Costs**: R100-500/month per unit
+- **Highest Operational Costs**: R18,550/month per unit (Iridium - only ICASA-approved option)
 - **Poor Real-time Performance**: Minutes to hours latency
 - **Message Size Limitations**: Restricted data payload per transmission
-- **Regulatory Uncertainty**: Some services pending South African approval
+- **Regulatory Constraints**: Only Iridium currently ICASA-approved, Astrocast and Swarm pending
 
 #### Why Not Modular Pi?
 - **Higher Power Consumption**: 1.7x higher power usage than T-SIM base
@@ -70,7 +70,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 - **Route-Based Expansion**: Add expansion modules only where route requirements justify cost
 - **Operational Cost Reduction**: LoRa expansion modules provide zero-cost depot communication
 - **Emergency-Only Satellite**: Add satellite expansion modules only for emergency communications (15+ minute intervals)
-- **Cost Control**: Satellite modules reserved for safety-critical situations only (R3,309/month per unit)
+- **Cost Control**: Satellite modules reserved for safety-critical situations only (R18,550/month per unit - Iridium baseline)
 - **Inventory Efficiency**: Stock expansion modules instead of complete units
 
 ### Future-Proofing Architecture
@@ -184,7 +184,7 @@ After comprehensive analysis of five distinct communication concepts, the **Modu
 **Strategic Advantage of Modular Design**: The modular architecture specifically enables integration with future technologies like Starlink without platform replacement:
 
 - **Technology Evolution**: When Starlink becomes available in South Africa, a dedicated expansion module can be developed
-- **Cost Disruption**: Starlink may offer dramatically lower costs than traditional satellite services (currently R3,309-R9,384/month per unit)
+- **Cost Disruption**: Starlink may offer dramatically lower costs than traditional satellite services (currently R18,550/month for ICASA-approved Iridium)
 - **Capability Enhancement**: High-speed satellite connectivity would enable features impossible with current satellite limitations
 - **No Obsolescence**: Existing base units remain fully compatible with new communication technologies
 - **Competitive Advantage**: Early adoption capability once regulatory approval is obtained

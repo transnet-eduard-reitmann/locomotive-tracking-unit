@@ -170,13 +170,34 @@ This strategy delivers a robust, cost-effective solution while maintaining the a
 **Modular Architecture Benefit**: The system's modular design enables seamless integration with emerging satellite technologies like Starlink once available in South Africa.
 
 **Key Advantages:**
-- **Cost Revolution**: Starlink may provide satellite connectivity at a fraction of current costs (vs R3,309-R9,384/month for traditional satellite)
+- **Cost Revolution**: Starlink may provide satellite connectivity at a fraction of current costs (vs R18,550/month for ICASA-approved Iridium)
 - **Performance Leap**: High-speed, low-latency connectivity enabling advanced railway applications
 - **Module Compatibility**: Both T-A7670G R2 Q425 and T-SIM7600G-H platforms support expansion modules
 - **No Hardware Replacement**: Existing installations can be upgraded with Starlink modules when available
 - **Strategic Positioning**: Ready for immediate adoption upon South African service launch
 
 This demonstrates the forward-looking value of the modular platform approach, ensuring long-term technology relevance and investment protection.
+
+## Regulatory Compliance Considerations
+
+### Satellite Communication Modules
+
+Both hardware platforms support identical expansion module interfaces, including satellite communication modules. Current regulatory status in South Africa:
+
+**ICASA-Approved Services**:
+- **Iridium 9603N**: Fully approved, immediate deployment ready
+- **Cost**: R18,550/month per unit at 1-minute intervals
+
+**Pending ICASA Approval**:
+- **Astrocast Astronode S**: Potentially cost-effective (R5,123/month) pending approval
+- **Swarm M138**: Alternative option (R3,309/month) pending approval
+
+**Implementation Strategy**:
+- Deploy with ICASA-approved Iridium modules for compliance
+- Monitor regulatory developments for future cost optimization opportunities
+- Modular architecture enables quick transition to approved alternatives
+
+This ensures both platform options maintain regulatory compliance while preserving flexibility for future optimization.
 
 ---
 

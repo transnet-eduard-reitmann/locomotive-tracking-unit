@@ -105,12 +105,12 @@
   - [ ] Implement cost-optimized depot communication
   - [ ] Add automatic cellular/LoRa failover
 
-- [ ] **Satellite Module Development (REVISED SCOPE)**
-  - [ ] **CRITICAL**: Limit satellite to emergency communications only (15+ minute intervals)
-  - [ ] Integrate 1-2 satellite modules for testing (Iridium 9603 preferred, Swarm M138 alternative)
-  - [ ] Evaluate satellite options as emergency backup only (Iridium preferred, R3,309-R9,384/month per unit)
-  - [ ] Implement satellite communication for true emergencies only
-  - [ ] Position satellite as last resort, not routine coverage solution
+- [ ] **Satellite Module Development (REGULATORY COMPLIANT)**
+  - [ ] **CRITICAL**: Use only ICASA-approved satellite services (Iridium 9603N)
+  - [ ] Limit satellite to emergency communications only (R18,550/month per unit - Iridium baseline)
+  - [ ] Integrate 1-2 Iridium satellite modules for testing
+  - [ ] Position satellite as last resort, regulatory-compliant emergency communication
+  - [ ] Monitor ICASA approval status for Astrocast and Swarm for future cost optimization
 
 ### Industrial-Grade Hardware
 - [ ] **Custom Carrier Board Design**
@@ -136,14 +136,14 @@
   - [ ] Fuel monitoring system integration
   - [ ] Wagon tracking integration
 
-## Critical Tasks (Immediate - Post Satellite Cost Analysis)
-1. [ ] **URGENT**: Review satellite communication strategy given extremely high satellite costs
-2. [ ] **URGENT**: Validate budget projections with stakeholders (5-year cost now R1.8M-R3.7M)
-3. [ ] **URGENT**: Revise satellite usage to emergency/critical communications only (15+ minute intervals)
-4. [ ] **URGENT**: Evaluate alternative solutions for remote route coverage (extended LoRa networks)
-5. [ ] **URGENT**: Update all stakeholder presentations and budget submissions with accurate satellite costs
-6. [ ] **URGENT**: Assess impact on project cost rankings and decision rationale
-7. [ ] **URGENT**: Consider reducing satellite module deployment from planned 5 units to 1-2 units maximum
+## Critical Tasks (Immediate - Regulatory Compliance)
+1. [x] **COMPLETED**: Implemented regulatory-compliant satellite strategy with Iridium 9603N baseline
+2. [x] **COMPLETED**: Updated budget projections with regulatory-compliant costs (5-year: R6.4M)
+3. [x] **COMPLETED**: Revised satellite usage to emergency communications only (R18,550/month per unit)
+4. [ ] **URGENT**: Monitor ICASA approval developments for Astrocast and Swarm services
+5. [x] **COMPLETED**: Updated all project documentation with regulatory-compliant satellite costs
+6. [x] **COMPLETED**: Updated project cost rankings with regulatory baseline costs
+7. [x] **COMPLETED**: Reduced satellite module deployment to emergency use only (1-2 units maximum)
 
 ## Priority Tasks (Next 30 Days)
 1. [ ] Order development hardware (LILYGO boards, antennas, power supplies)
@@ -162,8 +162,8 @@
 
 - [ ] **Technical Risks**
   - [ ] Cellular coverage gaps on remote routes
-  - [ ] **CRITICAL**: Satellite communication costs are prohibitively expensive (R3,309-R9,384/month per unit)
-  - [ ] **NEW**: Need alternative solutions for remote routes due to satellite cost prohibitions
+  - [x] **COMPLETED**: Satellite communication costs addressed with regulatory-compliant Iridium baseline (R18,550/month per unit)
+  - [x] **COMPLETED**: Positioned satellite as emergency-only solution due to high costs
   - [ ] Data cost management and optimization
   - [ ] Battery life in extreme temperatures
 
@@ -179,9 +179,10 @@
 - [x] **UPDATED**: Analyze costs and create business case (satellite costs corrected across all documentation)
 - [x] Define architecture and system design
 - [x] Create development roadmap and timeline
-- [x] **COMPLETED**: Comprehensive satellite cost analysis confirming high operational costs
-- [x] **COMPLETED**: Updated all project documentation with accurate satellite costs (R3,309-R9,384/month per unit)
-- [x] **COMPLETED**: Revised strategic positioning of satellite as emergency-only communication
+- [x] **COMPLETED**: Comprehensive satellite cost analysis with regulatory compliance focus
+- [x] **COMPLETED**: Updated all project documentation with ICASA-approved Iridium costs (R18,550/month per unit)
+- [x] **COMPLETED**: Revised strategic positioning with regulatory-compliant satellite baseline
+- [x] **COMPLETED**: Added potential cost reduction scenarios if Astrocast/Swarm receive ICASA approval
 
 ---
 

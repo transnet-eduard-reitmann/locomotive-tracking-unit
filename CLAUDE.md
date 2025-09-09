@@ -170,7 +170,7 @@ The firmware includes enterprise-grade OTA capabilities:
 ### Communication Strategy
 1. **Cellular (Primary)**: 4G/3G/2G via private APN for 99%+ coverage
 2. **LoRa (Optional)**: 868MHz for depot areas and cost optimization
-3. **Satellite (Optional)**: Swarm/Iridium for emergency communications only (prohibitively expensive for routine use)
+3. **Satellite (Optional)**: Iridium 9603N (ICASA-approved) for emergency communications only (R18,550/month per unit - prohibitively expensive for routine use). Astrocast and Swarm pending ICASA approval.
 4. **Store & Forward**: Local buffering when all networks unavailable
 
 ## Configuration

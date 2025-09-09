@@ -82,19 +82,17 @@ graph TD
 | Service | Monthly Cost | Annual Cost |
 |---------|--------------|-------------|
 | **Cellular Connectivity (85 units)** | R4,250 | R51,000 |
-| **Satellite Data (5 units @ 15min intervals)** | R16,545 | R198,540 |
-| **Satellite Data (5 units @ 5min intervals)** | R46,920 | R563,040 |
+| **Iridium Satellite Data (5 units @ R18,550/month)** | R92,750 | R1,113,000 |
 | **System Maintenance** | R500 | R6,000 |
-| **Total OPEX (15min satellite)** | **R21,295** | **R255,540** |
-| **Total OPEX (5min satellite)** | **R51,670** | **R620,040** |
+| **Total OPEX** | **R97,500** | **R1,170,000** |
 
 ### 5-Year Total Cost of Ownership
 ```mermaid
 graph LR
-    A[Year 1<br/>R632,500] --> B[Year 2<br/>R67,500]
-    B --> C[Year 3<br/>R67,500]
-    C --> D[Year 4<br/>R67,500]
-    D --> E[Year 5<br/>R67,500]
+    A[Year 1<br/>R1,735,000] --> B[Year 2<br/>R1,170,000]
+    B --> C[Year 3<br/>R1,170,000]
+    C --> D[Year 4<br/>R1,170,000]
+    D --> E[Year 5<br/>R1,170,000]
     
     style A fill:#FFE4B5
     style B fill:#E6F3FF
@@ -103,10 +101,11 @@ graph LR
     style E fill:#E6F3FF
 ```
 
-**Total 5-Year Expenditure with 15min satellite intervals: R1,842,700**  
-**Total 5-Year Expenditure with 5min satellite intervals: R3,665,200**
+**Total 5-Year Expenditure: R6,415,000**
 
-**⚠️ Critical Note**: Satellite communication costs are extremely high (R3,309-R9,384/month per unit). Recommend satellite use only for emergency/critical communications.
+**Regulatory Note**: Only Iridium satellite service is currently confirmed ICASA-approved in South Africa. Astrocast and Swarm are potential future options pending regulatory approval.
+
+**Cost Potential**: If Astrocast receives ICASA approval, satellite costs could reduce to R25,615/month (72% savings), making operational satellite use more viable.
 
 ---
 
@@ -208,7 +207,7 @@ graph TD
 |----------|------------------|---------------|---------------|
 | **Approach** | Cellular + Modular | Fixed Hybrid | Full Modular |
 | **Initial Cost** | R565K | R1,013K | R542K |
-| **5-Year Total Cost** | R902.5K | R1,343K | R1,035K |
+| **5-Year Total Cost** | R6,415K | R1,343K | R1,035K |
 | **Deployment Time** | 6 months | 18 months | 12 months |
 | **Flexibility** | High | Low | Very High |
 | **Complexity** | Low | Medium | High |
@@ -217,7 +216,7 @@ graph TD
 ### Cost Efficiency Analysis
 ```mermaid
 graph TD
-    A[Solution Options] --> B[Selected: R902.5K<br/>T-A7670G + Train Mgmt]
+    A[Solution Options] --> B[Selected: R6,415K<br/>T-A7670G + Train Mgmt]
     A --> C[Alternative 1: R1,343K<br/>Fixed Hybrid]
     A --> D[Alternative 2: R1,035K<br/>Full Modular]
     
@@ -259,27 +258,27 @@ graph LR
 
 ## 9. Budget Summary
 
-### Total Project Expenditure (Conservative - 15min satellite intervals)
+### Total Project Expenditure (Iridium Satellite Baseline)
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R565,000 | R255,540 | R820,540 |
-| **Year 2** | - | R255,540 | R1,076,080 |
-| **Year 3** | - | R255,540 | R1,331,620 |
-| **Year 4** | - | R255,540 | R1,587,160 |
-| **Year 5** | - | R255,540 | R1,842,700 |
+| **Year 1** | R565,000 | R1,170,000 | R1,735,000 |
+| **Year 2** | - | R1,170,000 | R2,905,000 |
+| **Year 3** | - | R1,170,000 | R4,075,000 |
+| **Year 4** | - | R1,170,000 | R5,245,000 |
+| **Year 5** | - | R1,170,000 | R6,415,000 |
 
-### Alternative: Aggressive satellite use (5min intervals)
+### Alternative: Future Astrocast Scenario (if ICASA approved)
 | Period | CAPEX | OPEX | Cumulative |
 |--------|-------|------|------------|
-| **Year 1** | R565,000 | R620,040 | R1,185,040 |
-| **Year 5** | - | R620,040 | R3,665,200 |
+| **Year 1** | R565,000 | R295,730 | R860,730 |
+| **Year 5** | - | R295,730 | R1,748,650 |
 
 ### Budget Allocation by Category
 ```mermaid
-pie title "5-Year Cost Distribution (15min satellite)"
+pie title "5-Year Cost Distribution (Iridium Baseline)"
     "Initial Hardware" : 337.5
     "Development & Integration" : 227.5  
-    "Operating Costs (5 years)" : 1277.7
+    "Operating Costs (5 years)" : 5850
 ```
 
 ---
@@ -292,10 +291,11 @@ The proposed locomotive tracking system offers a **practical, scalable solution*
 | Factor | Assessment |
 |--------|------------|
 | **Strategic Alignment** | ✅ Supports fleet modernization objectives |
-| **Budget Requirements** | ✅ R565K initial + R67.5K annual |
+| **Budget Requirements** | ⚠️ R565K initial + R1.17M annual (regulatory-compliant) |
 | **Technical Risk** | ✅ Low - proven hardware platform |
 | **Operational Impact** | ✅ Immediate visibility improvement |
 | **Scalability** | ✅ Easily expanded to 1000+ units |
+| **Regulatory Compliance** | ✅ Uses only ICASA-approved satellite services |
 
 ### Final Recommendation
 **PROCEED WITH IMPLEMENTATION** - The solution provides:

@@ -11,8 +11,8 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 |---------|---------------|------------------------------|---------------|
 | **Cellular-Only** | Simplicity & Real-time | R937K | Immediate deployment, real-time operations |
 | **LoRa-Only** | Cost Optimization | R551K | Budget-conscious, historical tracking |
-| **Satellite-Only** | Global Coverage | R1,179K-R9,195K | Remote routes, cross-border operations |
-| **Modular T-SIM** | Cellular-Base + Train Integration | R935K | Complete solution with train management ⭐ **SELECTED** |
+| **Satellite-Only** | Global Coverage | R12.2M (Iridium baseline) | Emergency communications only |
+| **Modular T-SIM** | Cellular-Base + Train Integration | R6.4M (with Iridium modules) | Complete solution with train management ⭐ **SELECTED** |
 | **Modular Pi** | Advanced Computing | R1,150K | Complex analytics requirements |
 
 ---
@@ -81,21 +81,21 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 | Cost Category | Cellular-Only | LoRa-Only | Satellite-Only | Modular T-SIM | Modular Pi |
 |---------------|---------------|-----------|----------------|---------------|------------|
 | **Cellular Data** | R60,000 | R0 | R0 | R42,000 (optimized) | R50,000 |
-| **Satellite Data** | R0 | R0 | R400,000-R11,260,800 | R198,540 (conservative 15min) | R563,040 (5min) |
+| **Satellite Data** | R0 | R0 | R11,130,000 (Iridium baseline) | R1,113,000 (5 Iridium units) | R1,113,000 (5 Iridium units) |
 | **Gateway Maintenance** | R0 | R6,000 | R0 | R0 | R0 |
 | **Module Replacement** | R0 | R0 | R0 | R500 | R800 |
 | **System Maintenance** | R0 | R0 | R0 | R0 | R2,000 |
-| ****ANNUAL OPEX** | **R60,000** | **R6,000** | **R400,000-R11,260,800** | **R255,540** (conservative) | **R620,040** (5min satellite) |
+| **ANNUAL OPEX** | **R60,000** | **R6,000** | **R11,165,000** (Iridium only) | **R1,170,000** (with Iridium modules) | **R1,170,000** (with Iridium modules) |
 
 ### 2.3 Total Cost of Ownership (5 Years, 100 Units)
 
 | Solution | Initial Investment | 5-Year Operations | **Total 5-Year Cost** | Cost Rank |
 |----------|-------------------|-------------------|----------------------|-----------|
 | **LoRa-Only** | R551K | R30K | **R581K** | 1st (lowest) |
-| **Modular T-SIM (minimal satellite)** | R695K | R1,278K | **R1,973K** | 3rd ⭐ **SELECTED** |
 | **Cellular-Only** | R637K | R300K | **R937K** | 2nd |
-| **Modular Pi** | R720K | R3,100K | **R3,820K** | 4th |
-| **Satellite-Only** | R679K-R2,095K | R2,000K-R56,304K | **R2,679K-R58,399K** | 5th (highest) |
+| **Modular T-SIM (with Iridium)** | R565K | R5,850K | **R6,415K** | 3rd ⭐ **SELECTED** |
+| **Modular Pi** | R720K | R5,850K | **R6,570K** | 4th |
+| **Satellite-Only** | R1,050K | R55,825K | **R56,875K** | 5th (highest) |
 
 ---
 
@@ -230,10 +230,10 @@ This document provides a comprehensive comparison of five locomotive tracking sy
 |---------------|------------------|--------------|----------|---------------------|
 | **Urban Standard** | T-SIM only | R50 | 99% | Real-time tracking, proven reliability |
 | **Main Line Optimized** | T-SIM + LoRa | R50 | 99% | Real-time + zero-cost depot communication |
-| **Remote Enhanced** | T-SIM + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency communications only |
-| **International** | T-SIM + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency communications only |
+| **Remote Enhanced** | T-SIM + Satellite (emergency) | R50 (+R18,550 when activated) | 100% | Emergency communications only |
+| **International** | T-SIM + Satellite (emergency) | R50 (+R18,550 when activated) | 100% | Emergency communications only |
 | **Depot Economical** | T-SIM + LoRa (cellular off) | R0 | 95% | Zero operational costs for yard operations |
-| **Emergency Backup** | T-SIM + LoRa + Satellite (emergency) | R50 (+R3,309 when activated) | 100% | Emergency backup only |
+| **Emergency Backup** | T-SIM + LoRa + Satellite (emergency) | R50 (+R18,550 when activated) | 100% | Emergency backup only |
 
 ---
 
